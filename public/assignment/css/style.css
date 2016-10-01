@@ -3,5 +3,51 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 65px;
+}
+
+.pseudo-margin {
+    margin: 0 -15px;
+}
+
+.navbar-default {
+    background-color:#337ab7;
+    /*background-color:#1e90ff;*/
+
+}
+
+.navbar-default .navbar-brand{
+    color : white;
+}
+
+.left-chevron{
+    padding: 15px;
+}
+.align-to-left{
+    float: left!important;
+    padding-left: 5px;
+    margin: 15px;
+}
+.align-to-right{
+    float: right!important;
+    margin: 15px;
+    padding-right: 5px;
+}
+
+.padding-nav-text{
+    padding-left: 55px;
+}
+
+.glaficon-color{
+    color: white;
+}
+.right-separator{
+    padding-right: 10px;
+}
+
+.list-group-item{
+    border : none;
+    margin: 15px;
+    color: #337ab7;
+
 }
