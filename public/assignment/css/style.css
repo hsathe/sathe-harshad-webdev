@@ -10,16 +10,16 @@ body {
     margin: 0 -15px;
 }
 
-/*.navbar-default {*/
-    /*background-color:#337ab7;*/
-    /*!*background-color:#1e90ff;*!*/
-
-/*}*/
-
-/*.navbar-default .navbar-brand{*/
-    /*color : white;*/
-/*}*/
-
+.draw-vertical-line {
+    width:1px;
+    height:100%;
+    left: 33%;
+    position: absolute;
+    top:0;
+    margin-left:2px;
+    margin-right:2px;
+    border-left:1px solid gray;
+}
 .left-chevron{
     padding: 15px;
 }
@@ -64,7 +64,23 @@ body {
 
 .list-group-item{
     border : none;
-    margin: 15px;
+    margin: 10px;
     color: #337ab7;
 
+}
+
+.relative-position{
+    position: relative;
+}
+
+.absolute-position{
+    position: absolute;
+}
+
+.set_overlay{
+    top : 0px;
+    right : 0px;
+    z-index: 6;
+    background-color: white;
+    padding-right: 0px;
 }
