@@ -10,15 +10,15 @@ body {
     margin: 0 -15px;
 }
 
-.navbar-default {
-    background-color:#337ab7;
-    /*background-color:#1e90ff;*/
+/*.navbar-default {*/
+    /*background-color:#337ab7;*/
+    /*!*background-color:#1e90ff;*!*/
 
-}
+/*}*/
 
-.navbar-default .navbar-brand{
-    color : white;
-}
+/*.navbar-default .navbar-brand{*/
+    /*color : white;*/
+/*}*/
 
 .left-chevron{
     padding: 15px;
@@ -35,12 +35,29 @@ body {
 }
 
 .padding-nav-text{
-    padding-left: 55px;
+    padding-left: 35px;
 }
 
+.navbar-bg{
+    background-color:#337ab7;
+    /*color : white;*/
+}
+
+.navbar-brand-font{
+    color : white!important;
+}
 .glaficon-color{
     color: white;
 }
+
+.glaficon-color-black{
+    color: black;
+}
+
+.glaficon-color-blue{
+    color: dodgerblue;
+}
+
 .right-separator{
     padding-right: 10px;
 }
