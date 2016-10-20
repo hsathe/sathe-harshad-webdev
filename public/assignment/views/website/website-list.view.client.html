@@ -1,0 +1,113 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-bg">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#/profile">
+                    <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand-font navbar-brand" href="#">Websites</a>
+            </div>
+            <div class="navbar-text pull-right" style="margin-right: 27px;">
+                <a href="#/website/new">
+                    <span class="glyphicon glyphicon-plus glaficon-color"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#">
+                    <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right" style="margin-right: 0px;">
+                <a href="#">
+                    <span class="glyphicon glyphicon-ok glaficon-color"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand-font navbar-brand" href="#">Websites</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="row container-fluid">
+    <div class="col-sm-4 hidden-xs" style="margin-left:15px; margin-top: 50px; padding-top: 15px; margin-bottom: 50px; position: absolute;top: 0px;bottom: 0px;overflow: auto;">
+        {{model.websites}}
+        <ul class="list-group">
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a href="#">
+                    {{website.name}}
+                </a>
+                <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <a href="#" class="pull-right">
+                    <span class="glyphicon glyphicon-play"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile" class="form-control">
+            </div>
+            <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" aria-label="...">
+                      </span>
+                <input value="Single" readonly type="text" class="form-control" aria-label="...">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
+    <div class="container-fluid">
+        <div class="row navbar-text" style="width: 100%; text-align: center;">
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-heart glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-star glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-thumbs-up glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-share-alt glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#" class="pull-right">
+                    <span class="glyphicon glyphicon-user glaficon-color"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
