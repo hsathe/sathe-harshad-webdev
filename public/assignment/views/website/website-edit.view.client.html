@@ -1,115 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body style="overflow: hidden">
 <nav class="navbar navbar-default navbar-fixed-top navbar-bg">
     <div class="row container-fluid">
-        <div class="col-xs-4 hidden-xs">
-            <div class="navbar-header align-to-left">
-                <a href="st.html" class="navbar-link">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
                 </a>
             </div>
-            <div>
-                <a class="navbar-brand navbar-brand-font" href="">Websites</a>
+            <div class="navbar-header">
+                <a class="navbar-brand-font navbar-brand" href="#">Websites</a>
             </div>
-            <div class="align-to-right">
-                <a href="w.html" class="navbar-link">
+            <div class="navbar-text pull-right" style="margin-right: 27px;">
+                <a href="#/website/new">
                     <span class="glyphicon glyphicon-plus glaficon-color"></span>
                 </a>
             </div>
-
         </div>
-
         <div class="col-xs-12 col-sm-8">
-
             <div class="navbar-header align-to-left visible-xs">
-                <a href="st.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
                 </a>
             </div>
-            <div>
-                <a class="navbar-brand navbar-brand-font" href="">Edit Website</a>
-            </div>
-            <div class="align-to-right">
-                <a href="st.html" class="navbar-link">
+            <div class="navbar-text pull-right" style="margin-right: 0px;">
+                <a ng-click="model.updateWebsite(model.website)">
                     <span class="glyphicon glyphicon-ok glaficon-color"></span>
                 </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand-font navbar-brand" href="#">Edit Website</a>
             </div>
         </div>
     </div>
 </nav>
-
 <div class="row container-fluid">
     <div class="col-xs-4 hidden-xs">
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="../pages/page-list.view.client.html"> Address Book App </a>
-                <p class="pull-right">
-                    <a href="/website-edit.html">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </p>
-            </li>
-            <li class="list-group-item">
-                <a href="../pages/page-list.view.client.html">Blogger</a>
-                <p class="pull-right">
-                    <a href="/website-edit.html">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </p>
-            </li>
-            <li class="list-group-item">
-                <a href="../pages/page-list.view.client.html"> Blogging App</a>
-                <p class="pull-right">
-                    <a href="/website-edit.html">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </p>
-            </li>
-            <li class="list-group-item">
-                <a href="../pages/page-list.view.client.html">Script Testing App</a>
-                <p class="pull-right">
-                    <a href="/website-edit.html">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </p>
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a href="#/user/{{website.developerId}}/website/{{website._id}}/page">{{website.name}}</a>
+                <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
             </li>
         </ul>
     </div>
     <div class="draw-vertical-line hidden-xs"></div>
     <div class="col-xs-12 col-sm-8">
-
         <form>
             <div class="form-group">
                 <label for="website-name">Website Name</label>
-                <input type="text" class="form-control" id="website-name" placeholder="Blogger"/>
+                <input ng-model="model.website.name" type="text" class="form-control" id="website-name" placeholder="Blogger"/>
             </div>
             <div class="form-group">
                 <label for="website-description">Website Description</label>
-                <textarea class="form-control" id="website-description" placeholder="Description" rows="3"></textarea>
+                <textarea ng-model="model.website.description" class="form-control" id="website-description" placeholder="Description" rows="3"></textarea>
             </div>
-            <a  class="btn btn-danger btn-block" href="st.html" >Delete</a>
+            <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
         </form>
     </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
-    <div class="container-fluid" align="right">
-        <div class="align-to-right pseudo-margin">
-            <a href="../profile.html">
-                <span class="glyphicon glyphicon-user glaficon-color"></span>
-            </a>
+    <div class="container-fluid">
+        <div class="row navbar-text" style="width: 100%; text-align: center;">
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-heart glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-star glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-thumbs-up glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#">
+                    <span class="glyphicon glyphicon-share-alt glaficon-color"></span>
+                </a>
+            </div>
+            <div class="col-xs-2">
+                <a href="#/user/{{model.userId}}" class="pull-right">
+                    <span class="glyphicon glyphicon-user glaficon-color"></span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
-
-</body>
-</html>

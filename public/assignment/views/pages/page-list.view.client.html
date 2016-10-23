@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-bg">
     <div class="container-fluid">
         <div class="navbar-header align-to-left right-separator">
-            <a href="../website/website-list.view.client.html" class="navbar-link">
-                <span class="glyphicon glyphicon-chevron-left glaficon-color-black"></span>
+            <a href="#/user/{{model.userId}}/website/" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
             </a>
         </div>
         <div>
-            <a class="navbar-brand" href="/page-list.html">Pages</a>
+            <a class="navbar-brand navbar-brand-font" href="">Pages</a>
         </div>
 
 
         <div class="align-to-right">
-            <a href=".html" class="navbar-link">
-                <span class="glyphicon glyphicon-plus glaficon-color-black"></span>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new" class="navbar-link">
+                <span class="glyphicon glyphicon-plus glaficon-color"></span>
             </a>
         </div>
     </div>
@@ -33,59 +20,23 @@
 
 <div class="container-fluid">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="../widgets/widget-list.view.client.html">Blog Post</a>
-            <p class="pull-right">
-                <a href="t.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            </p>
+        <li ng-repeat="page in model.pages" class="list-group-item">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                {{page.name}}
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
         </li>
-        <li class="list-group-item">
-            <a href="../widgets/widget-list.view.client.html">Blogs</a>
-            <p class="pull-right">
-                <a href="t.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            </p>
-        </li>
-        <li class="list-group-item">
-            <a href="../widgets/widget-list.view.client.html">Home</a>
-            <p class="pull-right">
-                <a href="t.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            </p>
-        </li>
-        <li class="list-group-item">
-            <a href="../widgets/widget-list.view.client.html">About</a>
-            <p class="pull-right">
-                <a href="t.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            </p>
-        </li>
-        <li class="list-group-item">
-            <a href="../widgets/widget-list.view.client.html">Contact Us</a>
-            <p class="pull-right">
-                <a href="t.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            </p>
-        </li>
-
     </ul>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
     <div class="container-fluid" align="right">
         <div class="align-to-right pseudo-margin">
-            <a href="../profile.html">
-                <span class="glyphicon glyphicon-user glaficon-color-blue"></span>
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user glaficon-color"></span>
             </a>
         </div>
     </div>
 </nav>
-
-</body>
-</html>
