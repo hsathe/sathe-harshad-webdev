@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-bg">
     <div class="container-fluid">
         <div class="navbar-header align-to-left right-separator">
-            <a href="t.html" class="navbar-link">
-                <span class="glyphicon glyphicon-chevron-left glaficon-color-black"></span>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
             </a>
         </div>
         <div>
-            <a class="navbar-brand" href="/widget-chooser.html">Choose Widget</a>
+            <a class="navbar-brand navbar-brand-font" href="/widget-chooser.html">Choose Widget</a>
         </div>
     </div>
 </nav>
@@ -27,13 +14,13 @@
 <div class="container-fluid">
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="ding.html">Header</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myheader">Header</a>
         </li>
         <li class="list-group-item">
             <a href="">Label</a>
         </li>
         <li class="list-group-item">
-            <a href="">HTML</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myhtml">HTML</a>
         </li>
         <li class="list-group-item">
             <a href="">Text Input</a>
@@ -45,10 +32,10 @@
             <a href="">Button</a>
         </li>
         <li class="list-group-item">
-            <a href="ge.html">Image</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myimage">Image</a>
         </li>
         <li class="list-group-item">
-            <a href="tube.html">Youtube</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myyoutube">Youtube</a>
         </li>
         <li class="list-group-item">
             <a href="">Data Table</a>
@@ -62,12 +49,9 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid" align="right">
         <div class="align-to-right pseudo-margin">
-            <a href="../profile.html">
-                <span class="glyphicon glyphicon-user glaficon-color-blue"></span>
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user glaficon-color"></span>
             </a>
         </div>
     </div>
 </nav>
-
-</body>
-</html>

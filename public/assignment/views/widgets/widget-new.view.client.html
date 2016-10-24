@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-bg">
+    <div class="container-fluid">
+        <div class="navbar-header align-to-left right-separator">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
+            </a>
+        </div>
+        <div>
+            <a class="navbar-brand navbar-brand-font" href="">New Widget</a>
+        </div>
+        <div class="align-to-right">
+            <a ng-click="model.createWidget()" class="navbar-link">
+                <span class="glyphicon glyphicon-ok glaficon-color"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="widget-name">Name</label>
+            <input ng-model="model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="widget-name"
+                   placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="widget-text">Text</label>
+            <input ng-model="model.widget.text"
+                   type="text"
+                   class="form-control"
+                   id="widget-text"
+                   placeholder="Widget Text">
+        </div>
+        <div ng-switch="model.widgetType">
+            <div ng-switch-when="myheader">
+                <ng-include src="'views/widgets/widget-heading.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="myimage">
+                <ng-include src="'views/widgets/widget-image.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="myyoutube">
+                <ng-include src="'views/widgets/widget-youtube.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="myhtml">
+                <ng-include src="'views/widgets/widget-html.view.client.html'"></ng-include>
+            </div>
+        </div>
+    </form>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
+    <div class="container">
+        <div class="pseudo-margin align-to-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user glaficon-color"></span>
+            </a>
+        </div>
+    </div>
+</nav>

@@ -9,7 +9,7 @@
         vm.websiteId = $routeParams.wid;
         
         function init() {
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         }
         init();

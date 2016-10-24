@@ -56,6 +56,26 @@
                 controller: "EditPageController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/website/:wid/page/:pid/widget",{
+                templateUrl: "views/widgets/widget-list.view.client.html",
+                controller: "ListWidgetController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new",{
+                templateUrl: "views/widgets/widget-chooser.view.client.html",
+                controller: "ChooseWidgetController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid",{
+                templateUrl : "views/widgets/widget-edit.view.client.html",
+                controller: "EditWidgetController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/:wtype",{
+                templateUrl : "views/widgets/widget-new.view.client.html",
+                controller: "NewWidgetController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });

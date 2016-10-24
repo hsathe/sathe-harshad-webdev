@@ -11,7 +11,7 @@
         vm.pageId = $routeParams.pid;
 
         function  init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            vm.pages = angular.copy(PageService.findPageByWebsiteId(vm.websiteId));
             vm.page = PageService.findPageById(vm.pageId);
         }
         init();
