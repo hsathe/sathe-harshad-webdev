@@ -35,13 +35,13 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
             <div ng-switch-when="HTML">
-                <div ng-bind-html="model.getSafeHTML(widget)"></div>
+                <div ng-bind-html="model.getSafeHTML(widget.text)">{{widget.text}}</div>
             </div>
             <div ng-switch-when="IMAGE">
                 <img class="img-responsive" ng-src="{{widget.url}}" width="{{widget.width}}"/>
             </div>
             <div ng-switch-when="YOUTUBE">
-                <iframe ng-src="{{model.getSafeUrl(widget)}}"
+                <iframe ng-src="{{model.getSafeUrl(widget.url)}}"
                         width="{{widget.width}}"
                         height="100%"
                         frameborder="0"

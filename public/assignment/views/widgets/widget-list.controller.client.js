@@ -9,22 +9,22 @@
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
-        
+        vm.getSafeHtml = getSafeHtml;
 
         function init() {
             vm.widgets = angular.copy(WidgetService.findWidgetsByPageId(vm.pageId));
         }
         init();
 
-        vm.getSafeHtml = function getSafeHtml(widget) {
-            return $sce.trustAsHtml(widget.text);
+        function getSafeHtml(html){
+            return $sce.trustAsHtml(html);
         }
 
-        vm.getSafeUrl = function getSafeUrl(widget) {
-            var urlParts = widget.url.split("/");
+        vm.getSafeUrl = function getSafeUrl(url) {
+            var urlParts = url.split("/");
             var id = urlParts[urlParts.length - 1];
-            var url = "https://www.youtube.com/embed/" + id;
-            return $sce.trustAsResourceUrl(url);
+            var url_open = "https://www.youtube.com/embed/" + id;
+            return $sce.trustAsResourceUrl(url_open);
         }
     }
 })();
