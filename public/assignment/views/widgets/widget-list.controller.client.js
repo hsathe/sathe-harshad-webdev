@@ -10,13 +10,13 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.getSafeHtml = getSafeHtml;
-
         function init() {
             vm.widgets = angular.copy(WidgetService.findWidgetsByPageId(vm.pageId));
         }
         init();
 
         function getSafeHtml(html){
+            console.log(html);
             return $sce.trustAsHtml(html);
         }
 
