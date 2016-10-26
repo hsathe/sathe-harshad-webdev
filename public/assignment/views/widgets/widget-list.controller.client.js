@@ -17,7 +17,7 @@
 
         function getSafeHtml(html){
             console.log(html);
-            return $sce.trustAsHtml(html);
+            return $sce.trustAsHtml(html.text);
         }
 
         vm.getSafeUrl = function getSafeUrl(url) {

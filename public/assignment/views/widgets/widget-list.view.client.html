@@ -35,7 +35,7 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
             <div ng-switch-when="HTML">
-                <div ng-bind-html="{{model.getSafeHTML(widget.text)}}">{{widget.text}}</div>
+                <div ng-bind-html="{{model.getSafeHTML(widget)}}">{{widget.text}}</div>
             </div>
             <div ng-switch-when="IMAGE">
                 <img class="img-responsive" ng-src="{{widget.url}}" width="{{widget.width}}"/>
