@@ -11,8 +11,23 @@
         vm.pageId = $routeParams.pid;
 
         function  init() {
-            vm.pages = angular.copy(PageService.findPageByWebsiteId(vm.websiteId));
-            vm.page = PageService.findPageById(vm.pageId);
+            // vm.pages = angular.copy(PageService.findPageByWebsiteId(vm.websiteId));
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (response) {
+                    vm.pages = angular.copy(response);
+                })
+                .error(function () {
+
+                })
+            PageService
+                .findPageById(vm.pageId)
+                .success(function (response) {
+                    vm.page = angular.copy(response);
+                })
+                .error(function () {
+
+                })
         }
         init();
 
@@ -21,23 +36,27 @@
             if(!vm.page || !vm.page.name){
                 vm.error = "Cannot update the website, invalid name";
             }else{
-                var editedPage = PageService.updatePage(vm.pageId,vm.page);
-                if(editedPage){
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                }else{
-                    vm.error = "Cannot update Website";
-                }
+                var promise = PageService.updatePage(vm.pageId,vm.page);
+                promise
+                    .success(function () {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    })
+                    .error(function () {
+                        vm.error = "Cannot update Website";
+                    })
             }
         };
 
 
         vm.deletePage = function deletePage() {
-            var deleteFlag = PageService.deletePage(vm.pageId);
-            if(deleteFlag){
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }else{
-                vm.error = "Cannot delete website";
-            }
+            var promise = PageService.deletePage(vm.pageId);
+            promise
+                .success(function () {
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                })
+                .error(function () {
+                    vm.error = "Cannot delete website";
+                })
         };
     }
 })();

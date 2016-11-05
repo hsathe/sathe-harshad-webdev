@@ -10,7 +10,14 @@
         vm.websiteId = $routeParams.wid;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .success(function (response) {
+                    vm.pages = response;
+                })
+                .error(function () {
+                    
+                })
         }
         init();
     }

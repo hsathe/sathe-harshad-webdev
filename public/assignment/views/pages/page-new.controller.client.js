@@ -10,7 +10,14 @@
         vm.websiteId = $routeParams.wid;
 
         function  init() {
-            vm.pages = angular.copy(PageService.findPageByWebsiteId(vm.websiteId));
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .success(function (response) {
+                    vm.pages = angular.copy(response);
+                })
+                .error(function () {
+
+                })
         }
         init();
 
@@ -20,12 +27,15 @@
             if(!vm.page || !vm.page.name){
                 vm.error = "Check the page name or title";
             }else{
-                var result = PageService.createPage(vm.websiteId,vm.page);
-                if(result){
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                }else{
-                    vm.error = "Failed to create Page";
-                }
+                var promise = PageService.createPage(vm.websiteId,vm.page);
+
+                promise
+                    .success(function () {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    })
+                    .error(function () {
+                        vm.error = "Failed to create Page";
+                    })
             }
         }
     }
