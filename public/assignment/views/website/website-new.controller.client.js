@@ -10,7 +10,15 @@
         vm.userId = $routeParams.uid;
 
         function  init() {
-            vm.websites = angular.copy(WebsiteService.findWebsitesByUser(vm.userId));
+            // vm.websites = angular.copy(WebsiteService.findWebsitesByUser(vm.userId));
+            var promise = angular.copy(WebsiteService.findWebsitesByUser(vm.userId));
+            promise
+                .success(function (response) {
+                    vm.websites = response;
+                })
+                .error(function () {
+
+                })
         }
         init();
 
@@ -24,13 +32,15 @@
                     description: description
                 };
 
-                var webSite = WebsiteService.createWebsite(vm.userId,newWebSiteObj);
-
-                if(webSite){
-                    $location.url("/user/"+vm.userId+"/website")
-                }else{
-                    vm.error = "Unable to create website";
-                }
+                var promise = WebsiteService.createWebsite(vm.userId,newWebSiteObj);
+                    
+                promise
+                    .success(function (response) {
+                        $location.url("/user/"+vm.userId+"/website")
+                    })
+                    .error(function () {
+                        vm.error = "Unable to create website";
+                    })
             }
         }
     }

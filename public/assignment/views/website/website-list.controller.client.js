@@ -5,13 +5,25 @@
     
     function WebsiteListController($location, $routeParams, WebsiteService) {
         var vm = this;
-        console.log("Help!");
-
         vm.userId = $routeParams.uid;
+        
         console.log("User ID: "+vm.userId);
         function  init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            var promise = WebsiteService.findWebsitesByUser(vm.userId);
+            promise
+                .success(function (response) {
+                    vm.websites = response;
+                })
+                .error(function () {
+                    
+                })
         }
         init();
+        
+        vm.editWebsite = function editWebsite(wID) {
+            vm.websiteId = wID;
+            $location.url("/user/" + vm.userId + "/website/" + wID);
+        };
+        
     }
 })();

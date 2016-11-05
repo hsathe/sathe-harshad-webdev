@@ -9,8 +9,24 @@
         vm.websiteId = $routeParams.wid;
         
         function init() {
-            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            var promise = WebsiteService.findWebsiteById(vm.websiteId);
+            promise
+                .success(function (response) {
+                    vm.website = angular.copy(response);
+                })
+                .error(function () {
+
+                })
+            
+            WebsiteService
+                .findWebsitesByUser(vm.userId)
+                .success(function (response) {
+                    vm.websites = angular.copy(response);
+                })
+                .error(function () {
+                    
+                })
+                
         }
         init();
 
@@ -19,23 +35,26 @@
             if(!updatedWebsite || !updatedWebsite.name){
                 vm.error = "Cannot update the website, invalid name";
             }else{
-                var editedWebsite = WebsiteService.updateWebsite(updatedWebsite._id,updatedWebsite);
-                if(editedWebsite){
-                    $location.url("/user/"+vm.userId+"/website");
-                }else{
-                    vm.error = "Cannot update Website";
-                }
+                var promise = WebsiteService.updateWebsite(updatedWebsite._id,updatedWebsite);
+                promise
+                    .success(function () {
+                        $location.url("/user/"+vm.userId+"/website");
+                    })
+                    .error(function () {
+                        vm.error = "Cannot update Website";
+                    })
             }
         };
 
-
         vm.deleteWebsite = function deleteWebsite(websiteId) {
-            var deleteFlag = WebsiteService.deleteWebsite(websiteId);
-            if(deleteFlag){
-                $location.url("/user/"+vm.userId+"/website");
-            }else{
-                vm.error = "Cannot delete website";
-            }
+            var promise = WebsiteService.deleteWebsite(websiteId);
+            promise
+                .success(function () {
+                    $location.url("/user/"+vm.userId+"/website");
+                })
+                .error(function () {
+                    vm.error = "Cannot delete website";
+                })
         };
     }
 })();

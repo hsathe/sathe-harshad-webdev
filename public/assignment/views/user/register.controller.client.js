@@ -4,7 +4,7 @@
         .controller("RegisterController",RegisterController);
     
     function RegisterController($location, UserService) {
-        vm = this;
+        var vm = this;
         
         vm.createUser = function (username,password, verifyPassword) {
             var user = {
@@ -13,12 +13,21 @@
                 verifyPassword : verifyPassword
             };
 
-            var id = UserService.createUser(user);
-
-            if(id != -1){
-                $location.url("/user/"+id);
+            if(!user.username || !user.password || !user.verifyPassword){
+                vm.error = "Fields are blanks!";
+            }else if(user.password != user.verifyPassword){
+                vm.error = "Passwords do not match";
             }else{
-                vm.error = "Error, please check username and password."
+                UserService
+                    .createUser(user)
+                    .success(function (response) {
+                        var newUser = response;
+                        if(newUser){
+                            $location.url("/user/"+newUser._id);
+                        }
+                    })
+                    .error(function (error) {
+                    })
             }
         };
 

@@ -9,12 +9,27 @@
 
 
         function login(username,password) {
-            var user = UserService.findUserByCredentials(username,password);
-            if(user == null){
-              vm.error = "No Such User";
+            // Username and password required to login
+            if(!username || !password) {
+                vm.error = "No Such User";
             }else{
-                $location.url("/user/"+user._id);
+                var promise = UserService.findUserByCredentials(username,password);
+                promise
+                    .success(function (user) {
+                        if(user == '0'){
+                            vm.error = "No Such User";
+                        }else{
+                            $location.url("/user/"+user._id);
+                        }
+                    })
+                    .error(function (err) {
+                        console.log(err);
+                    })
             }
+        }
+
+        vm.register = function () {
+            $location.url("/register");
         }
     }
 })();
