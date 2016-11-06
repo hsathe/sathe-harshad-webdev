@@ -30,6 +30,8 @@
 				updateImage(widget);
 			}else if(widget.widgetType === "YOUTUBE") {
 				updateYoutube(widget);
+			}else if(widget.widgetType === "HTML"){
+				updateHTML(widget);
 			}
 		};
 		
@@ -57,6 +59,24 @@
 			}else{
 				if(!widget.width){
 					widget.width = "100%";
+				}
+				WidgetService
+					.updateWidget(vm.widgetId, widget)
+					.success(function (response) {
+						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+					})
+					.error(function () {
+						vm.error = "Unable to update the widget";
+					})
+			}
+		}
+
+		function updateHTML(widget) {
+			if(!widget.text){
+				vm.error = "Text field is blank";
+			}else{
+				if(!widget.text){
+					widget.text = "Blank Text";
 				}
 				WidgetService
 					.updateWidget(vm.widgetId, widget)
