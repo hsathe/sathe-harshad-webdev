@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-bg">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header align-to-left right-separator">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
@@ -35,7 +35,8 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
             <div ng-switch-when="HTML">
-                <div ng-bind-html="{{model.getSafeHTML(widget)}}">{{widget.text}}</div>
+                <div ng-bind-html="model.getSafeHtml(widget)">{{widget.text}}</div>
+                <!--<div ng-bind-html="{{model.getSafeHTML(widget)}}">{{widget.text}}</div>-->
             </div>
             <div ng-switch-when="IMAGE">
                 <img class="img-responsive" ng-src="{{widget.url}}" width="{{widget.width}}"/>
@@ -47,87 +48,15 @@
                         frameborder="0"
                         allowfullscreen></iframe>
             </div>
-            <!--<div ng-switch-default>-->
-                <!--Unable to render widgets {{widgets}}-->
-            <!--</div>-->
+            <div ng-switch-default>
+                Unable to render widgets {{widgets}}
+            </div>
         </div>
     </div>
-
-    <!--<div>-->
-        <!--<div class="pull-right">-->
-            <!--<a href="ding.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<h1>GIZMODO</h1>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<div class="pull-right">-->
-            <!--<a href="ding.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<h3>US Senate Reaches Compromise on Emergency Zika Funding</h3>-->
-    <!--</div>-->
-
-    <!--<div class="relative-position">-->
-        <!--<div class="pull-right absolute-position set_overlay">-->
-            <!--<a href="ge.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<img width="100%" height="100%" src="http://sportstorque.co/wp-content/uploads/2015/06/Golden-State.jpg"/>-->
-    <!--</div>-->
-
-    <!--<div>-->
-        <!--<div class="pull-right">-->
-            <!--<a href="ding.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<p align="justify">Golden State Warriors celebrated their first NBA championship in 40 years when the final buzzer sounded and the players formed a frantic mob at the center court as silence fell over the sellout crowd who came pouring in to support local favorites Cleveland Cavaliers.</p>-->
-    <!--</div>-->
-
-    <!--<div>-->
-        <!--<div class="pull-right">-->
-            <!--<a href="ding.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<h2>Man in wingsuit flies straight into the Fire!</h2>-->
-    <!--</div>-->
-
-    <!--<div class="relative-position">-->
-        <!--<div class="pull-right absolute-position set_overlay">-->
-            <!--<a href="tube.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<div class="embed-responsive embed-responsive-16by9">-->
-            <!--<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-C_jPcUkVrM"></iframe>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div>-->
-        <!--<div class="pull-right">-->
-            <!--<a href="ding.html">-->
-                <!--<span class="glyphicon glyphicon-cog right-separator"></span>-->
-            <!--</a>-->
-            <!--<span class="glyphicon glyphicon-align-justify right-separator"></span>-->
-        <!--</div>-->
-        <!--<p>I’m certainly not the only internet person to raise money online from strangers. James Curry IV, an artist, has solicited money from strangers to eat a meal in the bathtub. A writer named Niall told me he used to get money from someone calling himself the Disposable Income Kid, who “used to give cash out in the form of visa gift cards to anyone who contacted him with a good reason, or a bad reason, or anything that he found interesting.”</p>-->
-    <!--</div>-->
-
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
-    <div class="container-fluid">
+    <div class="container">
         <div class="align-to-left pseudo-margin">
             <a href="">
                 <span class="glyphicon glyphicon-play glaficon-color"></span>

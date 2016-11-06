@@ -11,35 +11,98 @@
 		vm.widgetId = $routeParams.wgid;
 
 		function init(){
-			vm.widget = angular.copy(WidgetService.findWidgetById(vm.widgetId));
+			var promise = WidgetService.findWidgetById(vm.widgetId);
+			promise
+				.success(function (response) {
+					vm.widget = angular.copy(response);
+				})
+				.error(function () {
+					
+				})
 		}
 		init();
 
-		vm.updateWidget = function updateWidget(){
-			var result = WidgetService.updateWidget(vm.widgetId, vm.widget);
-			if(!result){
-				vm.error = "Widget could not be updated.";
-			}
-			else{
-				$location.url("/user/" + vm.userId +
-					"/website/" + vm.websiteId +
-					"/page/" + vm.pageId +
-					"/widget");
+		vm.updateWidget = function updateWidget(widget){
+
+			if(widget.widgetType === "HEADER"){
+				updateHeading(widget);
+			}else if(widget.widgetType === "IMAGE"){
+				updateImage(widget);
+			}else if(widget.widgetType === "YOUTUBE") {
+				updateYoutube(widget);
 			}
 		};
-
-		vm.deleteWidget = function deleteWidget(){
-			var flag = WidgetService.deleteWidget(vm.widgetId);
-			if(!flag){
-				vm.error = "Widget could not be deleted.";
-			}
-			else{
-				$location.url("/user/" + vm.userId +
-					"/website/" + vm.websiteId +
-					"/page/" + vm.pageId +
-					"/widget");
+		
+		function updateHeading(widget) {
+			if(!widget.text){
+				vm.error = "Text field is blank";
+			}else{
+				if(!widget.size){
+					widget.size = 1;
+				}
+				WidgetService
+					.updateWidget(vm.widgetId, widget)
+					.success(function (response) {
+						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+					})
+					.error(function () {
+						vm.error = "Unable to update the widget";
+					})
 			}
 		}
+
+		function updateYoutube(widget) {
+			if(!widget.url){
+				vm.error = "URL field is blank";
+			}else{
+				if(!widget.width){
+					widget.width = "100%";
+				}
+				WidgetService
+					.updateWidget(vm.widgetId, widget)
+					.success(function (response) {
+						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+					})
+					.error(function () {
+						vm.error = "Unable to update the widget";
+					})
+			}
+		}
+
+		function updateImage(widget) {
+			if(!widget.url){
+				vm.error = "URL field is blank";
+			}else{
+				if(!widget.width){
+					widget.width = "100%";
+				}
+				WidgetService
+					.updateWidget(vm.widgetId, widget)
+					.success(function (response) {
+						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+					})
+					.error(function () {
+						vm.error = "Unable to update the widget";
+					})
+			}
+		}
+
+		vm.deleteWidget = function deleteWidget(){
+			var promise = WidgetService.deleteWidget(vm.widgetId);
+			
+			promise
+				.success(function () {
+					$location.url("/user/" + vm.userId +
+						"/website/" + vm.websiteId +
+						"/page/" + vm.pageId +
+						"/widget");
+				})
+				.error(function () {
+					vm.error = "Widget could not be deleted.";
+				})
+		}
+		
+		
 	}
 })();
 

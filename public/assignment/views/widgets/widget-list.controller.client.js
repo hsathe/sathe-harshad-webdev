@@ -11,12 +11,19 @@
         vm.pageId = $routeParams.pid;
         vm.getSafeHtml = getSafeHtml;
         function init() {
-            vm.widgets = angular.copy(WidgetService.findWidgetsByPageId(vm.pageId));
+            var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+            promise
+                .success(function (response) {
+                    vm.widgets = angular.copy(response);
+                })
+                .error(function () {
+                    
+                })
         }
         init();
 
         function getSafeHtml(html){
-            console.log(html);
+            console.log("In GetSafe HTML="+html);
             return $sce.trustAsHtml(html.text);
         }
 

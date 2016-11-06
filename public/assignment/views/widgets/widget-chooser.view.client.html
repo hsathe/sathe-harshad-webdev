@@ -12,15 +12,18 @@
 </nav>
 
 <div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myheader">Header</a>
+            <a ng-click="model.addWidget('HEADER')">Header</a>
         </li>
         <li class="list-group-item">
             <a href="">Label</a>
         </li>
         <li class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myhtml">HTML</a>
+            <a ng-click="model.addWidget('HTML')">HTML</a>
         </li>
         <li class="list-group-item">
             <a href="">Text Input</a>
@@ -32,10 +35,10 @@
             <a href="">Button</a>
         </li>
         <li class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myimage">Image</a>
+            <a ng-click="model.addWidget('IMAGE')">Image</a>
         </li>
         <li class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new/myyoutube">Youtube</a>
+            <a ng-click="model.addWidget('YOUTUBE')">Youtube</a>
         </li>
         <li class="list-group-item">
             <a href="">Data Table</a>
@@ -46,7 +49,7 @@
     </ul>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
     <div class="container-fluid" align="right">
         <div class="align-to-right pseudo-margin">
             <a href="#/user/{{model.userId}}">

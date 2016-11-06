@@ -71,11 +71,6 @@
                 controller: "EditWidgetController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new/:wtype",{
-                templateUrl : "views/widgets/widget-new.view.client.html",
-                controller: "NewWidgetController",
-                controllerAs: "model"
-            })
             .otherwise({
                 redirectTo: "/login"
             });
