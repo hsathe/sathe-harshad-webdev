@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-bg">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header align-to-left right-separator">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
@@ -17,7 +17,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container" sortable>
     <div ng-repeat="widget in model.widgets">
         <div class="widget-tool">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
@@ -57,7 +57,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-bg">
     <div class="container">
-        <div class="align-to-left pseudo-margin">
+        <div class="align-to-left pseudo-margin padding-bottom">
             <a href="">
                 <span class="glyphicon glyphicon-play glaficon-color"></span>
             </a>

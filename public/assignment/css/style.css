@@ -4,12 +4,16 @@ input.form-control {
 
 body {
     padding-top: 65px;
+    padding-bottom: 65px;
 }
 
 .pseudo-margin {
     margin: 0 -15px;
 }
 
+/*.padding-bottom{*/
+    /*padding-bottom: 25px;*/
+/*}*/
 .draw-vertical-line {
     width:1px;
     height:100%;

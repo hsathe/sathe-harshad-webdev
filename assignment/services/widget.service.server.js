@@ -28,6 +28,8 @@ module.exports = function (app) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.put("/api/page/:pageId/widget", sortablewidgets);
+
 
     function createWidget(req, res) {
         var pId = req.params.pageId;
@@ -43,11 +45,9 @@ module.exports = function (app) {
 
         for(var w in widgets){
             if(widgets[w].pageId === pId){
-                console.log(widgets[w]);
                 result.push(widgets[w]);
             }
         }
-        console.log(result);
         res.json(result);
     }
 
@@ -115,5 +115,13 @@ module.exports = function (app) {
         } else {
             res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
         }
+    }
+
+    function sortablewidgets(req,res){
+        var pageId = req.params.pageId;
+        var initial=req.query.start;
+        var final=req.query.end;
+
+        widgets.splice(final,0,widgets.splice(initial,1)[0]);
     }
 };
