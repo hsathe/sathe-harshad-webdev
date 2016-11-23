@@ -16,7 +16,7 @@
                 var promise = UserService.findUserByCredentials(username,password);
                 promise
                     .success(function (user) {
-                        if(user == '0'){
+                        if(user == ""){
                             vm.error = "No Such User";
                         }else{
                             $location.url("/user/"+user._id);

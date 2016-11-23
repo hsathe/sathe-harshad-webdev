@@ -13,9 +13,10 @@
             promise
                 .success(function (response) {
                     vm.website = angular.copy(response);
+                    console.log(vm.website);
                 })
                 .error(function () {
-
+                    console.log("Issue");
                 })
             
             WebsiteService

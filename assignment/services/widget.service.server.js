@@ -121,7 +121,8 @@ module.exports = function (app) {
         var pageId = req.params.pageId;
         var initial=req.query.start;
         var final=req.query.end;
-
+        console.log(widgets);
         widgets.splice(final,0,widgets.splice(initial,1)[0]);
+        console.log(widgets);
     }
 };
