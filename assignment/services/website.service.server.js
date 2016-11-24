@@ -15,7 +15,7 @@ module.exports = function (app, model) {
             .createWebsite(uid, website)
             .then(
                 function (website) {
-                    res.json(website);
+                    res.send(website);
                     return website;
                 },
                 function (error) {
@@ -45,7 +45,6 @@ module.exports = function (app, model) {
     
     function findAllWebsitesForUser(req, res) {
         var uid = req.params.userId;
-        console.log(uid);
         model
             .websiteModel
             .findAllWebsitesForUser(uid)
@@ -112,7 +111,6 @@ module.exports = function (app, model) {
     }
 
     function deleteWebsiteFromUser(developerId, websiteId) {
-        console.log("Service Layer, deleting website from user");
         model
             .userModel
             .findUserById(developerId)

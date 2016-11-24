@@ -5,6 +5,7 @@ module.exports = function () {
         developerId: {type: mongoose.Schema.ObjectId, ref: "user"},
         name: String,
         description: String,
+        pages: {type: Array, default: []},
         dateCreated: {type: Date, default: Date.now}
     },{collection: "website"});
     

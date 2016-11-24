@@ -22,7 +22,6 @@ module.exports = function (app, model) {
             .then(
                 function (newUser) {
                     console.log("This is success");
-                    console.log(newUser)
                     res.send(newUser);
                 },
                 function (error) {
@@ -138,15 +137,6 @@ module.exports = function (app, model) {
 
         var userId = req.params.userId;
         console.log("Deleting user" + userId);
-        // for(var u in users){
-        //     if(users[u]._id === userId){
-        //         users.splice(u,1);
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // // Send 400 if the user is invalid
-        // res.sendStatus(400);
         model
             .userModel
             .deleteUser(userId)
