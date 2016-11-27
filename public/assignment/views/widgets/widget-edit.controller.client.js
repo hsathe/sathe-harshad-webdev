@@ -30,6 +30,8 @@
 				updateImage(widget);
 			}else if(widget.widgetType === "YOUTUBE") {
 				updateYoutube(widget);
+			}else if(widget.widgetType === "TEXT"){
+				updateText(widget);
 			}else if(widget.widgetType === "HTML"){
 				updateHTML(widget);
 			}
@@ -86,6 +88,20 @@
 					.error(function () {
 						vm.error = "Unable to update the widget";
 					})
+			}
+		}
+
+		function updateText(widget) {
+			if(!widget.rows && !widget.formatted){
+				vm.error = "No of rows and formatted option is mandatory";
+			}else{
+				WidgetService
+					.updateWidget(vm.widgetId, widget)
+					.then(function (response) {
+						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+					}, function (err) {
+						vm.error = "Widget cannot be updated";
+					});
 			}
 		}
 

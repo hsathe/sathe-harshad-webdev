@@ -9,12 +9,15 @@
                    placeholder="Heading Name">
         </div>
         <div class="form-group">
-            <label for="widget-text">Text</label>
-            <input ng-model="model.widget.text"
-                   type="text"
-                   class="form-control"
-                   id="widget-text"
-                   placeholder="Heading Text">
+            <label for="text-ng-toolbar">Text</label>
+            <div ng-model="model.widget.text"
+                   id = "text-ng-toolbar"
+                   text-angular
+                   ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+    ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+    ['indent','outdent'],['html']]">
+
+            </div>
         </div>
     </form>
     <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
