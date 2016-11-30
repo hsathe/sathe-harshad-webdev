@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-bg">
 	<div class="container-fluid">
 		<div class="navbar-header align-to-left right-separator">
-			<a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+			<!--<a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">-->
+			<a ng-click="model.selectWidget()" class="navbar-link">
 				<span class="glyphicon glyphicon-chevron-left glaficon-color"></span>
 			</a>
 		</div>

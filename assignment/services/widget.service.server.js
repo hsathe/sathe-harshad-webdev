@@ -15,7 +15,7 @@ module.exports = function (app, model) {
     function createWidget(req, res) {
         var pId = req.params.pageId;
         var widget = req.body;
-        
+        console.log("Creating Image Widget"+widget._id);
         model
             .widgetModel
             .findHighestOrder(pId)
@@ -66,8 +66,6 @@ module.exports = function (app, model) {
             .findAllWidgetsForPage(pId)
             .then(function (widgets) {
                 res.send(widgets);
-            }, function (widgets) {
-                res.send(widgets);
             },function (error) {
                 console.log("Error");
             });
@@ -78,10 +76,9 @@ module.exports = function (app, model) {
         model
             .widgetModel
             .findWidgetById(wId)
-            .then(function (widgets) {
-                res.send(widgets);
+            .then(function (widget) {
+                res.send(widget);
             }, function (error) {
-                console.log("Error");
                 res.sendStatus(400);
             });
     }
@@ -93,11 +90,11 @@ module.exports = function (app, model) {
         model
             .widgetModel
             .updateWidget(wId, newWidget)
-            .then(function (status) {
+            .then(function(stats){
                 newWidget._id = widgetId;
-                res.send(newWidget);
-            }, function (error) {
-                res.sendStatus(400);
+                res.json(newWidget);
+            }, function(error){
+                res.sendStatus(404);
             });
     }
     
@@ -145,11 +142,11 @@ module.exports = function (app, model) {
         var widgetId = req.body.widgetId;
         var pageId = req.body.pageId;
         var userId = req.body.userId;
-        var websiteId = req.body.websiteId;
-        
+        var websiteId = req.body.userId;
+
         var width = req.body.width;
         var myFile = req.file;
-        
+
         if(myFile) {
             var originalname = myFile.originalname; // file name on user's computer
             var filename = myFile.filename;     // new file name in upload folder
@@ -162,53 +159,53 @@ module.exports = function (app, model) {
             if(width == ''){
                 width = "100%";
             }
-
             newWidget.width = width;
             newWidget.name = req.body.name;
             newWidget.text = req.body.text;
             newWidget.pageId = pageId.toString();
             newWidget.widgetType = "IMAGE";
             newWidget.url = "/uploads/" + filename;
-            
+
             if(newWidget._id){
-                model
-                    .widgetModel
+                model.widgetModel
                     .updateWidget(newWidget._id, newWidget)
-                    .then(function (status) {
+                    .then(function(stats){
                         res.sendStatus(200);
-                    }, function (error) {
-                        res.sendStatus(400);
+                    }, function(error){
+                        res.sendStatus(404);
                     });
-                res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+newWidget._id);
-            }else{
-                delete newWidget._id;
-                model
-                    .widgetModel
-                    .findHighestOrder(pageId)
-                    .then(function (doc) {
-                        var orderElement = -1;
-                        if(doc && doc.order){
-                            orderElement = doc.order + 1;
-                        }else{
-                            orderElement = 1;
-                        }
-                        newWidget.order = orderElement;
-                        return orderElement;
-                    }, function (err) {
-                        res.sendStatus(400);
-                    }).then(function (number) {
-                    model
-                        .widgetModel
-                        .createWidget(newWidget.pageId, newWidget)
-                        .then(function (widget) {
-                            newWidget._id = widget._id;
-                            res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
-                        }, function (error) {
-                            console.log("Error");
-                        });
-                });
+                res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + newWidget._id);
             }
-        } else {
+            else{
+                delete newWidget._id;
+                model.widgetModel
+                    .findHighestOrder(pageId)
+                    .then(function (doc){
+                        var orderX = -1;
+                        if(doc && doc.order){
+                            orderX = doc.order + 1;
+                        }
+                        else{
+                            orderX = 1;
+                        }
+                        newWidget.order = orderX;
+                        return orderX;
+                    }, function (err){
+                        res.sendStatus(404);
+                    })
+                    .then(function(number) {
+                        model.widgetModel
+                            .createWidget(newWidget.pageId, newWidget)
+                            .then(function (widget) {
+                                newWidget._id = widget._id;
+                                res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widget._id);
+                            }, function (error) {
+                                console.log("Error creating widget.");
+                            });
+                    });
+            }
+        }
+        else {
             res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
         }
     }

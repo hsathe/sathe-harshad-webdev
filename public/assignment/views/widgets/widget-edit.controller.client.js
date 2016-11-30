@@ -16,8 +16,8 @@
 				.success(function (response) {
 					vm.widget = angular.copy(response);
 				})
-				.error(function () {
-					
+				.error(function (err) {
+					console.log("Print Error"+err);
 				})
 		}
 		init();
@@ -45,11 +45,13 @@
 					widget.size = 1;
 				}
 				WidgetService
-					.updateWidget(vm.widgetId, widget)
-					.success(function (response) {
+                    .updateWidget(vm.widgetId, widget)
+					.success(function (res) {
+						console.log("Updated Successfully! "+res);
 						$location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
 					})
-					.error(function () {
+					.error(function (err) {
+                        console.log(err);
 						vm.error = "Unable to update the widget";
 					})
 			}
@@ -137,8 +139,10 @@
 					vm.error = "Widget could not be deleted.";
 				})
 		}
-		
-		
+
+        vm.selectWidget= function selectWidget() {
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+        }
 	}
 })();
 

@@ -14,6 +14,7 @@
             var promise = WidgetService.findWidgetsByPageId(vm.pageId);
             promise
                 .success(function (response) {
+                    console.log("Success!!!!!");
                     vm.widgets = angular.copy(response);
                 })
                 .error(function () {
