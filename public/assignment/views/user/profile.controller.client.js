@@ -3,12 +3,13 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($location, $routeParams, UserService) {
+    function ProfileController($location, $routeParams, $rootScope, UserService) {
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.deleteUser = deleteUser;
         vm.updateUser = updateUser;
-
+        vm.logout = logout;
+        vm.userId = $rootScope.currentUser._id;
 
         function init() {
             var promise = UserService.findUserById(vm.userId);
@@ -45,10 +46,22 @@
                 .success(function () {
                     vm.deleteSuccess = "Success!";
                     $location.url("/login");
+                    $rootScope.currentUser = null;
                 })
                 .error(function () {
                     vm.deleteError = "Error!";  
                 })
+        }
+        
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();
