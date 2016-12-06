@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="">
+        <div>
+
+            <a href="#/">
+                <div class="align-center">
+                    <img src="img/logo.jpg" alt="TravelYaar">
+                </div>
+            </a>
+            <p class="align-center">
+                <span class="desc">Discover new Places to visit</span><br/>
+                <span class="sub-desc">Which your friends recommend</span>
+            </p>
+            <br/>
+
+            <form>
+                <input ng-model="firstName" type="text"
+                       class="form-control" placeholder="First Name"
+                       spellcheck="false"/>
+                <input ng-model="lastName" type="text"
+                       class="form-control" placeholder="Last Name"
+                       spellcheck="false"/>
+                <input ng-model="email" type="email"
+                       class="form-control" placeholder="Email Address"
+                       spellcheck="false"/>
+                <input ng-model="password" type="password"
+                       class="form-control" placeholder="Password"/>
+                <input ng-model="confirmPassword" type="password"
+                       class="form-control" placeholder="Confirm Password"/>
+                <br/>
+                <button ng-click="model.createUser(email, password, confirmPassword, firstName, lastName)" type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <div class="text-center footer-div">
+                <h6>Don't have an account? <a href="#/signup">Sign up</a></h6>
+            </div>
+        </div>
+    </div>
+</div>
