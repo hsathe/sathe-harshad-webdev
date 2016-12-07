@@ -1,0 +1,222 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#ty-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand v-mid" href="">
+                <span class="fa fa-tumblr-square"></span>
+                TravelYaar
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="ty-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
+                </li>
+                <li>
+                    <a href="#/recommendations"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
+                </li>
+                <li>
+                    <a href="#/network"><span class="fa fa-users nav-icon"></span> Connections</a>
+                </li>
+                <li>
+                    <a href="#/discover">
+                        <span class="fa fa-search nav-icon"></span>
+                        Discover
+                    </a>
+                </li>
+                <!--<li ng-if="currentUser.role == 'admin'">-->
+                <!--<a href="#/admin">-->
+                <!--<span class="fa fa-user nav-icon"></span>-->
+                <!--Admin-->
+                <!--</a>-->
+                <!--</li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       role="button"
+                       aria-expanded="false">
+                        <span class="fa fa-user nav-icon"></span>
+                        <span class="profile-username">{{currentUser.firstName}}</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#/account"><span class="fa fa-cog nav-icon"></span>Settings</a></li>
+                        <li><a ng-click="model.logout()" href=""><span class="fa fa-sign-out nav-icon"></span>Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container padded-top padded-bottom">
+    <div class="center-content text-center">
+        <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
+        <hr/>
+        <h6>
+            <span class="hidden-xs">Followers</span>
+            <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
+            <span class="link-separator">|</span>
+            <span class="hidden-xs">Following</span>
+            <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
+            <span class="link-separator">|</span>
+            <span class="hidden-xs">Recommendations</span>
+            <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
+        </h6>
+    </div>
+    <br/>
+    <div ng-If="model.allUsers === 0">
+        <div class="center-content text-center">
+            <button type="submit" ng-click="model.changeRoute()" class="btn btn-primary btn-yt">
+                <span class="fa fa-search"></span>
+                Find more users to follow
+            </button>
+        </div>
+        <hr/>
+        <h4>Following</h4>
+        <hr class="results-heading-separator"/>
+        <br/>
+        <div class="row">
+            <div ng-show="!model.following.length" class="col-xs-12">
+                <p class="center-content" style="font-size: 14px">Not following anyone yet.</p>
+            </div>
+            <div ng-repeat="hit in model.following | orderBy : 'user.name'" class="col-sm-6 col-md-3 result">
+                <div class="result-container">
+                    <div class="user-info">
+                        <h5>{{hit.user.name}}</h5>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <span class="fa fa-long-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-long-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-thumbs-up nav-icon"></span>{{hit.user.noOfRecommendations}}
+                        </h6>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <button type="submit"
+                                    ng-click="model.unfollow(hit.user._id)"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-minus"></span>
+                                Unfollow
+                            </button>
+                            <button type="submit"
+                                    ng-click="model.viewFavs(hit.user._id)"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-thumbs-up"></span>
+                                Recommendations
+                            </button>
+                            <span ng-show="hit.error" class="badge badge-error">Error!</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <h4>Followers</h4>
+        <hr class="results-heading-separator"/>
+        <br/>
+        <div class="row">
+            <div ng-show="!model.followers.length" class="col-xs-12">
+                <p class="center-content" style="font-size: 14px">No followers yet.</p>
+            </div>
+            <div ng-repeat="hit in model.followers | orderBy: 'user.name'" class="col-sm-6 col-md-3 result">
+                <div class="result-container">
+                    <div class="user-info">
+                        <h5>{{hit.user.name}}</h5>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <span class="fa fa-long-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-long-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-thumbs-up nav-icon"></span>{{hit.user.noOfRecommendations}}
+                        </h6>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <button type="submit"
+                                    ng-click="model.follow(hit.user)"
+                                    ng-hide="hit.following"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-plus"></span>
+                                Follow
+                            </button>
+                            <span ng-show="hit.following" class="badge badge-follow">Following</span>
+                            <button type="submit"
+                                    ng-click="model.viewFavs(hit.user._id)"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-thumbs-up"></span>
+                                Recommendations
+                            </button>
+                            <span ng-show="hit.error" class="badge badge-error">Error!</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="model.allUsers === 1">
+        <div class="center-content text-center">
+            <button type="submit" ng-click="model.changeRoute()" class="btn btn-primary btn-yt">
+                <span class="fa fa-users"></span>
+                View your network
+            </button>
+        </div>
+        <hr/>
+        <h4>TravelYaar Users</h4>
+        <hr class="results-heading-separator"/>
+        <br/>
+        <div class="input-group center-content">
+            <input ng-model="keywords"
+                   type="text"
+                   class="form-control"
+                   placeholder="Search users to follow">
+        </div>
+        <br/>
+        <div class="row">
+            <div ng-show="!model.userResults.length" class="col-xs-12">
+                <p class="center-content" style="font-size: 14px">No more users to follow.</p>
+            </div>
+            <div ng-repeat="hit in model.userResults | filter : keywords | orderBy: 'data.name'" class="col-sm-6 col-md-3 result">
+                <div class="result-container">
+                    <div class="user-info">
+                        <h5>{{hit.data.name}}</h5>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <span class="fa fa-long-arrow-down nav-icon"></span>{{hit.data.noOfFollowers}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-long-arrow-up nav-icon"></span>{{hit.data.noOfFollowing}}
+                            <span class="link-separator">|</span>
+                            <span class="fa fa-thumbs-up nav-icon"></span>{{hit.data.noOfRecommendations}}
+                        </h6>
+                        <hr class="results-heading-separator"/>
+                        <h6>
+                            <button type="submit"
+                                    ng-click="model.follow(hit.data)"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-plus"></span>
+                                Follow
+                            </button>
+                            <button type="submit"
+                                    ng-click="model.viewFavs(hit.data._id)"
+                                    class="btn btn-primary btn-yt">
+                                <span class="fa fa-thumbs-up"></span>
+                                Recommendations
+                            </button>
+                            <span ng-show="hit.error" class="badge badge-error">Error!</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

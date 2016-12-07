@@ -20,6 +20,21 @@
                 controller: "SignUpController",
                 controllerAs: "model"
             })
+            .when("/profile",{
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model"
+            })
+            .when("/connections",{
+                templateUrl: "views/user/connections.view.client.html",
+                controller: "ConnectionsController",
+                controllerAs: "model"
+            })
+            .when("/connections/view/:searchView", {
+                templateUrl: "views/user/connections.view.client.html",
+                controller: "ConnectionsController",
+                controllerAs: "model"
+            })
             .otherwise({
             redirectTo: "/"
         });

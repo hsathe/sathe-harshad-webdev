@@ -49,3 +49,15 @@
 .center-content{
     width: 90%;
 }
+
+.padded-top{
+    padding-top: 90px;
+}
+
+.user-info{
+    padding: 0 10px;
+}
+
+.results-heading-separator{
+    margin: 5px 0;
+}
