@@ -3,79 +3,185 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="description" content="Homepage for CS5610 Web Development course">
     <meta name="author" content="Harshad Sathe">
     <title>CS5610-WebDevelopment Course</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/paper/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-2mX2PSpkRSXLQzmNzH3gwK6srb06+OfbDlYjbog8LQuALYJjuQ3+Yzy2JIWNV9rW" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="css/main-page.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/paper/bootstrap.min.css" rel="stylesheet"-->
+    <!--integrity="sha384-2mX2PSpkRSXLQzmNzH3gwK6srb06+OfbDlYjbog8LQuALYJjuQ3+Yzy2JIWNV9rW" crossorigin="anonymous">-->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"-->
+    <!--integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="homepage/css/home-page-style.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://sathe-harshad-webdevapp.herokuapp.com/">Hosted on Heroku</a>
+            <a class="navbar-brand" href="#">Harshad Sathe</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="project">Project</a>
-                </li>
-                <li>
-                    <a href="assignment">Assignment</a>
-                </li>
-                <li>
-                    <a href="test">Test MongoDB</a>
-                </li>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="https://sathe-harshad-webdevapp.herokuapp.com/">Hosted Website</a></li>
+                <li><a href="project">Project</a></li>
+                <li><a href="assignment">Assignment</a></li>
+                <li><a href="test">Test MongoDB</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container center-content">
-    <div class="row">
-            <hr/>
-            <div class="col-sm-12 content">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img class="img-responsive img-rounded" src="project/img/hs.jpg">
-                    </div>
-                    <div class="col-sm-9">
-                        <h1 style="text-align: center">Harshad Sathe</h1>
-                    </div>
-                </div>
-                <hr/>
-                <h4 style="text-align: center; font-weight:bold">Software Engineer | Horse Lover | Dancer |
-                    Traveller</h4>
-                <hr/>
-                <h6>I'm a software engineer and candidate for M.S. in Computer Science at Northeastern University,
-                    Boston. My academic interests include Networking,Virtualization, Information Retrieval, Big Data and
-                    Web Development</h6>
-                <h6>I love to dabble in the latest and greatest in the technology world and I'm always on the look out
-                    for an opportunity to learn something interesting. In my free time, I travel to learn about cultures
-                    and meet new people.</h6>
-                <h6>This website and the linked applications were developed for <a
-                        href="http://portal-cs5610online.rhcloud.com/#/">CS5610 Web Development</a> course, under the
-                    guidance of Prof. Jose Annunziato.
-                </h6>
-                <h6>Connect with me:
-                    <a href="https://github.com/hsathe"><span class="fa fa-github social"></span></a>
-                    <a href="https://www.linkedin.com/in/harshadsathe"><span class="fa fa-linkedin social"></span></a>
-                </h6>
+
+<div class="row container add-top-margin">
+    <div class="col-xs-4 hidden-xs" id="leftPanel">
+        <h3><a href="#education">Academics</a></h3>
+        <h3><a href="#experience">Experience</a></h3>
+        <h3><a href="#projects">Course-Projects</a></h3>
+        <h3><a href="#contact">Contact Me</a></h3>
+
+    </div>
+    <!--<div class="draw-vertical-line hidden-xs"></div>-->
+    <div class="col-xs-12 col-sm-8" id="rightPanel">
+        <div class="row">
+            <div class="col-sm-8">
+                <img class="img-responsive img-rounded" src="homepage/img/hs.jpg">
             </div>
         </div>
+        <br>
+        <hr/>
+        <h3>
+            <span class="traits">Software Engineer</span>
+            <span class="visible-sm-inline visible-md-inline visible-lg-inline">|</span>
+            <span class="traits">Horse Lover</span>
+            <span class="visible-sm-inline visible-md-inline visible-lg-inline">|</span>
+            <span class="traits">Dancer</span>
+            <span class="visible-sm-inline visible-md-inline visible-lg-inline">|</span>
+            <span class="traits">Traveller</span>
+        </h3>
+        <hr/>
+
+        <a name="education"></a>
+        <div id="section2">
+            <section class="education">
+                <h2>Academics</h2>
+                <hr/>
+                <h4>About Me:</h4>
+                <h4>I'm a software engineer and candidate for M.S. in Computer Science at Northeastern University,
+                    Boston. My academic interests include Networking,Virtualization, Information Retrieval, Big Data
+                    and
+                    Web Development</h4>
+                <h4>I love to explore latest technologies and work on products that impact the world. I'm addicted to
+                    problem solving and always look
+                    for an opportunity to learn something interesting. In my free time, I travel to learn about
+                    cultures
+                    and meet new people.</h4>
+            </section>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5><img style="height: 30%;width: 30%" class="img-responsive item img-circle"
+                             src="homepage/img/northeastern.png"></h5>
+                </div>
+                <div class="col-sm-6">
+                    <h3>Northeastern University</h3>
+                    <h4>Computer Science</h4>
+                    <h4>Sept 2014 - Dec 2016</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5><img style="height: 35%;width: 35%" class="img-responsive item img-circle"
+                             src="homepage/img/pict.jpg"></h5>
+                </div>
+                <div class="col-sm-6">
+                    <h3>Pune Institute Of Computer Technology</h3>
+                    <h4>Information Technology</h4>
+                    <h4>May 2008 - Apr 2011</h4>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <a name="experience"></a>
+        <h2>Professional Experience</h2>
+        <div class="container">
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img class="img-responsive" src="homepage/img/persistent1.png">
+                    </div>
+
+                    <div class="item">
+                        <img class="img-responsive" src="homepage/img/imprivata1.png">
+                    </div>
+
+                    <div class="item">
+                        <img class="img-responsive" src="homepage/img/imprivata2.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr/>
+        <a name="projects"></a>
+        <h2>Recent projects</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5><img class="item img-responsive" src="homepage/img/demo.gif"></h5>
+            </div>
+            <div class="col-sm-6">
+                <h4>
+                    Created WordPress plugin and used TimeLineJs and LeaftLet JS. <br/><br/>
+                    Enabled research groups at Northeastrn Research Group to use the tool effectively <br/><br/>
+                    Helped view artifacts across a easy TimeLine and locate the content origin using Maps.
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <img class="img-responsive" src="homepage/img/cdn.png">
+            </div>
+            <div class="col-sm-6">
+                <h4><a href="https://github.com/hsathe/NetworkingProjects" class="project-link">CDN And Raw Sockets</a>
+                </h4>
+                <h4>
+                    Built building blocks of Content Delivery Network and Raw Sockets used python to implemented using
+                    TCP/IP, HTTP knowledge.
+                </h4>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <a name="contact"></a>
+        <h2>Connect with me:</h2>
+        <br/>
+        <a href="https://github.com/hsathe" class="btn btn-default social-link"><span
+                class="fa fa-github fa-lg"></span> Github</a>
+        <a href="https://www.linkedin.com/in/harshadsathe" class="btn btn-default social-link"><span
+                class="fa fa-linkedin fa-lg"></span> LinkedIn</a>
+        <a href="https://twitter.com/@harshadssathe" class="btn btn-default social-link"><span
+                class="fa fa-twitter fa-lg"></span> Twitter</a>
+
     </div>
+</div>
 </body>
 </html>
