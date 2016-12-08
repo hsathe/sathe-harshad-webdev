@@ -35,6 +35,11 @@
                 controller: "ConnectionsController",
                 controllerAs: "model"
             })
+            .when("/discover", {
+                templateUrl: "views/user/discover.view.client.html",
+                controller: "DiscoverController",
+                controllerAs: "model"
+            })
             .otherwise({
             redirectTo: "/"
         });

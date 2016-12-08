@@ -31,7 +31,7 @@ module.exports = function (app, models) {
     app.delete("/api/user/:userId/following", removeFromFollowing);
     app.get("/api/user/:userId/followers", getFollowersForUser);
     app.get("/api/user/:userId/following", getFollowingForUser);
-
+    
     function serializeUser(user, done) {
         done(null, user);
     }
