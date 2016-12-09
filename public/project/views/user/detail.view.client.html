@@ -21,7 +21,7 @@
                     <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-heart nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendations"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -33,10 +33,10 @@
                     </a>
                 </li>
                 <!--<li ng-if="currentUser.role == 'admin'">-->
-                    <!--<a href="#/admin">-->
-                        <!--<span class="fa fa-user nav-icon"></span>-->
-                        <!--Admin-->
-                    <!--</a>-->
+                <!--<a href="#/admin">-->
+                <!--<span class="fa fa-user nav-icon"></span>-->
+                <!--Admin-->
+                <!--</a>-->
                 <!--</li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -51,27 +51,32 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#/account"><span class="fa fa-cog nav-icon"></span>Settings</a></li>
-                        <li><a ng-click="model.logout()" href=""><span class="fa fa-sign-out nav-icon"></span>Sign Out</a></li>
+                        <li><a ng-click="model.logout()" href=""><span class="fa fa-sign-out nav-icon"></span>Sign
+                            Out</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container padded-top padded-bottom">
-    <div class="center-content text-center">
-        <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
-        <hr/>
-        <h6>
-            <span class="">Followers</span>
-            <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
-            <span class="link-separator">|</span>
-            <span class="">Following</span>
-            <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
-            <span class="link-separator">|</span>
-            <span class="">Recommendations</span>
-            <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
-        </h6>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+    <!--{{model.detail}}-->
+<div class="row">
+    <div class="col-xs-6">
+        {{model.detail.name}}
     </div>
-    <br/>
+    <div class="col-xs-6">
+        {{model.detail.international_phone_number}}
+    </div>
+</div>
+
 </div>

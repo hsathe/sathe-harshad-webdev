@@ -31,6 +31,8 @@ module.exports = function (app, models) {
     app.delete("/api/user/:userId/following", removeFromFollowing);
     app.get("/api/user/:userId/followers", getFollowersForUser);
     app.get("/api/user/:userId/following", getFollowingForUser);
+    app.put("/api/user/:userId/recommendation", addToRecommendation);
+    app.delete("/api/user/:userId/recommendation", removeFromRecommendation);
     
     function serializeUser(user, done) {
         done(null, user);
@@ -278,6 +280,72 @@ module.exports = function (app, models) {
                 },
                 function (err) {
                     res.status(400).send("Could not add following");
+                }
+            );
+    }
+
+    function addToRecommendation(req, res){
+        var userId = req.params.userId;
+        // var placeId = req.query.placeId;
+        var placeId = req.body.place_id;
+        TravelYaarUserModel
+            .addRecommendation(placeId, userId)
+            .then(
+                function (success) {
+                    models.placeModel
+                        .addRecommendationByUser(placeId, userId)
+                        .then(
+                            function (success) {
+                                res.status(200).send("User recommendation added");
+                            },
+                            function (err) {
+                                res.status(400).send("Could not add recommendation");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(400).send("Not added to recommendation");
+                }
+            );
+    }
+    
+    function removeFromRecommendation(req, res) {
+        var userId = req.params.userId;
+        var placeId = req.query.placeId;
+
+        TravelYaarUserModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    models.placeModel
+                        .findPlaceById(placeId)
+                        .then(
+                            function (place) {
+                                TravelYaarUserModel.removeRecommendation(place.placeId, user._id)
+                                    .then(
+                                        function (success) {
+                                            models.placeModel.removeRecommendationByUser(place.placeId, user._id)
+                                                .then(
+                                                    function (success) {
+                                                        res.status(200).send("User recommendation removed");
+                                                    },
+                                                    function (err) {
+                                                        res.status(400).send("Unable to remove user recommendation");
+                                                    }
+                                                );
+                                        },
+                                        function (err) {
+                                            res.status(400).send("Unable to remove from recommendations");
+                                        }
+                                    );
+                            },
+                            function (err) {
+                                res.status(400).send("Place not available");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(400).send("Unable to find user");
                 }
             );
     }

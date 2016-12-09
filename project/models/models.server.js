@@ -6,7 +6,8 @@ module.exports = function () {
     mongoose.connect(connectionString);
     
     return{
-        travelyaarUserModel: require("./user/travelyaar.user.model.server")()
+        travelyaarUserModel: require("./user/travelyaar.user.model.server")(),
+        placeModel: require("./places/place.model.server")()
     };
 
 };

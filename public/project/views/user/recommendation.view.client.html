@@ -21,10 +21,10 @@
                     <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-heart nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
                 </li>
                 <li>
-                    <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
+                    <a href="#/network"><span class="fa fa-users nav-icon"></span> Connections</a>
                 </li>
                 <li>
                     <a href="#/discover">
@@ -33,10 +33,10 @@
                     </a>
                 </li>
                 <!--<li ng-if="currentUser.role == 'admin'">-->
-                    <!--<a href="#/admin">-->
-                        <!--<span class="fa fa-user nav-icon"></span>-->
-                        <!--Admin-->
-                    <!--</a>-->
+                <!--<a href="#/admin">-->
+                <!--<span class="fa fa-user nav-icon"></span>-->
+                <!--Admin-->
+                <!--</a>-->
                 <!--</li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -63,15 +63,18 @@
         <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
         <hr/>
         <h6>
-            <span class="">Followers</span>
+            <span class="hidden-xs">Followers</span>
             <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
             <span class="link-separator">|</span>
-            <span class="">Following</span>
+            <span class="hidden-xs">Following</span>
             <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
             <span class="link-separator">|</span>
-            <span class="">Recommendations</span>
+            <span class="hidden-xs">Recommendations</span>
             <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
         </h6>
     </div>
+    <br/>
+    <h4>Favorites</h4>
+    <hr class="results-heading-separator"/>
     <br/>
 </div>

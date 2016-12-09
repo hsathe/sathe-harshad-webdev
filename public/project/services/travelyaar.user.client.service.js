@@ -17,8 +17,10 @@
             getFollowingForUser: getFollowingForUser,
             addToFollowers: addToFollowers,
             addToFollowing: addToFollowing,
+            addToRecommendations: addToRecommendations,
             removeFromFollowers: removeFromFollowers,
             removeFromFollowing: removeFromFollowing,
+            removeFromRecommendation: removeFromRecommendation,
             updateUser: updateUser
         };
         
@@ -90,6 +92,16 @@
         function removeFromFollowing(userId, followingId){
             console.log("removeFromFollowing - " + userId + " " + followingId);
             return $http.delete("/api/user/"+userId+"/following?followingId="+followingId);
+        }
+
+        function addToRecommendations(userId, place) {
+            console.log("addToRecommendation : "+userId+" "+ place);
+            return $http.put("/api/user/"+ userId +"/recommendation", place);
+        }
+
+        function removeFromRecommendation(userId, placeId) {
+            console.log("removeFromRecommendations : "+userId+" "+ placeId);
+            return $http.delete("/api/user/"+ userId +"/recommendation?placeId="+placeId);
         }
     }
 })();

@@ -40,6 +40,16 @@
                 controller: "DiscoverController",
                 controllerAs: "model"
             })
+            .when("/details/:placeId", {
+                templateUrl: "views/user/detail.view.client.html",
+                controller: "DetailsController",
+                controllerAs: "model"
+            })
+            .when("/recommendation", {
+                templateUrl: "views/user/recommendation.view.client.html",
+                controller: "RecommendationController",
+                controllerAs: "model"
+            })
             .otherwise({
             redirectTo: "/"
         });

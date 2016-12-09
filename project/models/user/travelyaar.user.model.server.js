@@ -17,7 +17,9 @@ module.exports = function () {
         addFollowing: addFollowing,
         removeFollower: removeFollower,
         removeUserFromFollowing: removeUserFromFollowing,
-        removeUserFromAllFollowers:removeUserFromAllFollowers
+        removeUserFromAllFollowers:removeUserFromAllFollowers,
+        addRecommendation: addRecommendation,
+        removeRecommendation: removeRecommendation
     };
 
     return api;
@@ -99,5 +101,20 @@ module.exports = function () {
                 {$pull: {following: user._id}},
                 {multi: true}
             );
+    }
+
+    function addRecommendation(placeId, userId) {
+        return travelyaarUserModel
+            .update(
+                {_id: userId},{
+                    $push: {recommendations: placeId}
+                });
+    }
+    
+    function removeRecommendation(placeId, userId) {
+        return travelyaarUserModel
+            .update({_id: userId},{
+                $pull: {recommendations: placeId}
+            });
     }
 };
