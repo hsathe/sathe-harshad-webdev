@@ -21,6 +21,7 @@
             removeFromFollowers: removeFromFollowers,
             removeFromFollowing: removeFromFollowing,
             removeFromRecommendation: removeFromRecommendation,
+            getRecommendationsForUser: getRecommendationsForUser,
             updateUser: updateUser
         };
         
@@ -102,6 +103,11 @@
         function removeFromRecommendation(userId, placeId) {
             console.log("removeFromRecommendations : "+userId+" "+ placeId);
             return $http.delete("/api/user/"+ userId +"/recommendation?placeId="+placeId);
+        }
+        
+        function getRecommendationsForUser(userId) {
+            console.log("Getting recommendations for the user  "+userId);
+            return $http.get("/api/user/"+userId+"/recommendations");
         }
     }
 })();

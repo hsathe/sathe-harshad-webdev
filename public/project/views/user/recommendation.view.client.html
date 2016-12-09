@@ -24,7 +24,7 @@
                     <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
                 </li>
                 <li>
-                    <a href="#/network"><span class="fa fa-users nav-icon"></span> Connections</a>
+                    <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
                 </li>
                 <li>
                     <a href="#/discover">
@@ -74,7 +74,52 @@
         </h6>
     </div>
     <br/>
-    <h4>Favorites</h4>
+    <h4>Recommended Places</h4>
     <hr class="results-heading-separator"/>
     <br/>
+    <div class="input-group center-content" ng-show="model.recommendations.length">
+        <input ng-model="recoQuery"
+               type="text"
+               class="form-control"
+               placeholder="Filter places from Recommendations">
+    </div>
+    <br/>
+    <div class="row">
+        <div ng-show="!model.recommendations.length" class="col-xs-12">
+            <p class="center-content" style="font-size: 14px">No places recommended yet.</p>
+        </div>
+        <div ng-repeat-start="reco in model.recommendations | filter: recoQuery" class="col-sm-6 col-md-3 result">
+            <div class="result-container">
+                <!--<div class="embed-responsive embed-responsive-16by9">-->
+                    <!--<iframe class="embed-responsive-item"-->
+                            <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
+                    <!--</iframe>-->
+                <!--</div>-->
+                <div class="result-info">
+                    <h5 class="place-title">{{reco.place.name}}</h5>
+                    <h6 class="place-author">{{reco.place.formatted_address}}</h6>
+                    <h6 class="place-description">{{reco.place.rating}}</h6>
+                </div>
+                <hr class="results-heading-separator"/>
+                <h6>
+                    <span class="fa fa-heart itube-heart-info"></span>
+                    <span class="badge">{{reco.place.totalReco}}</span>
+					<span ng-show="model.seeButton">
+						<span ng-show="reco.added"
+                              class="badge badge-added">Recommended</span>
+						<button type="submit"
+                                ng-click="model.addRecommendation(reco)"
+                                ng-hide="reco.added"
+                                class="btn btn-default itube-heart">
+						<span class="fa fa-heart"></span>
+						Recommend
+						</button>
+						<span ng-show="reco.error"
+                              class="badge badge-error">Error!</span>
+					</span>
+                </h6>
+            </div>
+        </div>
+        <div ng-repeat-end ng-if="$index % 4 == 3" class="clearfix visible-md-block visible-lg-block"></div>
+    </div>
 </div>

@@ -7,7 +7,8 @@ module.exports = function () {
         createPlace: createPlace,
         addRecommendationByUser: addRecommendationByUser,
         removeRecommendationByUser: removeRecommendationByUser,
-        findPlaceByPlaceId: findPlaceByPlaceId
+        findPlaceByPlaceId: findPlaceByPlaceId,
+        getRecommendationsForUser : getRecommendationsForUser
     };
     return api;
 
@@ -31,5 +32,9 @@ module.exports = function () {
     
     function findPlaceByPlaceId(placeId) {
         return PlaceModel.findOne({place_id: placeId});
+    }
+    
+    function getRecommendationsForUser(user) {
+        return PlaceModel.find({place_id: {$in: user.recommendations}})
     }
 }

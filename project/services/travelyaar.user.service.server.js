@@ -33,7 +33,7 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId/following", getFollowingForUser);
     app.put("/api/user/:userId/recommendation", addToRecommendation);
     app.delete("/api/user/:userId/recommendation", removeFromRecommendation);
-    
+    app.get("/api/user/:userId/recommendations", getRecommendationsForUser)
     function serializeUser(user, done) {
         done(null, user);
     }
@@ -371,6 +371,31 @@ module.exports = function (app, models) {
                 }
             );
     }
+    
+    function getRecommendationsForUser(req, res) {
+        var userId = req.params.userId;
+
+        TravelYaarUserModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    models.placeModel
+                        .getRecommendationsForUser(user)
+                        .then(
+                            function (recommendations) {
+                                res.json(recommendations);
+                            },
+                            function (err) {
+                                res.status(400).send("Could not find recommendations for user");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(400).send("Could not find user");
+                }
+            );
+    }
+    
     function signout(req, res) {
         req.logout();
         res.sendStatus(200);
