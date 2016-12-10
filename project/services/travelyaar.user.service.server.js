@@ -17,7 +17,7 @@ module.exports = function (app, models) {
     passport.deserializeUser(deserializeUser);
 
     var TravelYaarUserModel = models.travelyaarUserModel;
-    
+
     app.post("/api/register", signUp);
     app.post("/api/login", passport.authenticate('local'), signIn);
     app.post("/api/logout", signout);
@@ -33,7 +33,10 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId/following", getFollowingForUser);
     app.put("/api/user/:userId/recommendation", addToRecommendation);
     app.delete("/api/user/:userId/recommendation", removeFromRecommendation);
-    app.get("/api/user/:userId/recommendations", getRecommendationsForUser)
+    app.get("/api/user/:userId/recommendations", getRecommendationsForUser);
+    app.get("/api/user/:userId/feed", getUserFeed);
+    app.get("/api/user/:userId/publicfeed", getFilteredFeed);
+
     function serializeUser(user, done) {
         done(null, user);
     }
@@ -42,10 +45,10 @@ module.exports = function (app, models) {
         TravelYaarUserModel
             .findUserById(user._id)
             .then(
-                function(user){
+                function (user) {
                     done(null, user);
                 },
-                function(err){
+                function (err) {
                     done(err, null);
                 }
             );
@@ -55,41 +58,45 @@ module.exports = function (app, models) {
         TravelYaarUserModel
             .findUserByEmail(username)
             .then(
-                function(user) {
-                    if(user && user.email === username && password, user.password) {
+                function (user) {
+                    if (user && user.email === username && password, user.password) {
                         return done(null, user);
                     } else {
                         return done(null, false);
                     }
                 },
-                function(err) {
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             );
     }
+
     function signIn(req, res) {
         var user = req.user;
         res.json(user);
     }
+
     function signUp(req, res) {
         var email = req.body.email;
         var password = req.body.password;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
-        
+
         TravelYaarUserModel
             .findUserByEmail(email)
             .then(
-                function(user){
-                    if(user){
+                function (user) {
+                    if (user) {
                         res.status(400).send("User already exists");
-                    }else{
+                    } else {
                         password = req.body.password;
                         return TravelYaarUserModel
                             .createUser({
                                 email: email,
-                                firstName:firstName,
-                                lastName:lastName,
+                                firstName: firstName,
+                                lastName: lastName,
                                 password: password
                             });
                     }
@@ -100,11 +107,11 @@ module.exports = function (app, models) {
             )
             .then(
                 function (user) {
-                    if(user){
+                    if (user) {
                         req.login(user, function (err) {
-                            if(err){
+                            if (err) {
                                 res.status(400).send(err);
-                            } else{
+                            } else {
                                 res.json(user);
                             }
                         });
@@ -112,7 +119,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function getAllUsers(req, res) {
         TravelYaarUserModel.findAllUsers()
             .then(
@@ -124,7 +131,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function getUsersToFollow(req, res) {
         var userId = req.params.userId;
         TravelYaarUserModel.findUserById(userId)
@@ -193,10 +200,10 @@ module.exports = function (app, models) {
     function updateUser(req, res) {
         var userId = req.params.userId;
         var newUser = req.body;
-        TravelYaarUserModel.updateUser(userId,newUser)
+        TravelYaarUserModel.updateUser(userId, newUser)
             .then(function (success) {
                 res.status(200).send("User updated!");
-            },function (err) {
+            }, function (err) {
                 res.status(400).send("Problem in updating user");
             });
     }
@@ -205,7 +212,7 @@ module.exports = function (app, models) {
     function deleteUser(req, res) {
         var userId = req.params.userId;
     }
-    
+
     function getUserById(req, res) {
         var userId = req.params.userId;
         TravelYaarUserModel.findUserById(userId)
@@ -225,11 +232,11 @@ module.exports = function (app, models) {
             .addFollower(followerId, userId)
             .then(
                 function (success) {
-                    TravelYaarUserModel.addFollowing(userId,followerId)
+                    TravelYaarUserModel.addFollowing(userId, followerId)
                         .then(
                             function (success) {
                                 res.status(200).send("Follower added successfully");
-                            },function (err) {
+                            }, function (err) {
                                 res.status(400).send("Could not add follower");
                             }
                         );
@@ -247,11 +254,11 @@ module.exports = function (app, models) {
             .removeFollower(followerId, userId)
             .then(
                 function (success) {
-                    TravelYaarUserModel.removeFollowing(userId,followerId)
+                    TravelYaarUserModel.removeFollowing(userId, followerId)
                         .then(
                             function (success) {
                                 res.status(200).send("Follower removed successfully");
-                            },function (err) {
+                            }, function (err) {
                                 res.status(400).send("Could not remove follower");
                             }
                         );
@@ -269,11 +276,11 @@ module.exports = function (app, models) {
             .addFollowing(followerId, userId)
             .then(
                 function (success) {
-                    TravelYaarUserModel.addFollower(userId,followerId)
+                    TravelYaarUserModel.addFollower(userId, followerId)
                         .then(
                             function (success) {
                                 res.status(200).send("Following added successfully");
-                            },function (err) {
+                            }, function (err) {
                                 res.status(400).send("Could not add Following");
                             }
                         );
@@ -284,7 +291,7 @@ module.exports = function (app, models) {
             );
     }
 
-    function addToRecommendation(req, res){
+    function addToRecommendation(req, res) {
         var userId = req.params.userId;
         // var placeId = req.query.placeId;
         var placeId = req.body.place_id;
@@ -308,7 +315,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function removeFromRecommendation(req, res) {
         var userId = req.params.userId;
         var placeId = req.query.placeId;
@@ -349,7 +356,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function removeFromFollowing(req, res) {
         var userId = req.params.userId;
         var followerId = req.query.followingId;
@@ -357,11 +364,11 @@ module.exports = function (app, models) {
             .removeFollowing(followerId, userId)
             .then(
                 function (success) {
-                    TravelYaarUserModel.removeFollower(userId,followerId)
+                    TravelYaarUserModel.removeFollower(userId, followerId)
                         .then(
                             function (success) {
                                 res.status(200).send("Following removed successfully");
-                            },function (err) {
+                            }, function (err) {
                                 res.status(400).send("Could not remove Following");
                             }
                         );
@@ -371,7 +378,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function getRecommendationsForUser(req, res) {
         var userId = req.params.userId;
 
@@ -395,10 +402,56 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
+    function getUserFeed(req, res) {
+        var userId = req.params.userId;
+        TravelYaarUserModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    models.placeModel
+                        .getUserFeed(user)
+                        .then(
+                            function (feed) {
+                                res.json(feed);
+                            },
+                            function (err) {
+                                res.status(400).send("No data found for this user");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(404).send("User not found");
+                }
+            );
+    }
+
+    function getFilteredFeed(req, res) {
+        var userId = req.params.userId;
+        TravelYaarUserModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    models.placeModel
+                        .getFilteredFeed(user)
+                        .then(
+                            function (feed) {
+                                res.json(feed);
+                            },
+                            function (err) {
+                                res.status(400).send("No data found for this user");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(404).send("User not found");
+                }
+            );
+    }
+
     function signout(req, res) {
         req.logout();
         res.sendStatus(200);
     }
-    
+
 }

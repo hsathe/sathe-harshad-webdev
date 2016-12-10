@@ -21,7 +21,7 @@
                     <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendations"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -98,11 +98,11 @@
     <div class="row">
         <div ng-repeat-start="place in model.attractions" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <!--<div class="thumbnail">-->
-                    <!--<img class="img-responsive"-->
-                            <!--ng-src="" allowfullscreen>-->
-                    <!--</img>-->
-                <!--</div>-->
+                <div class="thumbnail">
+                    <img class="img-responsive"
+                            ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                    </img>
+                </div>
                 <div class="result-info">
                     <h5 class="place-title">{{place.name}}</h5>
                     <h6 class="place-author">{{place.formatted_address}}</h6>

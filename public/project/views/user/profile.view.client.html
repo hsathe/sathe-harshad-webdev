@@ -21,7 +21,7 @@
                     <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-heart nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendations"><span class="fa fa-heart nav-icon"></span> Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -74,4 +74,122 @@
         </h6>
     </div>
     <br/>
+    <div ng-If="model.networkRecommendations === 0">
+        <div class="center-content text-center">
+            <button type="submit" ng-click="model.toggleView()" class="btn btn-danger btn-yt">
+                <span class="fa fa-users"></span>
+                Latest from Network
+            </button>
+        </div>
+        <hr/>
+        <h4>Recommended places to visit</h4>
+        <hr class="results-heading-separator"/>
+        <br/>
+        <div class="input-group center-content" ng-show="model.public.length">
+            <input ng-model="publicQuery"
+                   type="text"
+                   class="form-control"
+                   placeholder="Filter Places">
+        </div>
+        <br/>
+        <div class="row">
+            <div ng-show="!model.public.length" class="col-xs-12">
+                <p class="center-content" style="font-size: 14px">
+                    There are no new places to recommend.
+                </p>
+            </div>
+            <div ng-repeat-start="hit in model.public | filter: publicQuery" class="col-sm-6 col-md-3 result">
+                <div class="result-container">
+                    <!--<div class="embed-responsive embed-responsive-16by9">-->
+                        <!--<iframe class="embed-responsive-item"-->
+                                <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
+                        <!--</iframe>-->
+                    <!--</div>-->
+                    <div class="result-info">
+                        <h5 class="place-title">{{hit.place.name}}</h5>
+                        <h6 class="place-author">{{hit.place.formatted_address}}</h6>
+                        <h6 class="place-description">{{hit.place.rating}}</h6>
+                    </div>
+                    <hr class="results-heading-separator"/>
+                    <hr class="results-heading-separator"/>
+                    <h6>
+                        <span class="fa fa-heart itube-heart-info"></span>
+                        <span class="badge">{{hit.place.recommendations}}</span>
+                        <span ng-show="place.added" class="badge badge-added">Recommended</span>
+                        <button type="submit"
+                                ng-click="model.addRecommendation(hit, 0)"
+                                ng-hide="place.added"
+                                class="btn btn-default itube-heart">
+                            <span class="fa fa-thumbs-up"></span>
+                            Recommend
+                        </button>
+                        <span ng-show="place.error" class="badge badge-error">Error!</span>
+                    </h6>
+                </div>
+            </div>
+            <div ng-repeat-end ng-if="$index % 4 == 3" class="clearfix visible-md-block visible-lg-block"></div>
+        </div>
+    </div>
+    <div ng-If="model.networkRecommendations === 1">
+        <div class="center-content text-center">
+            <button type="submit" ng-click="model.toggleView()" class="btn btn-danger btn-yt">
+                <span class="fa fa-youtube-play"></span>
+                Latest from iTube
+            </button>
+        </div>
+        <hr/>
+        <h4>Recommended videos from Network</h4>
+        <hr class="results-heading-separator"/>
+        <br/>
+        <div class="input-group center-content" ng-show="model.network.length">
+            <input ng-model="networkQuery"
+                   type="text"
+                   class="form-control"
+                   placeholder="Filter videos from Network">
+        </div>
+        <br/>
+        <div class="row">
+            <div ng-show="!model.network.length" class="col-xs-12">
+                <p class="center-content" style="font-size: 14px">
+                    There are no new recommendations from your Network.
+                    <br/>
+                    <br/>
+                    But do not worry, you can do either of the following:
+                    <br/>
+                    1. See recommendations from Travelyaar.
+                    <br/>
+                    2. Follow more users to get recommendations.
+                </p>
+            </div>
+            <div ng-repeat-start="hit in model.network | filter: networkQuery" class="col-sm-6 col-md-3 result">
+                <div class="result-container">
+                    <!--<div class="embed-responsive embed-responsive-16by9">-->
+                        <!--<iframe class="embed-responsive-item"-->
+                                <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
+                        <!--</iframe>-->
+                    <!--</div>-->
+                    <div class="result-info">
+                        <h5 class="hit-title">{{hit.place.name}}</h5>
+                        <h6 class="hit-author">{{hit.place.formatted_address}}</h6>
+                        <h6 class="hit-description">{{hit.place.rating}}</h6>
+                    </div>
+                    <hr class="results-heading-separator"/>
+                    <h6>
+                        <span class="fa fa-heart itube-heart-info"></span>
+                        <span class="badge">{{hit.place.recommendations}}</span>
+                        <span ng-show="hit.added" class="badge badge-added">Added to Favorites</span>
+                        <button type="submit"
+                                ng-click="model.addRecommendation(hit, 1)"
+                                ng-hide="hit.added"
+                                class="btn btn-default itube-heart">
+                            <span class="fa fa-heart"></span>
+                            Add to Favorite
+                        </button>
+                        <span ng-show="hit.error" class="badge badge-error">Error!</span>
+                    </h6>
+                </div>
+            </div>
+            <div ng-repeat-end ng-if="$index % 4 == 3" class="clearfix visible-md-block visible-lg-block"></div>
+        </div>
+    </div>
 </div>

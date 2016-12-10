@@ -119,3 +119,43 @@
     color: #cd201f;
     margin: 5px;
 }
+
+.branding-main{
+    padding-top: 0px;
+}
+
+.branding-main span{
+    font-size: 56px;
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.branding{
+    padding-top: 20px;
+}
+
+.branding span{
+    font-size: 48px;
+    vertical-align: middle;
+    padding-left: 5px;
+    /*color: #444444;*/
+}
+
+.hr-main{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.special-separator{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height:1px;
+    width: 100%;
+    border-top: 1px solid gray;
+    text-align: center;
+}
+div.special-separator>span{
+    z-index: 10;
+    background-color: white;
+    padding: 10px;
+}

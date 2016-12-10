@@ -8,7 +8,9 @@ module.exports = function () {
         addRecommendationByUser: addRecommendationByUser,
         removeRecommendationByUser: removeRecommendationByUser,
         findPlaceByPlaceId: findPlaceByPlaceId,
-        getRecommendationsForUser : getRecommendationsForUser
+        getRecommendationsForUser : getRecommendationsForUser,
+        getUserFeed : getUserFeed,
+        getFilteredFeed : getFilteredFeed
     };
     return api;
 
@@ -37,4 +39,20 @@ module.exports = function () {
     function getRecommendationsForUser(user) {
         return PlaceModel.find({place_id: {$in: user.recommendations}})
     }
+
+    function getUserFeed(user) {
+        return PlaceModel.find({
+            $and: [
+                {place_id: {$nin: user.recommendations}},
+                {recommendedBy: {$in: user.following}}
+            ]
+        });
+    }
+    // Fetch those places which are not recommended by the user.
+    function getFilteredFeed(user) {
+        return PlaceModel.find({
+            place_id:{$nin: user.recommendations}
+        });
+    }
+    
 }

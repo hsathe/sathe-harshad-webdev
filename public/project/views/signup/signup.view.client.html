@@ -1,19 +1,21 @@
-<div class="container-fluid">
-    <div class="">
+<div class="container">
+    <div class="center-content">
         <div>
 
             <a href="#/">
-                <div class="align-center">
-                    <img src="img/logo.jpg" alt="TravelYaar">
+                <div class="text-center branding">
+                    <span class="fa fa-tumblr-square"></span>
+                    <span>Travelyaar</span>
+                    <!--<img src="img/logo.jpg" alt="TravelYaar">-->
                 </div>
             </a>
+            <hr class="hr-main"/>
             <p class="align-center">
                 <span class="desc">Discover new Places to visit</span><br/>
                 <span class="sub-desc">Which your friends recommend</span>
             </p>
             <br/>
-
-            <form>
+            <form style="margin-left: auto">
                 <input ng-model="firstName" type="text"
                        class="form-control" placeholder="First Name"
                        spellcheck="false"/>
@@ -30,6 +32,20 @@
                 <br/>
                 <button ng-click="model.createUser(email, password, confirmPassword, firstName, lastName)" type="submit" class="btn btn-primary btn-block">Sign Up</button>
             </form>
+            <br/>
+            <div class="special-separator">
+                <span>OR</span>
+            </div>
+            <br/>
+            <a href="/auth/project/google" class="btn btn-danger btn-block btn-googl">
+                <span class="fa fa-google"></span>
+                Sign up with Google
+            </a>
+            <a href="/auth/project/facebook" class="btn btn-primary btn-block btn-fb">
+                <span class="fa fa-facebook-square"></span>
+                Sign up with Facebook
+            </a>
+            <br/>
             <div class="text-center footer-div">
                 <h6>Don't have an account? <a href="#/signup">Sign up</a></h6>
             </div>

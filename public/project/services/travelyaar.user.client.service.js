@@ -22,7 +22,9 @@
             removeFromFollowing: removeFromFollowing,
             removeFromRecommendation: removeFromRecommendation,
             getRecommendationsForUser: getRecommendationsForUser,
-            updateUser: updateUser
+            updateUser: updateUser,
+            getFilteredFeed: getFilteredFeed,
+            getUserFeed: getUserFeed
         };
         
         return api;
@@ -108,6 +110,16 @@
         function getRecommendationsForUser(userId) {
             console.log("Getting recommendations for the user  "+userId);
             return $http.get("/api/user/"+userId+"/recommendations");
+        }
+        
+        function getFilteredFeed(userId) {
+            console.log("Filtered Feed for "+ userId);
+            return $http.get("/api/user/"+userId+"/publicfeed");
+        }
+        
+        function getUserFeed(userId) {
+            console.log("User feed for "+ userId);
+            return $http.get("/api/user/"+userId+"/feed");
         }
     }
 })();
