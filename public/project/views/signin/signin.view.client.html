@@ -1,44 +1,38 @@
-<div class="container-fluid">
-    <div class="">
-        <div>
+<div class="container padded-top padded-bottom">
+    <div class="center-content text-center">
+        <p class="align-center">
+        <a><h3><span class="fa fa-tumblr-square"></span> Travelyaar</h3></a>
 
-            <a href="#/">
-                <div class="align-center">
-                    <img src="img/logo.jpg" alt="TravelYaar">
-                </div>
-            </a>
-            <p class="align-center">
-                <span class="desc">Discover new Places to visit</span><br/>
-                <span class="sub-desc">Which your friends recommend</span>
-            </p>
-            <br/>
-
-            <form novalidate>
-                <input ng-model="email" type="email"
-                       class="form-control" placeholder="Email Address"
-                       spellcheck="false"/>
-                <input ng-model="password" type="password"
-                       class="form-control" placeholder="Password"/>
-                <br/>
-                <button ng-click="model.signin(email, password)" type="submit" class="btn btn-success btn-block">Sign In</button>
-            </form>
-            <br/>
-            <div class="special-separator">
-                <span>OR</span>
-            </div>
-            <br/>
-            <a href="/auth/google" class="btn btn-danger btn-block btn-googl">
-                <span class="fa fa-google"></span>
-                Sign In with Google
-            </a>
-            <a href="/auth/facebook" class="btn btn-primary btn-block btn-fb">
-                <span class="fa fa-facebook-square"></span>
-                Sign In with Facebook
-            </a>
-            <br/>
-            <div class="text-center footer-div">
-                <h6>Don't have an account? <a href="#/signup">Sign up</a></h6>
-            </div>
-        </div>
+        <span class="desc">Discover new Places to visit</span><br/>
+        <span class="sub-desc">Which your friends recommend</span>
+        </p>
+        <br/>
+    </div>
+    <form novalidate>
+        <input ng-model="email" type="email"
+               class="form-control" placeholder="Email Address"
+               spellcheck="false"/>
+        <input ng-model="password" type="password"
+               class="form-control" placeholder="Password"/>
+        <br/>
+        <button ng-click="model.signin(email, password)" type="submit" class="btn btn-primary btn-block">Sign In
+        </button>
+    </form>
+    <br/>
+    <div class="special-separator">
+        <span>OR</span>
+    </div>
+    <br/>
+    <a href="/auth/google" class="btn btn-danger btn-block btn-googl">
+        <span class="fa fa-google"></span>
+        Sign In with Google
+    </a>
+    <a href="/auth/facebook" class="btn btn-primary btn-block btn-fb">
+        <span class="fa fa-facebook-square"></span>
+        Sign In with Facebook
+    </a>
+    <br/>
+    <div class="text-center footer-div">
+        <h6>Don't have an account? <a href="#/signup">Sign up</a></h6>
     </div>
 </div>

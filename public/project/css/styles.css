@@ -39,12 +39,14 @@
 
 .desc{
     font-size: larger;
-    font-weight: 400;
+    font-weight: 500;
+    color: white;
 }
 
 .sub-desc{
     font-size: smaller;
-    font-weight: 400;
+    font-weight: 500;
+    color: white;
 }
 .center-content{
     width: 90%;
@@ -162,4 +164,8 @@ div.special-separator>span{
     z-index: 10;
     background-color: white;
     padding: 10px;
+}
+
+.home-image{
+    background-image: url("../img/home3.png");
 }
