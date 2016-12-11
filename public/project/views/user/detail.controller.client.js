@@ -7,12 +7,23 @@
         var vm = this;
         vm.searchDetail = searchDetail;
         function init() {
-            
+
+            vm.place_photos = "";
             var placeId = $routeParams.placeId;
             APIService
                 .searchDetail(placeId)
                 .success(function (response) {
                     vm.detail = response.result;
+                    console.log(response)
+                    // for(var i=0;i < response.result.photos.length - 1;i++){
+                        vm.place_photos = APIService
+                            .getPhotoByPhotoReference(response.result.photos[0].photo_reference)
+                            // .then(function (res) {
+                            //     console.log(res.toString());
+                            //     // console.log(res.config.url)
+                            //     vm.place_photos = res;
+                            // });
+                    // }
                 });
         }
 

@@ -79,7 +79,7 @@
     <div class="row">
         <div ng-repeat-start="place in model.attractions" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <div class="thumbnail">
+                <a href="#/details/{{place.place_id}}"><div class="thumbnail">
                     <img class="img-responsive"
                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
                     </img>
@@ -88,7 +88,7 @@
                     <h5 class="place-title">{{place.name}}</h5>
                     <h6 class="place-author">{{place.formatted_address}}</h6>
                     <h6 class="place-description">Google Rating:{{place.rating}}</h6>
-                </div>
+                </div></a>
                 <hr class="results-heading-separator"/>
                 <h6>
                     <span ng-show="place.added" class="badge badge-added">Recommended</span>

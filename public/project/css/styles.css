@@ -97,6 +97,12 @@
     word-wrap: break-word;
     white-space: pre-wrap;
 }
+.details-container{
+    padding-bottom: 1px;
+    font-size: medium;
+    word-wrap: break-word;
+    color:black;
+}
 
 .badge-added{
     margin: 10px;
@@ -168,4 +174,12 @@ div.special-separator>span{
 
 .home-image{
     background-image: url("../img/home3.png");
+}
+
+.textarea-detail{
+    height:100px;
+    width: 100%;
+    border: 5px;
+    padding: 5px;
+    resize: none;
 }

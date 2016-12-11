@@ -32,12 +32,12 @@
                         Discover
                     </a>
                 </li>
-                <!--<li ng-if="currentUser.role == 'admin'">-->
-                <!--<a href="#/admin">-->
-                <!--<span class="fa fa-user nav-icon"></span>-->
-                <!--Admin-->
-                <!--</a>-->
-                <!--</li>-->
+                <li ng-if="currentUser.role == 'admin'">
+                    <a href="#/admin">
+                        <span class="fa fa-user nav-icon"></span>
+                        Admin
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -63,24 +63,86 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
-<div class="container-fluid">
-    <!--{{model.detail}}-->
-<div class="row">
-    <div class="col-xs-6">
-        {{model.detail.name}}
-    </div>
-    <div class="col-xs-6">
-        {{model.detail.international_phone_number}}
-    </div>
-    <div>
-        <span><img src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney"></span>
-    </div>
+<div class="container">
+    <!--<h3>-->
+        <!--<a href="#/discover/{{model.keyword}}">-->
+            <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+        <!--</a>-->
+    <!--</h3>-->
+    <h3>{{model.detail.name}}</h3>
+    <hr>
+    <div class="row">
+        <div class="center-content">
 
-</div>
+            <div class=" details-container col-xs-8 res" style="align-content: center">
+                <div>
+                    <b>Address :</b> {{model.detail.formatted_address}}
+                </div>
+                <div>
+                    <b>Phone Number :</b> {{model.detail.international_phone_number}}
 
+                </div>
+                <div>
+                    <b>Hours:</b>
+                    <ul>
+                        <li ng-repeat="time in model.detail.opening_hours.weekday_text">
+                            {{time}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <b>Overall Rating:</b> {{model.detail.rating}}
+                </div>
+                <!--<h5>Hours: {{model.detail.opening_hours.weekday_text}}</h5>-->
+
+            </div>
+            <div class="col-xs-4 hidden-xs">
+                <span><img src="{{model.place_photos}}"></span>
+            </div>
+        </div>
+        <br>
+        <br>
+        <hr>
+    </div>
+    <!--<div class="row details-container">-->
+    <!--<div class="col-xs-12">-->
+    <hr>
+
+    <!--<ul style="list-style: none">-->
+    <!--<li ng-repeat="review in model.detail.reviews" style="border-bottom: 20px">-->
+    <!--<div><b>{{review.author_name}}</b></div>-->
+    <!--<div>{{review.relative_time_description}}</div>-->
+    <!--<div style="border-bottom: 20px">-->
+    <!--<textarea readonly style="height:100px ; width: 55%; border: 5px">{{review.text}}</textarea>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row container">
+        <div>
+            <h3>Reviews:</h3>
+        </div>
+        <div ng-repeat-start="review in model.detail.reviews" class="col-sm-6 col-md-3 result">
+            <div class="result-container center-content">
+                <div class="result-info">
+                    <h5 class="place-title">{{review.author_name}}</h5>
+                    <h6 class="place-author">{{review.relative_time_description}}</h6>
+                    <h6 class="place-description">Google Rating: {{review.rating}}</h6>
+                </div>
+                </a>
+                <hr class="results-heading-separator"/>
+                <h6>
+                    <div style="border-bottom: 20px">
+                        <textarea readonly class="textarea-detail">{{review.text}}</textarea>
+                    </div>
+                </h6>
+            </div>
+            <br>
+        </div>
+        <div ng-repeat-end ng-if="$index % 4 == 3"
+             class="clearfix visible-sm-block visible-md-block visible-lg-block">
+        </div>
+    </div>
 </div>
