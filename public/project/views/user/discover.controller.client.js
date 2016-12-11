@@ -3,13 +3,19 @@
         .module("PlacesApp")
         .controller("DiscoverController", DiscoverController);
 
-    function DiscoverController(APIService, $rootScope, PlaceService, TravelYaarUserService,$location) {
+    function DiscoverController(APIService, $rootScope, PlaceService, TravelYaarUserService,$location, $routeParams) {
         var vm = this;
         vm.user = $rootScope.currentUser;
         vm.attractions = [];
+        vm.keywords = $routeParams.keywords;
 
         function init(){
             console.log("In Discover Controller");
+            if(vm.keywords){
+                search(vm.keywords);
+                $location.url("/discover/"+vm.keywords);
+            } 
+
         }
         init();
 

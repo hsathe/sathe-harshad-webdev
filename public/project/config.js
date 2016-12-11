@@ -64,6 +64,12 @@
                 controllerAs: "model",
                 resolve: {loggedIn: checkLoggedIn}
             })
+            .when("/discover/:keywords", {
+                templateUrl: "views/user/discover.view.client.html",
+                controller: "DiscoverController",
+                controllerAs: "model",
+                resolve: {loggedIn: checkLoggedIn}
+            })
             .when("/discover/:uid", {
                 templateUrl: "views/user/discover.view.client.html",
                 controller: "DiscoverController",
@@ -73,7 +79,14 @@
             .when("/details/:placeId", {
                 templateUrl: "views/user/detail.view.client.html",
                 controller: "DetailsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {loggedIn: checkLoggedIn}
+            })
+            .when("/details/:placeId/:keywords", {
+                templateUrl: "views/user/detail.view.client.html",
+                controller: "DetailsController",
+                controllerAs: "model",
+                resolve: {loggedIn: checkLoggedIn}
             })
             .when("/recommendation", {
                 templateUrl: "views/user/recommendation.view.client.html",

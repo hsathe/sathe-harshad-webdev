@@ -61,13 +61,13 @@
 </nav>
 <div class="container padded-top padded-bottom">
     <div class="input-group center-content">
-        <input ng-model="keywords"
-               ng-keypress="($event.which ==13 || $event.keyCode==13)? model.search(keywords):return"
+        <input ng-model="model.keywords"
+               ng-keypress="($event.which ==13 || $event.keyCode==13)? model.search(model.keywords):return"
                type="text"
                class="form-control"
                placeholder="Boston">
 					<span class="input-group-btn">
-	                    <a ng-click="model.search(keywords)" class="btn btn-default" type="button">
+	                    <a ng-click="model.search(model.keywords)" class="btn btn-default" type="button">
 				            <span class="glyphicon glyphicon-search"></span>
 	                    </a>
 	                </span>
@@ -79,7 +79,7 @@
     <div class="row">
         <div ng-repeat-start="place in model.attractions" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <a href="#/details/{{place.place_id}}"><div class="thumbnail">
+                <a href="#/details/{{place.place_id}}/{{model.keywords}}"><div class="thumbnail">
                     <img class="img-responsive"
                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
                     </img>

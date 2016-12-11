@@ -10,6 +10,7 @@
 
             vm.place_photos = "";
             var placeId = $routeParams.placeId;
+            vm.keywords = $routeParams.keywords;
             APIService
                 .searchDetail(placeId)
                 .success(function (response) {
