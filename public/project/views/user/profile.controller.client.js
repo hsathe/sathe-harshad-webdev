@@ -3,7 +3,7 @@
         .module("PlacesApp")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($rootScope, TravelYaarUserService, $location) {
+    function ProfileController($rootScope, TravelYaarUserService, $location, $routeParams) {
         var vm = this;
         vm.public = [];
         vm.network = [];
@@ -11,10 +11,26 @@
         vm.addRecommendation = addRecommendation;
 
         function init() {
-            console.log("In profile controller");
-            vm.userId = $rootScope.currentUser._id;
-            vm.user = $rootScope.currentUser;
-            
+            if($routeParams.uid){
+                vm.userId = $routeParams.uid;
+                (function(){
+                    TravelYaarUserService
+                        .findUserById($routeParams.uid)
+                        .then(
+                            function(user){
+                                vm.user = user.data;
+                            },
+                            function(err){
+                                vm.user = $rootScope.currentUser;
+                            }
+                        );
+                })();
+            }else{
+                console.log("In profile controller");
+                vm.userId = $rootScope.currentUser._id;
+                vm.user = $rootScope.currentUser;
+
+            }
             fetch();
         }
         init();

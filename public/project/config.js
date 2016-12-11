@@ -99,6 +99,18 @@
                 controllerAs: "model",
                 resolve: {loggedIn: checkAdmin}
             })
+            .when("/account",{
+                templateUrl: "views/user/account.view.client.html",
+                controller : "AccountController",
+                controllerAs : "model",
+                resolve: { loggedIn: checkLoggedIn }
+            })
+            .when("/account/:uid",{
+                templateUrl: "views/user/account.view.client.html",
+                controller : "AccountController",
+                controllerAs : "model",
+                resolve: { loggedIn: checkAdmin }
+            })
             .otherwise({
                 redirectTo: "/signin"
             });

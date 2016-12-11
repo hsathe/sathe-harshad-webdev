@@ -29,7 +29,7 @@
                 <li>
                     <a href="#/discover">
                         <span class="fa fa-search nav-icon"></span>
-                        Discover
+                        Discover Places
                     </a>
                 </li>
                 <li ng-if="currentUser.role == 'admin'">
@@ -64,13 +64,13 @@
         <hr/>
         <h6>
             <span class="">Followers</span>
-            <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
+            <span class="fa fa-long-arrow-down nav-icon"></span> {{model.user.followers.length}}
             <span class="link-separator">|</span>
             <span class="">Following</span>
-            <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
+            <span class="fa fa-long-arrow-up nav-icon"></span> {{model.user.following.length}}
             <span class="link-separator">|</span>
             <span class="">Recommendations</span>
-            <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
+            <span class="fa fa-thumbs-up nav-icon"></span> {{model.user.recommendations.length}}
         </h6>
     </div>
     <br/>
@@ -78,7 +78,7 @@
         <div class="center-content text-center">
             <button type="submit" ng-click="model.toggleView()" class="btn btn-primary btn-yt">
                 <span class="fa fa-users"></span>
-                See Recommended places by the network
+                See Recommended places from your network
             </button>
         </div>
         <hr/>
@@ -111,16 +111,15 @@
                         <h6 class="place-description">{{hit.place.rating}}</h6>
                     </div>
                     <hr class="results-heading-separator"/>
-                    <hr class="results-heading-separator"/>
                     <h6>
-                        <span class="fa fa-heart itube-heart-info"></span>
-                        <span class="badge">{{hit.place.recommendations}}</span>
+                        <span class="fa fa-thumbs-up itube-heart-info"></span>
+                        <span class="badge">{{hit.place.totalReco}}</span>
                         <span ng-show="place.added" class="badge badge-added">Recommended</span>
                         <button type="submit"
                                 ng-click="model.addRecommendation(hit, 0)"
                                 ng-hide="place.added"
-                                class="btn btn-default itube-heart">
-                            <span class="fa fa-thumbs-up"></span>
+                                class="btn btn-primary">
+                            <!--<span class="fa fa-thumbs-up"></span>-->
                             Recommend
                         </button>
                         <span ng-show="place.error" class="badge badge-error">Error!</span>
@@ -138,14 +137,14 @@
             </button>
         </div>
         <hr/>
-        <h4>Recommended videos from Network</h4>
+        <h4>Recommended places from Network</h4>
         <hr class="results-heading-separator"/>
         <br/>
         <div class="input-group center-content" ng-show="model.network.length">
             <input ng-model="networkQuery"
                    type="text"
                    class="form-control"
-                   placeholder="Filter videos from Network">
+                   placeholder="Filter recommendations from Network eg: Boston">
         </div>
         <br/>
         <div class="row">
@@ -175,15 +174,15 @@
                     </div>
                     <hr class="results-heading-separator"/>
                     <h6>
-                        <span class="fa fa-heart itube-heart-info"></span>
-                        <span class="badge">{{hit.place.recommendations}}</span>
+                        <span class="fa fa-thumbs-up itube-heart-info"></span>
+                        <span class="badge">{{hit.place.totalReco}}</span>
                         <span ng-show="hit.added" class="badge badge-added">Added to Favorites</span>
                         <button type="submit"
                                 ng-click="model.addRecommendation(hit, 1)"
                                 ng-hide="hit.added"
-                                class="btn btn-default itube-heart">
-                            <span class="fa fa-heart"></span>
-                            Add to Favorite
+                                class="btn btn-primary">
+                            <!--<span class="fa fa-heart"></span>-->
+                            Recommend
                         </button>
                         <span ng-show="hit.error" class="badge badge-error">Error!</span>
                     </h6>
