@@ -12,16 +12,16 @@
             </button>
             <a class="navbar-brand v-mid" href="">
                 <span class="fa fa-tumblr-square"></span>
-                TravelYaar
+                Travelyaar
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ty-navbar-collapse-2">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
+                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span> Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> My Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -29,15 +29,15 @@
                 <li>
                     <a href="#/discover">
                         <span class="fa fa-search nav-icon"></span>
-                        Discover
+                        Discover Places
                     </a>
                 </li>
-                <!--<li ng-if="currentUser.role == 'admin'">-->
-                <!--<a href="#/admin">-->
-                <!--<span class="fa fa-user nav-icon"></span>-->
-                <!--Admin-->
-                <!--</a>-->
-                <!--</li>-->
+                <li ng-if="currentUser.role == 'admin'">
+                <a href="#/admin">
+                    <span class="fa fa-user nav-icon"></span>
+                    Admin
+                </a>
+            </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -64,13 +64,13 @@
         <hr/>
         <h6>
             <span class="hidden-xs">Followers</span>
-            <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
+            <span class="fa fa-arrow-down nav-icon"></span> {{model.user.followers.length}}
             <span class="link-separator">|</span>
             <span class="hidden-xs">Following</span>
-            <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
+            <span class="fa fa-arrow-up nav-icon"></span> {{model.user.following.length}}
             <span class="link-separator">|</span>
             <span class="hidden-xs">Recommendations</span>
-            <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
+            <span class="fa fa-thumbs-up nav-icon"></span> {{model.user.recommendations.length}}
         </h6>
     </div>
     <br/>
@@ -90,11 +90,11 @@
         </div>
         <div ng-repeat-start="reco in model.recommendations | filter: recoQuery" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <!--<div class="embed-responsive embed-responsive-16by9">-->
-                    <!--<iframe class="embed-responsive-item"-->
-                            <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
-                    <!--</iframe>-->
-                <!--</div>-->
+                <div class="thumbnail">
+                    <img class="img-responsive"
+                         ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                    </img>
+                </div>
                 <div class="result-info">
                     <h5 class="place-title">{{reco.place.name}}</h5>
                     <h6 class="place-author">{{reco.place.formatted_address}}</h6>
@@ -102,7 +102,7 @@
                 </div>
                 <hr class="results-heading-separator"/>
                 <h6>
-                    <span class="fa fa-heart itube-heart-info"></span>
+                    <span class="fa fa-thumbs-up itube-heart-info"></span>
                     <span class="badge">{{reco.place.totalReco}}</span>
 					<span ng-show="model.seeButton">
 						<span ng-show="reco.added"

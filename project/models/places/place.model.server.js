@@ -20,14 +20,14 @@ module.exports = function () {
     
     function addRecommendationByUser(placeId, userId) {
         return PlaceModel
-            .update({placeId: placeId}, {
+            .update({place_id: placeId}, {
                 $push: {recommendedBy: userId}
             });
     }
     
     function removeRecommendationByUser(placeId, userId) {
         return PlaceModel
-            .update({placeId: placeId}, {
+            .update({place_id: placeId}, {
                 $pull: {recommendedBy: userId}
             });
     }
