@@ -15,6 +15,12 @@
                 <span class="sub-desc">Which your friends recommend</span>
             </p>
             <br/>
+            <div ng-show="model.signUpError" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{model.signUpError}}
+            </div>
             <form style="margin-left: auto">
                 <input ng-model="firstName" type="text"
                        class="form-control" placeholder="First Name"
@@ -37,11 +43,11 @@
                 <span>OR</span>
             </div>
             <br/>
-            <a href="/auth/project/google" class="btn btn-danger btn-block btn-googl">
+            <a href="/auth/google" class="btn btn-danger btn-block btn-googl">
                 <span class="fa fa-google"></span>
                 Sign up with Google
             </a>
-            <a href="/auth/project/facebook" class="btn btn-primary btn-block btn-fb">
+            <a href="/auth/facebook" class="btn btn-primary btn-block btn-fb">
                 <span class="fa fa-facebook-square"></span>
                 Sign up with Facebook
             </a>

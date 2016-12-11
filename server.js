@@ -3,16 +3,20 @@ var app = express();
 
 var bodyParser = require('body-parser');
 
-// var passport = require('passport');
-// var cookieParser = require('cookie-parser');
-// var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cookieParser());
+
+app.use(cookieParser());
+app.use(session({
+    secret: 'This is a secret'
+}));
 // app.use(session({secret: process.env.SESSION_SECRET}));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //  Option 4:
 // app.use(function(req, res, next) {

@@ -8,6 +8,8 @@ module.exports = function () {
         findUserByEmail: findUserByEmail,
         findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
+        findUserByFacebookId: findUserByFacebookId,
+        findUserByGoogleId: findUserByGoogleId,
         findAllUsers: findAllUsers,
         findUsersToFollow: findUsersToFollow,
         findFollowersForUser: findFollowersForUser,
@@ -19,7 +21,9 @@ module.exports = function () {
         removeUserFromFollowing: removeUserFromFollowing,
         removeUserFromAllFollowers:removeUserFromAllFollowers,
         addRecommendation: addRecommendation,
-        removeRecommendation: removeRecommendation
+        removeRecommendation: removeRecommendation,
+        updateUser: updateUser,
+        deleteUser: deleteUser
     };
 
     return api;
@@ -42,7 +46,14 @@ module.exports = function () {
     function findUserByCredentials(email, password) {
         return travelyaarUserModel.findOne({email: email, password: password});
     }
+    
+    function findUserByFacebookId(facebookId) {
+        return ProjectUser.findOne({'facebook.id': facebookId});
+    }
 
+    function findUserByGoogleId(googleId) {
+        return ProjectUser.findOne({'google.id': googleId});
+    }
     function findAllUsers() {
         return travelyaarUserModel.find();
     }
@@ -116,5 +127,22 @@ module.exports = function () {
             .update({_id: userId},{
                 $pull: {recommendations: placeId}
             });
+    }
+    function updateUser(userId, user) {
+        delete user._id;
+        return travelyaarUserModel
+            .update({_id: userId}, {
+                $set: {
+                    password: user.password,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    role: user.role
+                }
+            });
+    }
+
+    function deleteUser(userId) {
+        return travelyaarUserModel.remove({_id: userId});
     }
 };

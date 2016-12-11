@@ -1,26 +1,52 @@
 module.exports = function (app, models) {
     var passport = require('passport');
-    var cookieParser = require('cookie-parser');
-    var session = require('express-session');
-
-
-    app.use(cookieParser());
-    // app.use(session({secret: process.env.SESSION_SECRET}));
-    app.use(session({secret: 'This is a secret'}));
-    app.use(passport.initialize());
-    app.use(passport.session());
+    var bcrypt = require("bcrypt-nodejs");
+    // var cookieParser = require('cookie-parser');
+    // var session = require('express-session');
+    // app.use(cookieParser());
+    // // app.use(session({secret: process.env.SESSION_SECRET}));
+    // app.use(session({secret: 'This is a secret'}));
+    // app.use(passport.initialize());
+    // app.use(passport.session());
 
     var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+    // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    
+    // var project_fbConfig = {
+    //     clientID     : process.env.FB_P_CLIENT_ID,
+    //     clientSecret : process.env.FB_P_CLIENT_SECRET,
+    //     callbackURL  : process.env.FB_P_CALLBACK_URL,
+    //     enableProof: true,
+    //     profileFields: ['id', 'name', 'email']
+    // };
+    // var project_gConfig = {
+    //     clientID     : process.env.G_P_CLIENT_ID,
+    //     clientSecret : process.env.G_P_CLIENT_SECRET,
+    //     callbackURL  : process.env.G_P_CALLBACK_URL
+    // };
+    var project_fbConfig = {
+        clientID : '1783238465268855',
+        clientSecret: '8cc06999961a2141408c8c9e5f680e1b',
+        callbackURL: 'http://localhost:3000/auth/facebook/callback',
+        enableProof: true,
+        profileFields: ['id', 'name', 'email']
+    };
+    // var project_gConfig = {
+    //     clientID     : process.env.G_P_CLIENT_ID, 145129827061-fcgbcaq8o120jr8hceemcfchgvd4aaec.apps.googleusercontent.com
+    //     clientSecret : process.env.G_P_CLIENT_SECRET, O45lg-Q0uYuoM7ZdGDxDs-22
+    //     callbackURL  : process.env.G_P_CALLBACK_URL http://localhost:3000/auth/project/google/callback
+    // };
     passport.use(new LocalStrategy(projectStrategy));
+    passport.use(new FacebookStrategy(project_fbConfig, project_fbLogin));
+    // passport.use(new GoogleStrategy(project_gConfig, project_gLogin));
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     var TravelYaarUserModel = models.travelyaarUserModel;
-
-    app.post("/api/register", signUp);
-    app.post("/api/login", passport.authenticate('local'), signIn);
-    app.post("/api/logout", signout);
+    
+    app.post("/api/user", createUser);
     app.get("/api/user", getAllUsers);
     app.get("/api/user/:userId/tofollow", getUsersToFollow);
     app.get("/api/user/:userId", getUserById);
@@ -36,6 +62,26 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId/recommendations", getRecommendationsForUser);
     app.get("/api/user/:userId/feed", getUserFeed);
     app.get("/api/user/:userId/publicfeed", getFilteredFeed);
+    app.get("/api/loggedIn", loggedIn);
+    app.post("/api/register", signUp);
+    app.post("/api/login", passport.authenticate('local'), signIn);
+    app.post("/api/logout", signout);
+
+
+    // app.get('/auth/project/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+    // app.get('/auth/project/google/callback',
+    //     passport.authenticate('google', {
+    //         successRedirect: '/#/profile',
+    //         failureRedirect: '/#/signin'
+    //     }));
+
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '#/profile',
+            failureRedirect: '#/signin'
+        }));
+    
 
     function serializeUser(user, done) {
         done(null, user);
@@ -59,7 +105,7 @@ module.exports = function (app, models) {
             .findUserByEmail(username)
             .then(
                 function (user) {
-                    if (user && user.email === username && password, user.password) {
+                    if (user && user.email === username && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
                         return done(null, false);
@@ -73,6 +119,73 @@ module.exports = function (app, models) {
             );
     }
 
+    function project_fbLogin(token, refreshToken, profile, done) {
+        TravelYaarUserModel
+            .findUserByEmail(profile.emails[0].value)
+            .then(
+                function(facebookUser) {
+                    if(facebookUser) {
+                        return done(null, facebookUser);
+                    } else {
+                        facebookUser = {
+                            email: profile.emails[0].value,
+                            firstName: profile.name.givenName,
+                            lastName: profile.name.familyName,
+                            facebook: {
+                                token: token,
+                                id: profile.id
+                            }
+                        };
+                        TravelYaarUserModel
+                            .createUser(facebookUser)
+                            .then(
+                                function(user) {
+                                    done(null, user);
+                                }
+                            );
+                    }
+                }
+            );
+    }
+
+    // function project_gLogin(token, refreshToken, profile, done){
+    //     TravelYaarUserModel
+    //         .findUserByEmail(profile.emails[0].value)
+    //         .then(
+    //             function(googleUser) {
+    //                 if(googleUser) {
+    //                     return done(null, googleUser);
+    //                 } else {
+    //                     googleUser = {
+    //                         email: profile.emails[0].value,
+    //                         firstName: profile.name.givenName,
+    //                         lastName: profile.name.familyName,
+    //                         google: {
+    //                             token: token,
+    //                             id: profile.id
+    //                         }
+    //                     };
+    //                     TravelYaarUserModel
+    //                         .createUser(googleUser)
+    //                         .then(
+    //                             function(user) {
+    //                                 done(null, user);
+    //                             }
+    //                         );
+    //                 }
+    //             }
+    //         );
+    // }
+
+    
+    function loggedIn(req, res) {
+        if(req.isAuthenticated()){
+            res.json(req.user);
+        } else {
+            res.send(false);
+        }
+    }
+    
     function signIn(req, res) {
         var user = req.user;
         res.json(user);
@@ -91,7 +204,7 @@ module.exports = function (app, models) {
                     if (user) {
                         res.status(400).send("User already exists");
                     } else {
-                        password = req.body.password;
+                        password = bcrypt.hashSync(req.body.password);
                         return TravelYaarUserModel
                             .createUser({
                                 email: email,
@@ -119,7 +232,34 @@ module.exports = function (app, models) {
                 }
             );
     }
-
+    
+    function signout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+    function createUser(req, res) {
+        var user = req.body;
+        TravelYaarUserModel
+            .findUserByEmail(user.email)
+            .then(function (status) {
+                if(status.length != 0){
+                    res.status(400).send("User already exists");
+                }
+                else {
+                    TravelYaarUserModel
+                        .createUser(user)
+                        .then(
+                            function (user) {
+                                res.json(user);
+                            },
+                            function (err) {
+                                res.status(400).send("Something went wrong, Failed to created user");
+                            }
+                        );
+                }
+            });
+    }
+    
     function getAllUsers(req, res) {
         TravelYaarUserModel.findAllUsers()
             .then(
@@ -447,11 +587,6 @@ module.exports = function (app, models) {
                     res.status(404).send("User not found");
                 }
             );
-    }
-
-    function signout(req, res) {
-        req.logout();
-        res.sendStatus(200);
     }
 
 }

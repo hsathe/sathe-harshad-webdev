@@ -3,7 +3,7 @@
         .module("PlacesApp")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($rootScope, TravelYaarUserService) {
+    function ProfileController($rootScope, TravelYaarUserService, $location) {
         var vm = this;
         vm.public = [];
         vm.network = [];

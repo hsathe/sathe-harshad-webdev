@@ -12,16 +12,16 @@
             </button>
             <a class="navbar-brand v-mid" href="">
                 <span class="fa fa-tumblr-square"></span>
-                TravelYaar
+                Travelyaar
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ty-navbar-collapse-2">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
+                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span> Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendations"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> My Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -29,15 +29,15 @@
                 <li>
                     <a href="#/discover">
                         <span class="fa fa-search nav-icon"></span>
-                        Discover
+                        Discover Places
                     </a>
                 </li>
-                <!--<li ng-if="currentUser.role == 'admin'">-->
-                <!--<a href="#/admin">-->
-                <!--<span class="fa fa-user nav-icon"></span>-->
-                <!--Admin-->
-                <!--</a>-->
-                <!--</li>-->
+                <li ng-if="currentUser.role == 'admin'">
+                <a href="#/admin">
+                <span class="fa fa-user nav-icon"></span>
+                Admin
+                </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -74,25 +74,6 @@
     </div>
     <br/>
     <h4>Search Results</h4>
-    <!--{{model.attractions}}-->
-    <!--<table class="table">-->
-    <!--<thead>-->
-    <!--<tr>-->
-    <!--<th>Image</th>-->
-    <!--<th>Name</th>-->
-    <!--<th>Address</th>-->
-    <!--<th>Ratings</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr ng-repeat="attraction in model.attractions">-->
-    <!--<td><img ng-src="model.loadPhoto({{attraction.photos[0].photo_reference}})"></td>-->
-    <!--<td><a href="#/details/{{attraction.place_id}}">{{attraction.name}}</a></td>-->
-    <!--<td>{{attraction.formatted_address}}</td>-->
-    <!--<td>{{attraction.rating}}</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
     <hr class="results-heading-separator"/>
     <br/>
     <div class="row">
@@ -106,7 +87,7 @@
                 <div class="result-info">
                     <h5 class="place-title">{{place.name}}</h5>
                     <h6 class="place-author">{{place.formatted_address}}</h6>
-                    <h6 class="place-description">{{place.rating}}</h6>
+                    <h6 class="place-description">Google Rating:{{place.rating}}</h6>
                 </div>
                 <hr class="results-heading-separator"/>
                 <h6>
@@ -121,7 +102,7 @@
                     <span ng-show="place.error" class="badge badge-error">Error!</span>
                 </h6>
             </div>
-
+            <br>
         </div>
         <div ng-repeat-end ng-if="$index % 4 == 3" class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
     </div>

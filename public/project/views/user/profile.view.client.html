@@ -12,7 +12,7 @@
             </button>
             <a class="navbar-brand v-mid" href="">
                 <span class="fa fa-tumblr-square"></span>
-                TravelYaar
+                Travelyaar
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ty-navbar-collapse-2">
@@ -21,7 +21,7 @@
                     <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendations"><span class="fa fa-heart nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendation"><span class="fa fa-heart nav-icon"></span> My Recommendations</a>
                 </li>
                 <li>
                     <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
@@ -32,12 +32,12 @@
                         Discover
                     </a>
                 </li>
-                <!--<li ng-if="currentUser.role == 'admin'">-->
-                    <!--<a href="#/admin">-->
-                        <!--<span class="fa fa-user nav-icon"></span>-->
-                        <!--Admin-->
-                    <!--</a>-->
-                <!--</li>-->
+                <li ng-if="currentUser.role == 'admin'">
+                    <a href="#/admin">
+                        <span class="fa fa-user nav-icon"></span>
+                        Admin
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -76,9 +76,9 @@
     <br/>
     <div ng-If="model.networkRecommendations === 0">
         <div class="center-content text-center">
-            <button type="submit" ng-click="model.toggleView()" class="btn btn-danger btn-yt">
+            <button type="submit" ng-click="model.toggleView()" class="btn btn-primary btn-yt">
                 <span class="fa fa-users"></span>
-                Latest from Network
+                See Recommended places by the network
             </button>
         </div>
         <hr/>
@@ -100,11 +100,11 @@
             </div>
             <div ng-repeat-start="hit in model.public | filter: publicQuery" class="col-sm-6 col-md-3 result">
                 <div class="result-container">
-                    <!--<div class="embed-responsive embed-responsive-16by9">-->
-                        <!--<iframe class="embed-responsive-item"-->
-                                <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
-                        <!--</iframe>-->
-                    <!--</div>-->
+                    <div class="thumbnail">
+                        <img class="img-responsive"
+                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                        </img>
+                    </div>
                     <div class="result-info">
                         <h5 class="place-title">{{hit.place.name}}</h5>
                         <h6 class="place-author">{{hit.place.formatted_address}}</h6>
@@ -132,9 +132,9 @@
     </div>
     <div ng-If="model.networkRecommendations === 1">
         <div class="center-content text-center">
-            <button type="submit" ng-click="model.toggleView()" class="btn btn-danger btn-yt">
-                <span class="fa fa-youtube-play"></span>
-                Latest from iTube
+            <button type="submit" ng-click="model.toggleView()" class="btn btn-primary btn-yt">
+                <span class="fa fa-tumblr-square"></span>
+                Latest from Travelyaar Community
             </button>
         </div>
         <hr/>
@@ -154,7 +154,7 @@
                     There are no new recommendations from your Network.
                     <br/>
                     <br/>
-                    But do not worry, you can do either of the following:
+                    Thankfully, you can do either of the following:
                     <br/>
                     1. See recommendations from Travelyaar.
                     <br/>
@@ -163,11 +163,11 @@
             </div>
             <div ng-repeat-start="hit in model.network | filter: networkQuery" class="col-sm-6 col-md-3 result">
                 <div class="result-container">
-                    <!--<div class="embed-responsive embed-responsive-16by9">-->
-                        <!--<iframe class="embed-responsive-item"-->
-                                <!--ng-src="{{hit.video.url}}" allowfullscreen>-->
-                        <!--</iframe>-->
-                    <!--</div>-->
+                    <div class="thumbnail">
+                        <img class="img-responsive"
+                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                        </img>
+                    </div>
                     <div class="result-info">
                         <h5 class="hit-title">{{hit.place.name}}</h5>
                         <h6 class="hit-author">{{hit.place.formatted_address}}</h6>

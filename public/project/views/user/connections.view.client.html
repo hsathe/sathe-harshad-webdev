@@ -12,32 +12,32 @@
             </button>
             <a class="navbar-brand v-mid" href="">
                 <span class="fa fa-tumblr-square"></span>
-                TravelYaar
+                Travelyaar
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ty-navbar-collapse-2">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span>Profile</a>
+                    <a href="#/profile" class="selected-link"><span class="fa fa-home nav-icon"></span> Profile</a>
                 </li>
                 <li>
-                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> Recommendations</a>
+                    <a href="#/recommendation"><span class="fa fa-thumbs-up nav-icon"></span> My Recommendations</a>
                 </li>
                 <li>
-                    <a href="#/network"><span class="fa fa-users nav-icon"></span> Connections</a>
+                    <a href="#/connections"><span class="fa fa-users nav-icon"></span> Connections</a>
                 </li>
                 <li>
                     <a href="#/discover">
                         <span class="fa fa-search nav-icon"></span>
-                        Discover
+                        Discover places
                     </a>
                 </li>
-                <!--<li ng-if="currentUser.role == 'admin'">-->
-                <!--<a href="#/admin">-->
-                <!--<span class="fa fa-user nav-icon"></span>-->
-                <!--Admin-->
-                <!--</a>-->
-                <!--</li>-->
+                <li ng-if="currentUser.role == 'admin'">
+                <a href="#/admin">
+                <span class="fa fa-user nav-icon"></span>
+                Admin
+                </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -64,13 +64,13 @@
         <hr/>
         <h6>
             <span class="hidden-xs">Followers</span>
-            <span class="fa fa-long-arrow-down nav-icon"></span>{{model.user.followers.length}}
+            <span class="fa fa-long-arrow-down nav-icon"></span> {{model.user.followers.length}}
             <span class="link-separator">|</span>
             <span class="hidden-xs">Following</span>
-            <span class="fa fa-long-arrow-up nav-icon"></span>{{model.user.following.length}}
+            <span class="fa fa-long-arrow-up nav-icon"></span> {{model.user.following.length}}
             <span class="link-separator">|</span>
             <span class="hidden-xs">Recommendations</span>
-            <span class="fa fa-thumbs-up nav-icon"></span>{{model.user.recommendations.length}}
+            <span class="fa fa-thumbs-up nav-icon"></span> {{model.user.recommendations.length}}
         </h6>
     </div>
     <br/>
@@ -78,7 +78,7 @@
         <div class="center-content text-center">
             <button type="submit" ng-click="model.changeRoute()" class="btn btn-primary btn-yt">
                 <span class="fa fa-search"></span>
-                Find more users to follow
+                Search more users to follow
             </button>
         </div>
         <hr/>
@@ -95,9 +95,9 @@
                         <h5>{{hit.user.name}}</h5>
                         <hr class="results-heading-separator"/>
                         <h6>
-                            <span class="fa fa-long-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
+                            <span class="fa fa-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
                             <span class="link-separator">|</span>
-                            <span class="fa fa-long-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
+                            <span class="fa fa-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
                             <span class="link-separator">|</span>
                             <span class="fa fa-thumbs-up nav-icon"></span>{{hit.user.noOfRecommendations}}
                         </h6>
@@ -105,15 +105,15 @@
                         <h6>
                             <button type="submit"
                                     ng-click="model.unfollow(hit.user._id)"
-                                    class="btn btn-primary btn-yt">
+                                    class="btn btn-primary btn-yt " style="margin-bottom: 3px">
                                 <span class="fa fa-minus"></span>
                                 Unfollow
                             </button>
                             <button type="submit"
-                                    ng-click="model.viewFavs(hit.user._id)"
+                                    ng-click="model.viewReco(hit.user._id)"
                                     class="btn btn-primary btn-yt">
                                 <span class="fa fa-thumbs-up"></span>
-                                Recommendations
+                                See Recommendations
                             </button>
                             <span ng-show="hit.error" class="badge badge-error">Error!</span>
                         </h6>
@@ -135,9 +135,9 @@
                         <h5>{{hit.user.name}}</h5>
                         <hr class="results-heading-separator"/>
                         <h6>
-                            <span class="fa fa-long-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
+                            <span class="fa fa-arrow-down nav-icon"></span>{{hit.user.noOfFollowers}}
                             <span class="link-separator">|</span>
-                            <span class="fa fa-long-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
+                            <span class="fa fa-arrow-up nav-icon"></span>{{hit.user.noOfFollowing}}
                             <span class="link-separator">|</span>
                             <span class="fa fa-thumbs-up nav-icon"></span>{{hit.user.noOfRecommendations}}
                         </h6>
@@ -146,16 +146,17 @@
                             <button type="submit"
                                     ng-click="model.follow(hit.user)"
                                     ng-hide="hit.following"
-                                    class="btn btn-primary btn-yt">
+                                    class="btn btn-primary btn-yt"
+                                    style="margin-bottom: 3px">
                                 <span class="fa fa-plus"></span>
                                 Follow
                             </button>
                             <span ng-show="hit.following" class="badge badge-follow">Following</span>
                             <button type="submit"
-                                    ng-click="model.viewFavs(hit.user._id)"
-                                    class="btn btn-primary btn-yt">
+                                    ng-click="model.viewReco(hit.user._id)"
+                                    class="btn btn-primary btn-yt" >
                                 <span class="fa fa-thumbs-up"></span>
-                                Recommendations
+                                See Recommendations
                             </button>
                             <span ng-show="hit.error" class="badge badge-error">Error!</span>
                         </h6>
@@ -168,7 +169,7 @@
         <div class="center-content text-center">
             <button type="submit" ng-click="model.changeRoute()" class="btn btn-primary btn-yt">
                 <span class="fa fa-users"></span>
-                View your network
+                View your connections
             </button>
         </div>
         <hr/>
@@ -210,7 +211,7 @@
                                     ng-click="model.viewFavs(hit.data._id)"
                                     class="btn btn-primary btn-yt">
                                 <span class="fa fa-thumbs-up"></span>
-                                Recommendations
+                                Recommending
                             </button>
                             <span ng-show="hit.error" class="badge badge-error">Error!</span>
                         </h6>

@@ -24,7 +24,7 @@
                                 $rootScope.currentUser = currentUser;
                                 $location.url("/profile");
                             }else{
-                                vm.singInError = "Unable to login!";
+                                vm.signInError = "Unable to login!";
                             }
                         }, function (error) {
                             vm.signInError = "Credentials are not matching";

@@ -9,6 +9,7 @@
             signIn: signIn,
             signUp: signUp,
             signout: signout,
+            loggedIn: loggedIn,
             createUser: createUser,
             findUserById: findUserById,
             getAllUsers: getAllUsers,
@@ -41,7 +42,10 @@
         function signout() {
             return $http.post("/api/logout");
         }
-
+        
+        function loggedIn(){
+            return $http.get("/api/loggedIn");
+        }
         function createUser(newUser){
             console.log("createUser - " + newUser.email);
             return $http.post("/api/user", newUser);
