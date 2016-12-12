@@ -1,12 +1,24 @@
 module.exports = function (app, models) {
     var passport = require('passport');
     var bcrypt = require("bcrypt-nodejs");
-
+    var cookieParser  = require('cookie-parser');
+    var session       = require('express-session');
+    
     var TravelYaarUserModel = models.travelyaarUserModel;
 
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+    app.use(session({
+        secret: 'This is a secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+
+    app.use(cookieParser());
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     passport.use(new LocalStrategy(projectStrategy));
 
@@ -23,7 +35,7 @@ module.exports = function (app, models) {
     //     callbackURL  : process.env.G_P_CALLBACK_URL http://localhost:3000/auth/project/google/callback
     // };
 
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/project/#/profile',
@@ -31,9 +43,9 @@ module.exports = function (app, models) {
         }));
 
     var project_fbConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL,
         enableProof: true,
         profileFields: ['id', 'name', 'email']
     };
@@ -115,8 +127,8 @@ module.exports = function (app, models) {
         TravelYaarUserModel
             .findUserByEmail(profile.emails[0].value)
             .then(
-                function(facebookUser) {
-                    if(facebookUser) {
+                function (facebookUser) {
+                    if (facebookUser) {
                         return done(null, facebookUser);
                     } else {
                         facebookUser = {
@@ -131,7 +143,7 @@ module.exports = function (app, models) {
                         TravelYaarUserModel
                             .createUser(facebookUser)
                             .then(
-                                function(user) {
+                                function (user) {
                                     done(null, user);
                                 }
                             );
@@ -169,15 +181,15 @@ module.exports = function (app, models) {
     //         );
     // }
 
-    
+
     function loggedIn(req, res) {
-        if(req.isAuthenticated()){
+        if (req.isAuthenticated()) {
             res.json(req.user);
         } else {
             res.send(false);
         }
     }
-    
+
     function signIn(req, res) {
         var user = req.user;
         res.json(user);
@@ -224,17 +236,18 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function signout(req, res) {
         req.logout();
         res.sendStatus(200);
     }
+
     function createUser(req, res) {
         var user = req.body;
         TravelYaarUserModel
             .findUserByEmail(user.email)
             .then(function (status) {
-                if(status.length != 0){
+                if (status.length != 0) {
                     res.status(400).send("User already exists");
                 }
                 else {
@@ -251,7 +264,7 @@ module.exports = function (app, models) {
                 }
             });
     }
-    
+
     function getAllUsers(req, res) {
         TravelYaarUserModel.findAllUsers()
             .then(
