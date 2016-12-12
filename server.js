@@ -12,7 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(session({
-    secret: 'This is a secret'
+    secret: 'This is a secret',
+    resave: true,
+    saveUninitialized: true
 }));
 // app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
