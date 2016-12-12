@@ -8,6 +8,10 @@
                    id="widget-name"
                    placeholder="Image Name">
         </div>
+        <span class="help-block"
+              ng-show="myForm.name.$error.required && myForm.name.$dirty">
+			Name is required.
+        </span>
         <div class="form-group">
             <label for="widget-text">Text</label>
             <input ng-model="model.widget.text"

@@ -40,6 +40,8 @@
 		function updateHeading(widget) {
 			if(!widget.text){
 				vm.error = "Text field is blank";
+			}else if(!widget.name){
+				vm.error = "Name is required.";
 			}else{
 				if(!widget.size){
 					widget.size = 1;
@@ -60,6 +62,8 @@
 		function updateYoutube(widget) {
 			if(!widget.url){
 				vm.error = "URL field is blank";
+			}else if(!widget.name){
+				vm.error = "Name is required.";
 			}else{
 				if(!widget.width){
 					widget.width = "100%";
@@ -78,10 +82,9 @@
 		function updateHTML(widget) {
 			if(!widget.text){
 				vm.error = "Text field is blank";
+			}else if(!widget.name){
+				vm.error = "Name is required.";
 			}else{
-				if(!widget.text){
-					widget.text = "Blank Text";
-				}
 				WidgetService
 					.updateWidget(vm.widgetId, widget)
 					.success(function (response) {
@@ -96,6 +99,8 @@
 		function updateText(widget) {
 			if(!widget.rows && !widget.formatted){
 				vm.error = "No of rows and formatted option is mandatory";
+			}else if(!widget.name){
+				vm.error = "Name is required.";
 			}else{
 				WidgetService
 					.updateWidget(vm.widgetId, widget)
@@ -110,6 +115,8 @@
 		function updateImage(widget) {
 			if(!widget.url){
 				vm.error = "URL field is blank";
+			}else if(!widget.name){
+				vm.error = "Name is required.";
 			}else{
 				if(!widget.width){
 					widget.width = "100%";

@@ -39,7 +39,7 @@
         function updateWidget(widgetId, widget) {
             console.log("updateWidget - ", widgetId);
             var url = "/api/widget/" + widgetId;
-            return $http.put(url,widget);
+            return $http.put(url, widget);
         }
 
         function deleteWidget(widgetId) {

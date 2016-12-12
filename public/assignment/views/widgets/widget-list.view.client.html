@@ -18,7 +18,7 @@
     </div>
 </nav>
 <div class="container-fluid" sortable>
-    <div ng-repeat="widget in model.widgets">
+    <div ng-repeat="widget in model.widgets | orderBy : 'order'">
         <div class="widget-tool">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog right-separator"></span>
@@ -54,6 +54,7 @@
             </div>
             <div ng-switch-when="IMAGE">
                 <img class="img-responsive" ng-src="{{widget.url}}" width="{{widget.width}}"/>
+                <span ng-if="widget.text">{{widget.text}}</span>
             </div>
             <div ng-switch-when="YOUTUBE" class="youtube-widget">
                 <iframe ng-src="{{model.getSafeUrl(widget.url)}}"

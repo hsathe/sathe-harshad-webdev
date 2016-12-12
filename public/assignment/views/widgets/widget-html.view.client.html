@@ -8,6 +8,10 @@
                    id="widget-name"
                    placeholder="Heading Name">
         </div>
+        <span class="help-block"
+              ng-show="myForm.name.$error.required && myForm.name.$dirty">
+			Name is required.
+        </span>
         <div class="form-group">
             <label for="text-ng-toolbar">Text</label>
             <div ng-model="model.widget.text"

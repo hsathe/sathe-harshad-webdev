@@ -16,6 +16,10 @@
                    id="widget-text"
                    placeholder="Widget Text">
         </div>
+        <span class="help-block"
+              ng-show="myForm.name.$error.required && myForm.name.$dirty">
+			Name is required.
+        </span>
         <div class="form-group">
             <label for="widget-url">URL</label>
             <input ng-model="model.widget.url"
