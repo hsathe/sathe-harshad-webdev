@@ -9,7 +9,7 @@ module.exports = function () {
     //
     // mongoose.connect(connectionString);
     
-    mongoose.connect(process.env.MONGODB_URI || connectionString);
+    // mongoose.connect(process.env.MONGODB_URI || connectionString);
 
     var userModel = require("./user/user.model.server")();
     var websiteModel = require("./website/website.model.server")();
