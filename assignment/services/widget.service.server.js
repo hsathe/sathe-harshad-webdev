@@ -56,7 +56,7 @@ module.exports = function (app, model) {
                 page.save();
             }, function (error) {
                 console.log("Error publishing page to widgets")
-            })
+            });
     }
     function findAllWidgetsForPage(req, res) {
         var pId = req.params.pageId;
@@ -91,7 +91,7 @@ module.exports = function (app, model) {
             .widgetModel
             .updateWidget(wId, newWidget)
             .then(function(stats){
-                newWidget._id = widgetId;
+                newWidget._id = wId;
                 res.json(newWidget);
             }, function(error){
                 res.sendStatus(404);
