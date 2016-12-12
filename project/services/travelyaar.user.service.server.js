@@ -1,9 +1,9 @@
 module.exports = function (app, models) {
     var passport = require('passport');
     var bcrypt = require("bcrypt-nodejs");
-    var cookieParser  = require('cookie-parser');
-    var session       = require('express-session');
-    
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+
     var TravelYaarUserModel = models.travelyaarUserModel;
 
     var LocalStrategy = require('passport-local').Strategy;

@@ -1,19 +1,23 @@
 module.exports = function (app, model) {
-    
+
     var passport = require('passport');
     var bcrypt = require("bcrypt-nodejs");
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
 
+    app.use(session({
+        secret: 'This is a secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+
+    app.use(cookieParser());
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     passport.use(new LocalStrategy(assignmentStrategy));
-
-
-    app.post('/api/user', createUser);
-    app.get('/api/user', findUser);
-    app.get('/api/user/:userId', findUserById);
-    app.put('/api/user/:userId', updateUser);
-    app.delete('/api/user/:userId', deleteUser);
-
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback',
@@ -23,9 +27,6 @@ module.exports = function (app, model) {
         }));
 
     var assignment_fbConfig = {
-        // clientID : '711894245635263',
-        // clientSecret: 'cdd9dee497c7e06123d499cc5b970d43',
-        // callbackURL: 'http://localhost:3000/auth/facebook/callback',
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: process.env.FACEBOOK_CALLBACK_URL,
@@ -33,6 +34,11 @@ module.exports = function (app, model) {
     };
     passport.use(new FacebookStrategy(assignment_fbConfig, assignment_fbLogin));
 
+    app.post('/api/user', createUser);
+    app.get('/api/user', findUser);
+    app.get('/api/user/:userId', findUserById);
+    app.put('/api/user/:userId', updateUser);
+    app.delete('/api/user/:userId', deleteUser);
     app.post("/api/login", passport.authenticate('local'), login);
     app.post("/api/logout", logout);
     app.get("/api/loggedIn", loggedIn);
@@ -40,7 +46,7 @@ module.exports = function (app, model) {
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-    
+
     function serializeUser(user, done) {
         done(null, user);
     }
@@ -50,11 +56,11 @@ module.exports = function (app, model) {
             .userModel
             .findUserById(user._id)
             .then(function (user) {
-                done(null, user);
-            },
-            function (error) {
-                done(error, null);
-            });
+                    done(null, user);
+                },
+                function (error) {
+                    done(error, null);
+                });
     }
 
     function assignment_fbLogin(token, refreshToken, profile, done) {
@@ -100,23 +106,23 @@ module.exports = function (app, model) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    if(user){
+                    if (user) {
                         res.status(400).send("Username already exists!");
-                    }else{
+                    } else {
                         password = bcrypt.hashSync(req.body.password);
                         return model.userModel
                             .createUser({username: username, password: password});
                     }
-                },function (err) {
+                }, function (err) {
                     res.status(400).send(err);
                 }
             ).then(
             function (user) {
-                if(user){
+                if (user) {
                     req.login(user, function (err) {
-                        if(err){
+                        if (err) {
                             res.status(400).send(err);
-                        }else{
+                        } else {
                             res.json(user);
                         }
                     });
@@ -131,9 +137,9 @@ module.exports = function (app, model) {
             .userModel
             .findUserByUsername(user.username)
             .then(function (stats) {
-                if(stats.length !== 0){
+                if (stats.length !== 0) {
                     res.status(400).send("Username Already Exists");
-                }else{
+                } else {
                     model
                         .userModel
                         .createUser(user)
@@ -148,21 +154,21 @@ module.exports = function (app, model) {
                 }
             });
     }
-    
+
     function assignmentStrategy(username, password, done) {
         model
             .userModel
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    if(user && user.username === username && bcrypt.compareSync(password, user.password)){
+                    if (user && user.username === username && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
-                    }else{
+                    } else {
                         return done(null, false);
                     }
                 },
                 function (err) {
-                    if(err){
+                    if (err) {
                         return done(err);
                     }
                 }
@@ -173,30 +179,31 @@ module.exports = function (app, model) {
         var user = req.user;
         res.json(user);
     }
-    
+
     function logout(req, res) {
         req.logOut();
         res.sendStatus(200);
     }
-    
+
     function loggedIn(req, res) {
-        if(req.isAuthenticated()){
+        if (req.isAuthenticated()) {
             res.json(req.user);
-        }else{
+        } else {
             res.send(false);
         }
     }
+
     function findUser(req, res) {
         var username = req.query.username;
         var password = req.query.password;
-        
-        if(username && password){
+
+        if (username && password) {
             // Find user by given username & password.
-            findUserByCredentials(username,password, res);
-        } else if(username){
+            findUserByCredentials(username, password, res);
+        } else if (username) {
             // Find user with provided username
             findUserByUsername(username, res);
-        }else{
+        } else {
             res.send(users);
         }
     }
@@ -215,7 +222,7 @@ module.exports = function (app, model) {
             );
     }
 
-    function findUserByCredentials(username,password, res) {
+    function findUserByCredentials(username, password, res) {
         model
             .userModel
             .findUserByCredentials(username, password)
@@ -236,9 +243,9 @@ module.exports = function (app, model) {
             .findUserById(userId)
             .then(
                 function (user) {
-                    if(user){
+                    if (user) {
                         res.send(user);
-                    } else{
+                    } else {
                         res.send('0');
                     }
                 },
@@ -247,7 +254,7 @@ module.exports = function (app, model) {
                 }
             );
     }
-    
+
     function updateUser(req, res) {
         var userId = req.params.userId;
         var newUser = req.body;
@@ -263,7 +270,7 @@ module.exports = function (app, model) {
                 }
             );
     }
-    
+
     function deleteUser(req, res) {
 
         var userId = req.params.userId;
