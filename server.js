@@ -28,7 +28,7 @@ app.use(express.static(__dirname + '/public'));
 // require ("./test/app.js")(app);
 // require("./assignment/app.js")(app);
 require("./project/app.js")(app);
-require("./project/services/proxy")(app);
+// require("./project/services/proxy")(app);
 app.set('ipaddress', (process.env.IP || '127.0.0.1'));
 app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), app.get('ipaddress'));
