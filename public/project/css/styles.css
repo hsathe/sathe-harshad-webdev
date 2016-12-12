@@ -128,7 +128,8 @@
 }
 
 .itube-heart, .itube-heart:hover, .itube-heart:focus, .itube-heart:active{
-    color: #cd201f;
+    /*color: #cd201f;*/
+    color: white;
     margin: 5px;
 }
 
@@ -182,4 +183,8 @@ div.special-separator>span{
     border: 5px;
     padding: 5px;
     resize: none;
+}
+
+.result-desc{
+    color:white;
 }

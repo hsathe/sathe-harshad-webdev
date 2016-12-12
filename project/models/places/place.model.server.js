@@ -10,7 +10,8 @@ module.exports = function () {
         findPlaceByPlaceId: findPlaceByPlaceId,
         getRecommendationsForUser : getRecommendationsForUser,
         getUserFeed : getUserFeed,
-        getFilteredFeed : getFilteredFeed
+        getFilteredFeed : getFilteredFeed,
+        updatePlace : updatePlace
     };
     return api;
 
@@ -53,6 +54,19 @@ module.exports = function () {
         return PlaceModel.find({
             place_id:{$nin: user.recommendations}
         });
+    }
+    
+    function updatePlace(placeId, place) {
+        delete place._id;
+        return PlaceModel
+            .update({place_id: placeId},{
+                $set: {
+                    name: place.name,
+                    formatted_address: place.formatted_address,
+                    rating: place.rating,
+                    recommendedBy: place.recommendedBy
+                }
+            });
     }
     
 }

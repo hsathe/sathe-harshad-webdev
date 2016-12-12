@@ -1,51 +1,47 @@
 module.exports = function (app, models) {
     var passport = require('passport');
     var bcrypt = require("bcrypt-nodejs");
-    // var cookieParser = require('cookie-parser');
-    // var session = require('express-session');
-    // app.use(cookieParser());
-    // // app.use(session({secret: process.env.SESSION_SECRET}));
-    // app.use(session({secret: 'This is a secret'}));
-    // app.use(passport.initialize());
-    // app.use(passport.session());
+
+    var TravelYaarUserModel = models.travelyaarUserModel;
 
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-    
-    // var project_fbConfig = {
-    //     clientID     : process.env.FB_P_CLIENT_ID,
-    //     clientSecret : process.env.FB_P_CLIENT_SECRET,
-    //     callbackURL  : process.env.FB_P_CALLBACK_URL,
-    //     enableProof: true,
-    //     profileFields: ['id', 'name', 'email']
-    // };
+
+    passport.use(new LocalStrategy(projectStrategy));
+
+
     // var project_gConfig = {
     //     clientID     : process.env.G_P_CLIENT_ID,
     //     clientSecret : process.env.G_P_CLIENT_SECRET,
     //     callbackURL  : process.env.G_P_CALLBACK_URL
     // };
-    var project_fbConfig = {
-        clientID : '1783238465268855',
-        clientSecret: '8cc06999961a2141408c8c9e5f680e1b',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback',
-        enableProof: true,
-        profileFields: ['id', 'name', 'email']
-    };
+
     // var project_gConfig = {
     //     clientID     : process.env.G_P_CLIENT_ID, 145129827061-fcgbcaq8o120jr8hceemcfchgvd4aaec.apps.googleusercontent.com
     //     clientSecret : process.env.G_P_CLIENT_SECRET, O45lg-Q0uYuoM7ZdGDxDs-22
     //     callbackURL  : process.env.G_P_CALLBACK_URL http://localhost:3000/auth/project/google/callback
     // };
-    passport.use(new LocalStrategy(projectStrategy));
+
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/#/profile',
+            failureRedirect: '/project/#/signin'
+        }));
+
+    var project_fbConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        enableProof: true,
+        profileFields: ['id', 'name', 'email']
+    };
+
     passport.use(new FacebookStrategy(project_fbConfig, project_fbLogin));
     // passport.use(new GoogleStrategy(project_gConfig, project_gLogin));
 
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
 
-    var TravelYaarUserModel = models.travelyaarUserModel;
-    
     app.post("/api/user", createUser);
     app.get("/api/user", getAllUsers);
     app.get("/api/user/:userId/tofollow", getUsersToFollow);
@@ -75,13 +71,8 @@ module.exports = function (app, models) {
     //         failureRedirect: '/#/signin'
     //     }));
 
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '#/profile',
-            failureRedirect: '#/signin'
-        }));
-    
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
     function serializeUser(user, done) {
         done(null, user);
@@ -120,6 +111,7 @@ module.exports = function (app, models) {
     }
 
     function project_fbLogin(token, refreshToken, profile, done) {
+        console.log(profile);
         TravelYaarUserModel
             .findUserByEmail(profile.emails[0].value)
             .then(

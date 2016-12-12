@@ -58,7 +58,7 @@ module.exports = function (app, model) {
     }
 
     function assignment_fbLogin(token, refreshToken, profile, done) {
-        console.log(profile);
+        // console.log(profile);
         model.userModel
             .findUserByFacebookId(profile.id)
             .then(
