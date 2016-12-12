@@ -5,7 +5,7 @@ module.exports = function (app, model) {
     var cookieParser = require('cookie-parser');
     var session = require('express-session');
     var LocalStrategy = require('passport-local').Strategy;
-    var FacebookStrategy = require('passport-facebook').Strategy;
+    // var FacebookStrategy = require('passport-facebook').Strategy;
 
     app.use(session({
         secret: 'This is a secret',
@@ -19,20 +19,20 @@ module.exports = function (app, model) {
 
     passport.use(new LocalStrategy(assignmentStrategy));
 
-    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/assignment/#/user',
-            failureRedirect: '/assignment/#/login'
-        }));
+    // app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+    // app.get('/auth/facebook/callback',
+    //     passport.authenticate('facebook', {
+    //         successRedirect: '/assignment/#/user',
+    //         failureRedirect: '/assignment/#/login'
+    //     }));
 
-    var assignment_fbConfig = {
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-        profileFields: ['id', 'name', 'email']
-    };
-    passport.use(new FacebookStrategy(assignment_fbConfig, assignment_fbLogin));
+    // var assignment_fbConfig = {
+    //     clientID: process.env.FACEBOOK_CLIENT_ID,
+    //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    //     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    //     profileFields: ['id', 'name', 'email']
+    // };
+    // passport.use(new FacebookStrategy(assignment_fbConfig, assignment_fbLogin));
 
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
