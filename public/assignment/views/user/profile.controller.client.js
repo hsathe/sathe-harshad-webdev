@@ -45,8 +45,8 @@
             promise
                 .success(function () {
                     vm.deleteSuccess = "Success!";
-                    $location.url("/login");
                     $rootScope.currentUser = null;
+                    $location.url("/login");
                 })
                 .error(function () {
                     vm.deleteError = "Error!";  
@@ -59,7 +59,7 @@
                 .then(
                     function (response) {
                         $rootScope.currentUser = null;
-                        $location.url("/login");
+                        $location.url("/");
                     }
                 )
         }

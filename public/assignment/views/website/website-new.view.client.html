@@ -48,6 +48,9 @@
     </div>
     <div class="draw-vertical-line hidden-xs"></div>
     <div class="col-xs-12 col-sm-8">
+        <div ng-if="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
         <form>
             <div class="form-group">
                 <label for="website-name">Name</label>

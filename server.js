@@ -70,8 +70,8 @@ app.use(function (req, res, next) {
 
 */
 // require ("./test/app.js")(app);
-// require("./assignment/app.js")(app);
-require("./project/app.js")(app);
+require("./assignment/app.js")(app);
+// require("./project/app.js")(app);
 app.set('ipaddress', (process.env.IP || '127.0.0.1'));
 app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), app.get('ipaddress'));

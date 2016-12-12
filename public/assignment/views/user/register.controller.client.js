@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("RegisterController",RegisterController);
     
-    function RegisterController($location, UserService) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         
         vm.createUser = function (username,password, verifyPassword) {
@@ -19,15 +19,19 @@
                 vm.error = "Passwords do not match";
             }else{
                 UserService
-                    .createUser(user)
-                    .success(function (response) {
-                        var newUser = response;
-                        if(newUser){
-                            $location.url("/user/"+newUser._id);
+                    .registerUser(user)
+                    .then(
+                        function(response){
+                            var newUser = response.data;
+                            if(newUser && newUser._id) {
+                                $rootScope.currentUser = newUser;
+                                $location.url("/user/"+ newUser._id);
+                            }
+                        },
+                        function(err){
+                            vm.error = "Error! Username already exists.";
                         }
-                    })
-                    .error(function (error) {
-                    })
+                    );
             }
         };
 

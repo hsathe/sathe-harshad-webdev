@@ -25,7 +25,7 @@
         vm.createWebsite = function createWebsite(name, description){
             console.log("Creating website");
             if(!name){
-                vm.error = "Website cannot be blank!";
+                vm.error = "Website name cannot be blank!";
             }else{
                 var newWebSiteObj = {
                     name : name,

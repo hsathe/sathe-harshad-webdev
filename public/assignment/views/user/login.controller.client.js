@@ -17,7 +17,8 @@
                         
                         if(currentUser && currentUser._id){
                             $rootScope.currentUser = currentUser;
-                            $location.url("/user/"+currentUser._id);
+                            console.log(currentUser._id);
+                            $location.url("/user/" + currentUser._id);
                         }else{
                             vm.error = "Could not login!";
                         }

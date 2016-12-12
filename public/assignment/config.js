@@ -84,22 +84,28 @@
                 redirectTo: "/login"
             });
         // $q is a async library
-        function checkLoggedIn(UserService, $location, $q) {
+        function checkLoggedIn(UserService, $location, $q, $rootScope) {
             var deferred = $q.defer();
             UserService
                 .loggedIn()
                 .success(
-                    function (user) {
+                    function (response) {
+                        var user = response;
                         if(user){
+                            $rootScope.currentUser = user;
                             deferred.resolve();
                         }else{
                             deferred.reject();
+                            $rootScope.currentUser = null;
+                            deferred.reject();
                             $location.url("/login");
                         }
+                    },
+                    function (err) {
+                        $location.url("/login");
                     }
                 );
             return deferred.promise;
-
         }
     }
 })();
