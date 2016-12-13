@@ -23,7 +23,7 @@
                 .searchDetail(placeId)
                 .success(function (response) {
                     vm.detail = response.result;
-                    console.log(response)
+                    // console.log(response)
                         try{
                         vm.place_photos = APIService.getPhotoByPhotoReference(response.result.photos[0].photo_reference, vm.googlekey);
                         }catch (err){

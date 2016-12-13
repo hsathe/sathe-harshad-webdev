@@ -4,7 +4,7 @@
         .controller("SignInController", SignInController);
 
     function SignInController($location, TravelYaarUserService, $rootScope) {
-        console.log("SignInController");
+        // console.log("SignInController");
         var vm = this;
         vm.signin = function (email, password) {
             if(!email || !password){
@@ -19,7 +19,7 @@
                     .then(
                         function (response) {
                             var currentUser = response.data;
-                            console.log("SignIn returned success");
+                            // console.log("SignIn returned success");
                             if(currentUser && currentUser._id){
                                 $rootScope.currentUser = currentUser;
                                 $location.url("/profile");

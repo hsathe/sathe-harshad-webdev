@@ -67,7 +67,6 @@
                 );
         }
         function init(){
-            console.log("In ConnectionsController");
             if($routeParams.searchView){
                 vm.allUsers = parseInt($routeParams.searchView);
             }

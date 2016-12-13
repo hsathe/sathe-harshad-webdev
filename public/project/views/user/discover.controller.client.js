@@ -10,7 +10,6 @@
         vm.keywords = $routeParams.keywords;
         vm.googlekey = "";
         function init(){
-            console.log("In Discover Controller");
             // vm.googlekey = "";
             APIService
                 .getGoogleKey()
@@ -32,12 +31,9 @@
         vm.addRecommendation = addRecommendation;
         
         function search(keywords) {
-            console.log("Searching for the attractions in "+keywords);
             APIService
                 .search(keywords, vm.googlekey)
                 .then(function (response) {
-                    console.log(response.data.results);
-                    console.log(response);
                     TravelYaarUserService
                         .getRecommendationsForUser(vm.user._id)
                         .then(
@@ -99,7 +95,6 @@
                     added:false,
                     error:false
                 });
-                // console.log(i+"-->"+imageUrl);
             }
             return f;
         }

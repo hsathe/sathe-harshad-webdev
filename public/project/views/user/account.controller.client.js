@@ -4,7 +4,7 @@
         .controller("AccountController", AccountController);
     
     function AccountController($routeParams, $location, $rootScope, TravelYaarUserService) {
-        console.log("In Account Controller");
+        // console.log("In Account Controller");
 
         var vm = this;
 
@@ -15,7 +15,7 @@
         }
         
         function init() {
-            console.log(vm.user);
+            // console.log(vm.user);
             TravelYaarUserService
                 .findUserById(vm.userId)
                 .then(function (response) {

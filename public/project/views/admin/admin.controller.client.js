@@ -8,7 +8,7 @@
         vm.userResults = [];
         
         function init() {
-            console.log("In AdminController");
+            // console.log("In AdminController");
             TravelYaarUserService
                 .getAllUsers()
                 .then(

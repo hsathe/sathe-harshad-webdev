@@ -126,7 +126,7 @@ module.exports = function (app, models) {
     }
 
     function project_fbLogin(token, refreshToken, profile, done) {
-        console.log(profile);
+        // console.log(profile);
         TravelYaarUserModel
             .findUserByEmail(profile.emails[0].value)
             .then(

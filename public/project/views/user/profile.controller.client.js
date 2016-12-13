@@ -26,7 +26,6 @@
                         );
                 })();
             }else{
-                console.log("In profile controller");
                 vm.userId = $rootScope.currentUser._id;
                 vm.user = $rootScope.currentUser;
 

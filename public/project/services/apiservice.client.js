@@ -23,7 +23,7 @@
             }
 
             var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-            console.log(url);
+            // console.log(url);
 
             return $http.get(url, {
                 params: {
@@ -41,7 +41,7 @@
             }
             var Photokey = key;
             var photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+photoReference+"&key="+Photokey;
-            console.log("Getting Image: "+photoURL);
+            // console.log("Getting Image: "+photoURL);
 
             return photoURL;
         }

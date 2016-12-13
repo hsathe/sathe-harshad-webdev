@@ -8,8 +8,6 @@
         vm.recommendations = [];
         vm.seeButton = false;
         function init() {
-            console.log("In Recommendation Controller");
-//  TodO for userId route Path:
             if($routeParams.uid){
                 vm.userId  = $routeParams.uid;
                 if($routeParams.otherid){

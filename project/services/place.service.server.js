@@ -33,7 +33,7 @@ module.exports = function (app, models) {
 
     function getPlaceByPlaceId(req, res) {
         var placeID = req.params.placeId;
-        console.log("Getting Place by Id- In Server");
+        // console.log("Getting Place by Id- In Server");
         PlaceModel
             .findPlaceByPlaceId(placeID)
             .then(
