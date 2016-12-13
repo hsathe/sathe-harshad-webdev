@@ -68,20 +68,24 @@
     <h3>
         <a href="#/discover/{{model.keywords}}">
             <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
+        </a>Back
     </h3>
+    <hr class="results-heading-separator">
     <h3>{{model.detail.name}}</h3>
-    <hr>
+    <hr class="results-heading-separator" style="padding-bottom: 10px">
     <div class="row">
         <div class="center-content">
 
-            <div class=" details-container col-xs-8 res" style="align-content: center">
+            <div class=" details-container col-xs-6 res" style="align-content: center">
                 <div>
                     <b>Address :</b> {{model.detail.formatted_address}}
                 </div>
                 <div>
                     <b>Phone Number :</b> {{model.detail.international_phone_number}}
 
+                </div>
+                <div>
+                    <b>Website: </b> <a href="{{model.detail.website}}" target="_blank">{{model.detail.website}}</a>
                 </div>
                 <div>
                     <b>Hours:</b>
@@ -94,10 +98,8 @@
                 <div>
                     <b>Overall Rating:</b> {{model.detail.rating}}
                 </div>
-                <!--<h5>Hours: {{model.detail.opening_hours.weekday_text}}</h5>-->
-
             </div>
-            <div class="col-xs-4 hidden-xs">
+            <div class="col-xs-6 hidden-xs">
                 <span><img src="{{model.place_photos}}"></span>
             </div>
         </div>
@@ -105,21 +107,7 @@
         <br>
         <hr>
     </div>
-    <!--<div class="row details-container">-->
-    <!--<div class="col-xs-12">-->
     <hr>
-
-    <!--<ul style="list-style: none">-->
-    <!--<li ng-repeat="review in model.detail.reviews" style="border-bottom: 20px">-->
-    <!--<div><b>{{review.author_name}}</b></div>-->
-    <!--<div>{{review.relative_time_description}}</div>-->
-    <!--<div style="border-bottom: 20px">-->
-    <!--<textarea readonly style="height:100px ; width: 55%; border: 5px">{{review.text}}</textarea>-->
-    <!--</div>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="row container">
         <div>
             <h3>Reviews:</h3>
