@@ -133,6 +133,11 @@ img {
     width: 70px;
 }
 
+.mycontainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /*#leftPanel {*/
     /*float: left;*/
     /*width: 25%;*/

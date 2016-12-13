@@ -33,11 +33,11 @@
                     </a>
                 </li>
                 <li ng-if="currentUser.role == 'admin'">
-                <a href="#/admin">
-                    <span class="fa fa-user nav-icon"></span>
-                    Admin
-                </a>
-            </li>
+                    <a href="#/admin">
+                        <span class="fa fa-user nav-icon"></span>
+                        Admin
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -51,7 +51,8 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#/account"><span class="fa fa-cog nav-icon"></span>Settings</a></li>
-                        <li><a ng-click="model.logout()" href=""><span class="fa fa-sign-out nav-icon"></span>Sign Out</a></li>
+                        <li><a ng-click="model.logout()" href=""><span class="fa fa-sign-out nav-icon"></span>Sign
+                            Out</a></li>
                     </ul>
                 </li>
             </ul>
@@ -84,22 +85,22 @@
                placeholder="Filter places from Recommendations">
     </div>
     <br/>
-    <div class="row">
+    <div class="row mycontainer">
         <div ng-show="!model.recommendations.length" class="col-xs-12">
             <p class="center-content" style="font-size: 14px">No places recommended yet.</p>
         </div>
         <div ng-repeat-start="reco in model.recommendations | filter: recoQuery" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <div class="thumbnail">
-                    <img class="img-responsive"
-                         ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
-                    </img>
-                </div>
-                <div class="result-info">
-                    <h5 class="place-title">{{reco.place.name}}</h5>
-                    <h6 class="place-author">{{reco.place.formatted_address}}</h6>
-                    <h6 class="place-description">{{reco.place.rating}}</h6>
-                </div>
+                    <div class="thumbnail">
+                        <img class="img-responsive"
+                             ng-src="{{reco.place.photo_reference}}" style="height: 150px">
+                        </img>
+                    </div>
+                    <div class="result-info">
+                        <h5 class="place-title">{{reco.place.name}}</h5>
+                        <h6 class="place-author">{{reco.place.formatted_address}}</h6>
+                        <h6 class="place-description">{{reco.place.rating}}</h6>
+                    </div>
                 <hr class="results-heading-separator"/>
                 <h6>
                     <span class="fa fa-thumbs-up itube-heart-info"></span>

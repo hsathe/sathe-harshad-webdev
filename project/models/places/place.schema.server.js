@@ -5,7 +5,7 @@ module.exports = function () {
         place_id : String,
         name: String,
         formatted_address: String,
-        photo_reference: {type: Array, default:[]},
+        photo_reference: String,
         recommendedBy: {type: Array, default:[]}
     },{collection: "travelyaar.place"});
     

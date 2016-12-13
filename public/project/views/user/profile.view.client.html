@@ -101,8 +101,7 @@
             <div ng-repeat-start="hit in model.public | filter: publicQuery" class="col-sm-6 col-md-3 result">
                 <div class="result-container">
                     <div class="thumbnail">
-                        <img class="img-responsive"
-                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                        <img class="img-responsive" style="height: 150px" ng-src="{{hit.place.photo_reference}}">
                         </img>
                     </div>
                     <div class="result-info">
@@ -163,8 +162,7 @@
             <div ng-repeat-start="hit in model.network | filter: networkQuery" class="col-sm-6 col-md-3 result">
                 <div class="result-container">
                     <div class="thumbnail">
-                        <img class="img-responsive"
-                             ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
+                        <img class="img-responsive" style="height: 150px" ng-src="{{hit.place.photo_reference}}">
                         </img>
                     </div>
                     <div class="result-info">

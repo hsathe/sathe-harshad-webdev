@@ -75,17 +75,19 @@
             var f = [];
             var k = 0;
             for(var i=0; i<= data.results.length - 1;i++){
-                // var imageUrl = ""
-                // if(data.results[i].photos.length != 0){
-                //     var ref = data.results[i].photos[0].photo_reference;
-                //     imageUrl = loadPhoto(ref);
-                // }
+                var imageUrl = "";
+                try{
+                    var ref = data.results[i].photos[0].photo_reference;
+                    imageUrl = loadPhoto(ref);
+                }catch(err) {
+                    imageUrl = "No image to display";
+                }
                 f.push({
                     place_id: data.results[i].place_id,
-                    name: data.results[i].name,
-                    formatted_address: data.results[i].formatted_address,
+                    name: data.results[i].name.replace(/(\r\n|\n|\r)/gm,""),
+                    formatted_address: data.results[i].formatted_address.replace(/(\r\n|\n|\r)/gm,""),
                     rating: data.results[i].rating,
-                    photo_reference: data.results[i].photos,
+                    photo_reference: imageUrl,
                     added:false,
                     error:false
                 });
@@ -95,17 +97,7 @@
         }
 
         function loadPhoto(photo_reference) {
-            APIService
-                .getPhotoByPhotoReference(photo_reference)
-                .success(function (response) {
-                    var imageUrl = response;
-                    console.log(imageUrl);
-                    return imageUrl;
-                })
-                .error(function (err) {
-                    console.log(err);
-                })
-
+            return APIService.getPhotoByPhotoReference(photo_reference);
         }
         
         function addRecommendation(place) {

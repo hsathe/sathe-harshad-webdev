@@ -33,10 +33,10 @@
                     </a>
                 </li>
                 <li ng-if="currentUser.role == 'admin'">
-                <a href="#/admin">
-                <span class="fa fa-user nav-icon"></span>
-                Admin
-                </a>
+                    <a href="#/admin">
+                        <span class="fa fa-user nav-icon"></span>
+                        Admin
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -79,16 +79,16 @@
     <div class="row">
         <div ng-repeat-start="place in model.attractions" class="col-sm-6 col-md-3 result">
             <div class="result-container">
-                <a href="#/details/{{place.place_id}}/{{model.keywords}}"><div class="thumbnail">
-                    <img class="img-responsive"
-                            ng-src="https://lh4.googleusercontent.com/-1wzlVdxiW14/USSFZnhNqxI/AAAAAAAABGw/YpdANqaoGh4/s1600-w400/Google%2BSydney">
-                    </img>
-                </div>
-                <div class="result-info">
-                    <h5 class="place-title">{{place.name}}</h5>
-                    <h6 class="place-author">{{place.formatted_address}}</h6>
-                    <h6 class="place-description">Google Rating:{{place.rating}}</h6>
-                </div></a>
+                <a href="#/details/{{place.place_id}}/{{model.keywords}}">
+                    <div class="thumbnail">
+                        <img class="img-responsive" style="height: 150px" ng-src="{{place.photo_reference}}" altsrc>
+                    </div>
+                    <div class="result-info">
+                        <h5 class="place-title">{{place.name}}</h5>
+                        <h6 class="place-author">{{place.formatted_address}}</h6>
+                        <h6 class="place-description">Google Rating:{{place.rating}}</h6>
+                    </div>
+                </a>
                 <hr class="results-heading-separator"/>
                 <h6>
                     <span ng-show="place.added" class="badge badge-added">Recommended</span>
@@ -104,6 +104,7 @@
             </div>
             <br>
         </div>
-        <div ng-repeat-end ng-if="$index % 4 == 3" class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
+        <div ng-repeat-end ng-if="$index % 4 == 3"
+             class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
     </div>
 </div>

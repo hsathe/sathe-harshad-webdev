@@ -101,9 +101,9 @@
                     error : false,
                     place: {
                         _id: data[i]._id,
-                        name: data[i].name,
+                        name: data[i].name.replace(/(\r\n|\n|\r)/gm,""),
                         place_id: data[i].place_id,
-                        formatted_address:data[i].formatted_address,
+                        formatted_address:data[i].formatted_address.replace(/(\r\n|\n|\r)/gm,""),
                         totalReco: data[i].recommendedBy.length,
                         photo_reference: data[i].photo_reference,
                         rating: data[i].rating

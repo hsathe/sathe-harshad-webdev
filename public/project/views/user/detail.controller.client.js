@@ -17,8 +17,10 @@
                     vm.detail = response.result;
                     console.log(response)
                     // for(var i=0;i < response.result.photos.length - 1;i++){
-                        vm.place_photos = APIService
-                            .getPhotoByPhotoReference(response.result.photos[0].photo_reference)
+                        try{
+                        vm.place_photos = APIService.getPhotoByPhotoReference(response.result.photos[0].photo_reference);
+                        }catch (err){
+                        }
                             // .then(function (res) {
                             //     console.log(res.toString());
                             //     // console.log(res.config.url)
