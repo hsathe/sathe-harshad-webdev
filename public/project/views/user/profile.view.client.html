@@ -106,22 +106,22 @@
                     </div>
                     <div class="result-info">
                         <h5 class="place-title">{{hit.place.name}}</h5>
-                        <h6 class="place-author">{{hit.place.formatted_address}}</h6>
-                        <h6 class="place-description">{{hit.place.rating}}</h6>
+                        <h6 class="place-addr">{{hit.place.formatted_address}}</h6>
+                        <h6 class="place-rating">{{hit.place.rating}}</h6>
                     </div>
                     <hr class="results-heading-separator"/>
                     <h6>
                         <span class="fa fa-thumbs-up itube-heart-info"></span>
                         <span class="badge">{{hit.place.totalReco}}</span>
-                        <span ng-show="place.added" class="badge badge-added">Recommended</span>
+                        <span ng-show="hit.added" class="badge badge-added">Recommended</span>
                         <button type="submit"
                                 ng-click="model.addRecommendation(hit, 0)"
-                                ng-hide="place.added"
+                                ng-hide="hit.added"
                                 class="btn btn-primary">
                             <!--<span class="fa fa-thumbs-up"></span>-->
                             Recommend
                         </button>
-                        <span ng-show="place.error" class="badge badge-error">Error!</span>
+                        <span ng-show="hit.error" class="badge badge-error">Error!</span>
                     </h6>
                 </div>
             </div>
@@ -165,16 +165,16 @@
                         <img class="img-responsive" style="height: 150px" ng-src="{{hit.place.photo_reference}}">
                         </img>
                     </div>
-                    <div class="result-info">
-                        <h5 class="hit-title">{{hit.place.name}}</h5>
-                        <h6 class="hit-author">{{hit.place.formatted_address}}</h6>
-                        <h6 class="hit-description">{{hit.place.rating}}</h6>
+                    <div class="result-info" style="height: 100px">
+                        <p><h5 class="place-title">{{hit.place.name}}</h5></p>
+                        <p><h6 class="place-addr">{{hit.place.formatted_address}}</h6></p>
+                        <p><h6 class="place-rating">{{hit.place.rating}}</h6></p>
                     </div>
                     <hr class="results-heading-separator"/>
                     <h6>
                         <span class="fa fa-thumbs-up itube-heart-info"></span>
                         <span class="badge">{{hit.place.totalReco}}</span>
-                        <span ng-show="hit.added" class="badge badge-added">Added to Favorites</span>
+                        <span ng-show="hit.added" class="badge badge-added">Recommended</span>
                         <button type="submit"
                                 ng-click="model.addRecommendation(hit, 1)"
                                 ng-hide="hit.added"

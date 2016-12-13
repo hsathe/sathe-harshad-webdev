@@ -134,6 +134,12 @@ img {
     color: black;
 }
 
+.hr .hr-custom{
+    size: 100px;
+    width: 50%;
+    color: black;
+}
+
 .mycontainer{
     display: flex;
     flex-wrap: wrap;

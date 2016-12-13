@@ -1,11 +1,11 @@
-.jumbotron{
-    background:
-            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            #34495e url("bg.jpg") no-repeat center center;
-    background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-}
+/*.jumbotron{*/
+    /*background:*/
+            /*linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),*/
+            /*#34495e url("bg.jpg") no-repeat center center;*/
+    /*background-size: 100% 100%;*/
+    /*-moz-background-size: 100% 100%;*/
+    /*-o-background-size: 100% 100%;*/
+/*}*/
 .user-link:hover{
     color: #cd201f;
 }
@@ -65,7 +65,8 @@
 }
 
 .results-heading-separator{
-    margin: 5px 0;
+    margin: 4px 0;
+    color: black;
 }
 
 .result{
@@ -88,14 +89,14 @@
 }
 
 .result-info .place-title{
-    font-size: medium;
+    font-size: small;
     word-wrap: break-word;
     white-space: pre-wrap;
 }
 
-.result-info .place-author, .result-info .place-description{
-    font-size: small;
-    word-wrap: break-word;
+.result-info .place-addr, .result-info .place-rating{
+    font-size: x-small;
+    word-wrap: normal;
     white-space: pre-wrap;
 }
 .details-container{

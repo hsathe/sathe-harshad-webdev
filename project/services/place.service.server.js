@@ -6,6 +6,7 @@ module.exports = function (app, models) {
     // app.get("/api/place/:placeId", getPlaceById);
     app.get("/api/place/:placeId", getPlaceByPlaceId);
     app.put("/api/place/:place", updatePlace);
+    app.get("/api/key", getGoogleKey);
 
     function createPlace(req, res) {
         var place = req.body;
@@ -64,6 +65,14 @@ module.exports = function (app, models) {
             function (err) {
                 res.status(400).send("Could not update place")
             });
+    }
+
+    function getGoogleKey(req, res) {
+        var googleKey = "";
+        if(process.env.GOOGLE_API_KEY){
+            googleKey = process.env.GOOGLE_API_KEY;
+        }
+        res.send(googleKey);
     }
 
 

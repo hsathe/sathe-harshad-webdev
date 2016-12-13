@@ -5,8 +5,16 @@
     
     function DetailsController(APIService,$routeParams, $http) {
         var vm = this;
-        vm.searchDetail = searchDetail;
+        // vm.searchDetail = searchDetail;
+        vm.googlekey = "";
         function init() {
+
+            APIService.getGoogleKey()
+                .then(
+                    function (res) {
+                        vm.googlekey = res.data;
+                    }
+                );
 
             vm.place_photos = "";
             var placeId = $routeParams.placeId;
@@ -16,25 +24,18 @@
                 .success(function (response) {
                     vm.detail = response.result;
                     console.log(response)
-                    // for(var i=0;i < response.result.photos.length - 1;i++){
                         try{
-                        vm.place_photos = APIService.getPhotoByPhotoReference(response.result.photos[0].photo_reference);
+                        vm.place_photos = APIService.getPhotoByPhotoReference(response.result.photos[0].photo_reference, vm.googlekey);
                         }catch (err){
                         }
-                            // .then(function (res) {
-                            //     console.log(res.toString());
-                            //     // console.log(res.config.url)
-                            //     vm.place_photos = res;
-                            // });
-                    // }
                 });
         }
 
         init();
 
-        function searchDetail() {
-            var placeId = $routeParams.placeId;
-            console.log(placeId);
-        }
+        // function searchDetail() {
+        //     var placeId = $routeParams.placeId;
+        //     console.log(placeId);
+        // }
     }
 })();

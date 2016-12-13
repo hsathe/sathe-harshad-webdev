@@ -7,18 +7,21 @@
         var api = {
             search: search,
             getPhotoByPhotoReference:getPhotoByPhotoReference,
-            searchDetail:searchDetail
+            searchDetail:searchDetail,
+            getGoogleKey: getGoogleKey
         };
 
         return api;
-
-        function getKey() {
-            return $http.get("/api/googlePlaces");
+        
+        function getGoogleKey() {
+            return $http.get("/api/key");
         }
+        function search(keywords, key) {
+            if(!key){
+                // key = "AIzaSyCuNyzGJzJtVIYcOfJddT7cagW011fsioM";
+                key = "AIzaSyBausENaGVRf31dW-ph0Wi9sk1vFBSRCzo";
+            }
 
-        function search(keywords) {
-
-            var key = 'AIzaSyABe0JiGEryUQQsl_MLJPtDt-9IaKz5WRQ';
             var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
             console.log(url);
 
@@ -29,29 +32,23 @@
                 }
             });
 
-            // return $http.get("/api/google/search/"+keywords);
         }
 
-        function getPhotoByPhotoReference(photoReference) {
-            var Photokey = "AIzaSyAjaKcWRwi4RTt67BLdh6uZ0dMGk5zdArg";
-            // var photoURL = "https://maps.googleapis.com/maps/api/place/photo?photoreference=" + photoReference + "&key=" + Photokey;
-            // var photoURL = "https://maps.googleapis.com/maps/api/place/photo?";
-            // return $http.get(photoURL,{
-            //     params: {
-            //         photoreference: photoReference,
-            //         key: Photokey
-            //     }
-            // });
-
+        function getPhotoByPhotoReference(photoReference, key) {
+            if(!key){
+                // key = "AIzaSyCuNyzGJzJtVIYcOfJddT7cagW011fsioM";
+                key = "AIzaSyBausENaGVRf31dW-ph0Wi9sk1vFBSRCzo";
+            }
+            var Photokey = key;
             var photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+photoReference+"&key="+Photokey;
             console.log("Getting Image: "+photoURL);
 
-            // return $http.get(photoURL);
             return photoURL;
         }
 
         function searchDetail(placeId) {
-            var key = "AIzaSyAjaKcWRwi4RTt67BLdh6uZ0dMGk5zdArg";
+            // var key = "AIzaSyCuNyzGJzJtVIYcOfJddT7cagW011fsioM";
+            var key = "AIzaSyBausENaGVRf31dW-ph0Wi9sk1vFBSRCzo";
             var url = "https://maps.googleapis.com/maps/api/place/details/json?";
 
             return $http.get(url,{

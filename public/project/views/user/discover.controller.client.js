@@ -8,14 +8,22 @@
         vm.user = $rootScope.currentUser;
         vm.attractions = [];
         vm.keywords = $routeParams.keywords;
-
+        vm.googlekey = "";
         function init(){
             console.log("In Discover Controller");
+            // vm.googlekey = "";
+            APIService
+                .getGoogleKey()
+                .then(
+                    function (res) {
+                        vm.googlekey = res.data;
+                    }
+                );
+            
             if(vm.keywords){
-                search(vm.keywords);
+                search(vm.keywords, vm.googlekey);
                 $location.url("/discover/"+vm.keywords);
             } 
-
         }
         init();
 
@@ -26,7 +34,7 @@
         function search(keywords) {
             console.log("Searching for the attractions in "+keywords);
             APIService
-                .search(keywords)
+                .search(keywords, vm.googlekey)
                 .then(function (response) {
                     console.log(response.data.results);
                     console.log(response);
@@ -97,7 +105,7 @@
         }
 
         function loadPhoto(photo_reference) {
-            return APIService.getPhotoByPhotoReference(photo_reference);
+            return APIService.getPhotoByPhotoReference(photo_reference, vm.googlekey);
         }
         
         function addRecommendation(place) {
