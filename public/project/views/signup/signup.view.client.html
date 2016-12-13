@@ -1,59 +1,60 @@
 <div class="container">
     <div class="center-content">
-        <div>
-
-            <a href="#/">
-                <div class="text-center branding">
-                    <span class="fa fa-tumblr-square"></span>
-                    <span>Travelyaar</span>
-                </div>
-            </a>
-            <hr class="hr-main"/>
-            <p class="align-center">
-                <span class="desc">Discover new Places to visit</span><br/>
-                <span class="sub-desc">Which your friends recommend</span>
-            </p>
-            <br/>
-            <div ng-show="model.signUpError" class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{model.signUpError}}
+        <a href="#/">
+            <div class="text-center branding">
+                <span class="fa fa-tumblr-square"></span>
+                <span>Travelyaar</span>
             </div>
-            <form style="margin-left: auto">
-                <input ng-model="firstName" type="text"
-                       class="form-control" placeholder="First Name"
-                       spellcheck="false"/>
-                <input ng-model="lastName" type="text"
-                       class="form-control" placeholder="Last Name"
-                       spellcheck="false"/>
-                <input ng-model="email" type="email"
-                       class="form-control" placeholder="Email Address"
-                       spellcheck="false"/>
-                <input ng-model="password" type="password"
-                       class="form-control" placeholder="Password"/>
-                <input ng-model="confirmPassword" type="password"
-                       class="form-control" placeholder="Confirm Password"/>
-                <br/>
-                <button ng-click="model.createUser(email, password, confirmPassword, firstName, lastName)" type="submit" class="btn btn-primary btn-block">Sign Up</button>
-            </form>
+        </a>
+        <hr class="hr-main"/>
+        <!--<p class="align-center">-->
+            <!--<span class="desc">Discover new Places to visit</span><br/>-->
+            <!--<span class="sub-desc">Which your friends recommend</span>-->
+        <!--</p>-->
+        <h5 style="text-align: center;">Discover new Places to visit</span></h5>
+        <h6 style="text-align: center;">Which your friends recommend</h6>
+        <br/>
+        <div ng-show="model.signUpError" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{model.signUpError}}
+        </div>
+        <form style="margin-left: auto">
+            <input ng-model="firstName" type="text"
+                   class="form-control" placeholder="First Name"
+                   spellcheck="false"/>
+            <input ng-model="lastName" type="text"
+                   class="form-control" placeholder="Last Name"
+                   spellcheck="false"/>
+            <input ng-model="email" type="email"
+                   class="form-control" placeholder="Email Address"
+                   spellcheck="false"/>
+            <input ng-model="password" type="password"
+                   class="form-control" placeholder="Password"/>
+            <input ng-model="confirmPassword" type="password"
+                   class="form-control" placeholder="Confirm Password"/>
             <br/>
-            <div class="special-separator">
-                <span>OR</span>
-            </div>
-            <br/>
-            <a href="/auth/google" class="btn btn-danger btn-block btn-googl">
-                <span class="fa fa-google"></span>
-                Sign up with Google
-            </a>
-            <a href="/auth/facebook" class="btn btn-primary btn-block btn-fb">
-                <span class="fa fa-facebook-square"></span>
-                Sign up with Facebook
-            </a>
-            <br/>
-            <div class="text-center footer-div">
-                <h6>Don't have an account? <a href="#/signup">Sign up</a></h6>
-            </div>
+            <button ng-click="model.createUser(email, password, confirmPassword, firstName, lastName)" type="submit"
+                    class="btn btn-primary btn-block">Sign Up
+            </button>
+        </form>
+        <br/>
+        <div class="special-separator">
+            <span>OR</span>
+        </div>
+        <br/>
+        <!--<a href="/auth/google" class="btn btn-danger btn-block btn-googl">
+            <span class="fa fa-google"></span>
+            Sign up with Google
+        </a>-->
+        <a href="/auth/facebook" class="btn btn-primary btn-block btn-fb">
+            <span class="fa fa-facebook-square"></span>
+            Sign up with Facebook
+        </a>
+        <br/>
+        <div class="text-center footer-div">
+            <h6>Don't have an account? <a href="#/signin">Sign In</a></h6>
         </div>
     </div>
 </div>

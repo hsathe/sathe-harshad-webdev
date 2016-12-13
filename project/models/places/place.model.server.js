@@ -11,7 +11,8 @@ module.exports = function () {
         getRecommendationsForUser : getRecommendationsForUser,
         getUserFeed : getUserFeed,
         getFilteredFeed : getFilteredFeed,
-        updatePlace : updatePlace
+        updatePlace : updatePlace,
+        removeAllRecommendationsByUser: removeAllRecommendationsByUser
     };
     return api;
 
@@ -31,6 +32,13 @@ module.exports = function () {
             .update({place_id: placeId}, {
                 $pull: {recommendedBy: userId}
             });
+    }
+    
+    function removeAllRecommendationsByUser(user) {
+        return PlaceModel.update(
+            {place_id: {$in: user.recommendations}},
+            {$pull: {recommendedBy: user._id}},
+            {multi: true});
     }
     
     function findPlaceByPlaceId(placeId) {

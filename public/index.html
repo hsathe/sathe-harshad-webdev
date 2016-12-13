@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Homepage for CS5610 Web Development course">
     <meta name="author" content="Harshad Sathe">
-    <title>CS5610-WebDevelopment Course</title>
+    <title>Harshad Sathe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/paper/bootstrap.min.css" rel="stylesheet"-->
     <!--integrity="sha384-2mX2PSpkRSXLQzmNzH3gwK6srb06+OfbDlYjbog8LQuALYJjuQ3+Yzy2JIWNV9rW" crossorigin="anonymous">-->
@@ -34,28 +34,31 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="https://sathe-harshad-webdevapp.herokuapp.com/">Hosted Website</a></li>
+                <li class="active"><a href="https://sathe-harshad-webdevapp.herokuapp.com/" target="_blank">Hosted Website</a></li>
                 <li><a href="project">Project</a></li>
                 <li><a href="assignment">Assignment</a></li>
-                <li><a href="test">Test MongoDB</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="row container add-top-margin">
+<div class="row container">
     <div class="col-xs-4 hidden-xs" id="leftPanel">
-        <h3><a href="#education">Academics</a></h3>
-        <h3><a href="#experience">Experience</a></h3>
-        <h3><a href="#projects">Course-Projects</a></h3>
-        <h3><a href="#contact">Contact Me</a></h3>
 
+        <h4 class="super-link"><a href="#education">Academics</a></h4>
+        <hr>
+        <h4 class="super-link"><a href="#experience">Experience</a></h4>
+        <hr>
+        <h4 class="super-link"><a href="#projects">Academic Project</a></h4>
+        <hr>
+        <h4 class="super-link"><a href="#contact">Contact Me</a></h4>
+        <hr>
     </div>
     <!--<div class="draw-vertical-line hidden-xs"></div>-->
     <div class="col-xs-12 col-sm-8" id="rightPanel">
         <div class="row">
             <div class="col-sm-8">
-                <img class="img-responsive img-rounded" src="homepage/img/hs.jpg">
+                <img class="img-responsive img-rounded" style="height: auto; width: 300px" src="homepage/img/hs.jpg">
             </div>
         </div>
         <br>
@@ -76,16 +79,15 @@
             <section class="education">
                 <h2>Academics</h2>
                 <hr/>
-                <h4>About Me:</h4>
-                <h4>I'm a software engineer and candidate for M.S. in Computer Science at Northeastern University,
+                <h5>I'm a software engineer and candidate for M.S. in Computer Science at Northeastern University,
                     Boston. My academic interests include Networking,Virtualization, Information Retrieval, Big Data
                     and
-                    Web Development</h4>
-                <h4>I love to explore latest technologies and work on products that impact the world. I'm addicted to
+                    Web Development</h5>
+                <h5>I love to explore latest technologies and work on products that impact the world. I'm addicted to
                     problem solving and always look
                     for an opportunity to learn something interesting. In my free time, I travel to learn about
                     cultures
-                    and meet new people.</h4>
+                    and meet new people.</h5>
             </section>
             <br>
             <div class="row">
@@ -116,7 +118,7 @@
         <h2>Professional Experience</h2>
         <div class="container">
 
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -141,10 +143,10 @@
             </div>
         </div>
         <br>
-        <hr/>
         <a name="projects"></a>
-        <h2>Recent projects</h2>
         <div class="row">
+            <h2>   Recent projects</h2>
+            <hr>
             <div class="col-sm-6">
                 <h5><img class="item img-responsive" src="homepage/img/demo.gif"></h5>
             </div>
@@ -174,12 +176,25 @@
         <a name="contact"></a>
         <h2>Connect with me:</h2>
         <br/>
-        <a href="https://github.com/hsathe" class="btn btn-default social-link"><span
-                class="fa fa-github fa-lg"></span> Github</a>
-        <a href="https://www.linkedin.com/in/harshadsathe" class="btn btn-default social-link"><span
-                class="fa fa-linkedin fa-lg"></span> LinkedIn</a>
-        <a href="https://twitter.com/@harshadssathe" class="btn btn-default social-link"><span
-                class="fa fa-twitter fa-lg"></span> Twitter</a>
+        <div class="row">
+            <div class="col-sm-8">
+                <a href="https://github.com/hsathe" class="btn btn-default social-link"><span
+                        class="fa fa-github fa-lg"></span> Github</a>
+                <a href="https://www.linkedin.com/in/harshadsathe" class="btn btn-default social-link"><span
+                        class="fa fa-linkedin fa-lg"></span> LinkedIn</a>
+                <a href="https://twitter.com/@harshadssathe" class="btn btn-default social-link"><span
+                        class="fa fa-twitter fa-lg"></span> Twitter</a>
+            </div>
+            <div class="col-sm-4">
+                <div class="container-fluid bg-grey">
+                    <div class="row">
+                        <p><span class="glyphicon glyphicon-map-marker"></span> Boston,US</p>
+                        <p><span class="glyphicon glyphicon-phone"></span>+1 206.334.0366</p>
+                        <p><span class="glyphicon glyphicon-envelope"></span> sathe.h@husky.neu.edu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

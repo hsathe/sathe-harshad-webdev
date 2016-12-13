@@ -24,12 +24,6 @@ module.exports = function (app, models) {
 
 
     // var project_gConfig = {
-    //     clientID     : process.env.G_P_CLIENT_ID,
-    //     clientSecret : process.env.G_P_CLIENT_SECRET,
-    //     callbackURL  : process.env.G_P_CALLBACK_URL
-    // };
-
-    // var project_gConfig = {
     //     clientID     : process.env.G_P_CLIENT_ID, 145129827061-fcgbcaq8o120jr8hceemcfchgvd4aaec.apps.googleusercontent.com
     //     clientSecret : process.env.G_P_CLIENT_SECRET, O45lg-Q0uYuoM7ZdGDxDs-22
     //     callbackURL  : process.env.G_P_CALLBACK_URL http://localhost:3000/auth/project/google/callback
@@ -51,6 +45,21 @@ module.exports = function (app, models) {
     };
 
     passport.use(new FacebookStrategy(project_fbConfig, project_fbLogin));
+
+
+    // app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+    // app.get('/auth/google/callback',
+    //     passport.authenticate('google', {
+    //         successRedirect: '/project/#/profile',
+    //         failureRedirect: '/project/#/signin'
+    //     }));
+    //
+    // var project_gConfig = {
+    //     clientID     : process.env.G_P_CLIENT_ID,
+    //     clientSecret : process.env.G_P_CLIENT_SECRET,
+    //     callbackURL  : process.env.G_P_CALLBACK_URL
+    // };
+    //
     // passport.use(new GoogleStrategy(project_gConfig, project_gLogin));
 
 
@@ -59,6 +68,7 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId/tofollow", getUsersToFollow);
     app.get("/api/user/:userId", getUserById);
     app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
     app.put("/api/user/:userId/followers", addToFollowers);
     app.put("/api/user/:userId/following", addToFollowing);
     app.delete("/api/user/:userId/followers", removeFromFollowers);
@@ -75,13 +85,6 @@ module.exports = function (app, models) {
     app.post("/api/login", passport.authenticate('local'), signIn);
     app.post("/api/logout", signout);
 
-
-    // app.get('/auth/project/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-    // app.get('/auth/project/google/callback',
-    //     passport.authenticate('google', {
-    //         successRedirect: '/#/profile',
-    //         failureRedirect: '/#/signin'
-    //     }));
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -152,34 +155,34 @@ module.exports = function (app, models) {
             );
     }
 
-    // function project_gLogin(token, refreshToken, profile, done){
-    //     TravelYaarUserModel
-    //         .findUserByEmail(profile.emails[0].value)
-    //         .then(
-    //             function(googleUser) {
-    //                 if(googleUser) {
-    //                     return done(null, googleUser);
-    //                 } else {
-    //                     googleUser = {
-    //                         email: profile.emails[0].value,
-    //                         firstName: profile.name.givenName,
-    //                         lastName: profile.name.familyName,
-    //                         google: {
-    //                             token: token,
-    //                             id: profile.id
-    //                         }
-    //                     };
-    //                     TravelYaarUserModel
-    //                         .createUser(googleUser)
-    //                         .then(
-    //                             function(user) {
-    //                                 done(null, user);
-    //                             }
-    //                         );
-    //                 }
-    //             }
-    //         );
-    // }
+    /*function project_gLogin(token, refreshToken, profile, done){
+     TravelYaarUserModel
+     .findUserByEmail(profile.emails[0].value)
+     .then(
+     function(googleUser) {
+     if(googleUser) {
+     return done(null, googleUser);
+     } else {
+     googleUser = {
+     email: profile.emails[0].value,
+     firstName: profile.name.givenName,
+     lastName: profile.name.familyName,
+     google: {
+     token: token,
+     id: profile.id
+     }
+     };
+     TravelYaarUserModel
+     .createUser(googleUser)
+     .then(
+     function(user) {
+     done(null, user);
+     }
+     );
+     }
+     }
+     );
+     }*/
 
 
     function loggedIn(req, res) {
@@ -356,6 +359,50 @@ module.exports = function (app, models) {
     // ToDo:
     function deleteUser(req, res) {
         var userId = req.params.userId;
+        TravelYaarUserModel
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    models.placeModel
+                        .removeAllRecommendationsByUser(user)
+                        .then(
+                            function (success) {
+                                TravelYaarUserModel.removeUserFromFollowing(user)
+                                    .then(
+                                        function (success) {
+                                            models.placeModel.removeUserFromAllFollowers(user)
+                                                .then(
+                                                    function (success) {
+                                                        TravelYaarUserModel
+                                                            .deleteUser(userId)
+                                                            .then(
+                                                                function (success) {
+                                                                    res.status(200).send("Deleted User");
+                                                                },
+                                                                function (err) {
+                                                                    res.status(400).send("Could not delete user");
+                                                                }
+                                                            );
+                                                    },
+                                                    function (err) {
+                                                        res.status(400).send("Could not remove user from Followers");
+                                                    }
+                                                );
+                                        },
+                                        function () {
+                                            res.status(400).send("Could not remove user from following");
+                                        }
+                                    );
+                            },
+                            function (err) {
+                                res.status(404).send("Could not find user");
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(404).send("Could not erase reco from user");
+                }
+            );
     }
 
     function getUserById(req, res) {

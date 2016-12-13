@@ -25,7 +25,8 @@
             getRecommendationsForUser: getRecommendationsForUser,
             updateUser: updateUser,
             getFilteredFeed: getFilteredFeed,
-            getUserFeed: getUserFeed
+            getUserFeed: getUserFeed,
+            deleteUser: deleteUser
         };
         
         return api;
@@ -79,6 +80,11 @@
         function updateUser(userId, user){
             console.log("updateUser - " + userId);
             return $http.put("/api/user/" + userId, user);
+        }
+
+        function deleteUser(userId){
+            console.log("deleteUser - " + userId);
+            return $http.delete("/api/user/" + userId);
         }
 
         function addToFollowers(userId, follower){

@@ -131,6 +131,7 @@ img {
 .hr{
     size: 100px;
     width: 70px;
+    color: black;
 }
 
 .mycontainer{
@@ -146,3 +147,17 @@ img {
 /*#rightPanel {*/
     /*margin-left: 25%;*/
 /*}*/
+
+.full {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../img/homepage.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: Calibri;
+}
+
+.super-link{
+    font-family: Calibri;
+    color : white;
+}

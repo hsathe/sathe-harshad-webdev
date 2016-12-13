@@ -39,14 +39,13 @@
         vm.deleteUser = deleteUser;
 
         function deleteUser(userId) {
-            TravelYaarUserService
-                .deleteUser
+            TravelYaarUserService.deleteUser(userId)
                 .then(
                     function (success) {
                         $route.reload();
                     }
                 );
-        };
+        }
 
         vm.logout = logout;
 
