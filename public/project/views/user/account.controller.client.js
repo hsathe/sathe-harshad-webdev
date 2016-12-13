@@ -47,7 +47,7 @@
         function makeAdmin(newUser) {
             newUser.role = "admin";
             TravelYaarUserService
-                .updateUser(newUser)
+                .updateUser(vm.userId, newUser)
                 .then(
                     function () {
                         vm.updateSuccess = "User is now admin!";

@@ -370,7 +370,7 @@ module.exports = function (app, models) {
                                 TravelYaarUserModel.removeUserFromFollowing(user)
                                     .then(
                                         function (success) {
-                                            models.placeModel.removeUserFromAllFollowers(user)
+                                            TravelYaarUserModel.removeUserFromAllFollowers(user)
                                                 .then(
                                                     function (success) {
                                                         TravelYaarUserModel
